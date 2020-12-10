@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -23,6 +24,7 @@ class Navbar extends React.Component {
               Welcome, User
             </Typography>
             <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu">
+              {/* <Link to="/Login"><AccountCircleIcon /></Link> */}
               <AccountCircleIcon />
             </IconButton>
           </Toolbar>

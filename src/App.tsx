@@ -3,15 +3,17 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './components/site/Navbar'
 import Register from './components/site/Register'
+import Login from './components/site/Login'
 
 class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar/>
+      <div> 
         <Router>
-          <Register/>
+          <Navbar/>
+          {/* <Register/>
+          <Login /> */}
         </Router>
       </div>
     );
