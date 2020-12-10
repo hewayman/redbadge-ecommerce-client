@@ -19,7 +19,7 @@ class Navbar extends React.Component {
             <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu">
               <ShoppingCartIcon />
             </IconButton>
-            <Typography variant="p" className="welcomeText">
+            <Typography className="welcomeText">
               Welcome, User
             </Typography>
             <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu">
