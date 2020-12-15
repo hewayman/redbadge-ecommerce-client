@@ -26,34 +26,78 @@ function Copyright() {
 }
 
 type RegisterProps = {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  password?: string;
+  // firstName?: string;
+  // lastName?: string;
+  // email?: string;
+  // password?: string;
   updateToken: any;
-  setFirstName?: any;
-  setLastName?: any;
-  setPassword?: any;
-  setEmail?: any;
+  // setFirstName (firstName: string): void;
+  // setLastName (lastName: string): void;
+  // setPassword (password: string): void;
+  // setEmail (email: string): void;
 }
 
 export default class Register extends React.Component<RegisterProps> {
+  private firstName: string = '';
+  private lastName: string = '';
+  private email: string = '';
+  private password: string = '';
+
   constructor (props: RegisterProps) {
     super(props);
     this.state = {
-      firstName: '',
       updateToken: this.props.updateToken
     }
+  }
+
+  getFirstName = () => {
+    console.log(this.firstName);
+    return this.firstName;
+  }
+
+  setFirstName = (firstName: string) => {
+    this.firstName = firstName;
+    console.log(this.firstName);
+  }
+
+  getLastName = () => {
+    console.log(this.lastName);
+    return this.lastName;
+  }
+
+  setLastName = (lastName: string) => {
+    this.lastName = lastName;
+    console.log(this.lastName);
+  }
+
+  getEmail = () => {
+    console.log(this.email);
+    return this.email;
+  }
+
+  setEmail = (email: string) => {
+    this.email = email;
+    console.log(this.email);
+  }
+
+  getPassword = () => {
+    console.log(this.password);
+    return this.password;
+  }
+
+  setPassword = (password: string) => {
+    this.password = password;
+    console.log(this.password);
   }
   
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = 'http://localhost:8080/user/register';
     const body = {
-      email: this.props.email,
-      password: this.props.password,
-      firstName: this.props.firstName,
-      lastName: this.props.lastName
+      email: this.email,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName
     }
 
     fetch(url, {
@@ -77,7 +121,6 @@ export default class Register extends React.Component<RegisterProps> {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {this.props.firstName}
           </Typography>
           <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
             <Grid container spacing={2}>
@@ -91,7 +134,7 @@ export default class Register extends React.Component<RegisterProps> {
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  onChange = {e => this.props.setFirstName(e.target.value)}
+                  onChange = {e => this.setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -103,7 +146,7 @@ export default class Register extends React.Component<RegisterProps> {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
-                  onChange = {e => this.props.setLastName(e.target.value)}
+                  onChange = {e => this.setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,7 +158,7 @@ export default class Register extends React.Component<RegisterProps> {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange = {e => this.props.setEmail(e.target.value)}
+                  onChange = {e => this.setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -128,7 +171,7 @@ export default class Register extends React.Component<RegisterProps> {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange = {e => this.props.setPassword(e.target.value)}
+                  onChange = {e => this.setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
