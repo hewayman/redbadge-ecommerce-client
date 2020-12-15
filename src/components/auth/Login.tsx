@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+// import Register from './Register';
 
 function Copyright() {
   return (
@@ -23,18 +24,64 @@ function Copyright() {
   );
 }
 
-type AuthProps = {
-  setToken: any
+type LoginProps = {
+  email?: string;
+  password?: string;
+  updateToken: any;
 }
 
-export default class Register extends React.Component<AuthProps> {
-  constructor(props: AuthProps) {
-    super(props);
+export default class Login extends React.Component<LoginProps> {
+  private email: string = '';
+  private password: string = '';
+
+  constructor (props: LoginProps) {
+    super(props)
+    this.state = {
+      updateToken: this.props.updateToken
+    }
+  }
+
+  // getEmail = () => {
+  //   console.log(this.email);
+  //   return this.email;
+  // }
+
+  setEmail = (email: string) => {
+    this.email = email;
+    console.log(this.email);
+  }
+
+  // getPassword = () => {
+  //   console.log(this.password);
+  //   return this.password;
+  // }
+
+  setPassword = (password: string) => {
+    this.password = password;
+    console.log(this.password);
+  }
+
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    const url = 'http://localhost:8080/user/login/';
+    const body = {
+      email: this.props.email,
+      password: this.props.password
+    }
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+      .then(r => r.json())
+      .then(rObj => this.props.updateToken(rObj.sessionToken))
   }
 
   render() {
-    {console.log(this.props)}
-
+    console.log('Login token ' + this.props.updateToken)
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -45,7 +92,7 @@ export default class Register extends React.Component<AuthProps> {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className="formRegister" noValidate>
+          <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -56,6 +103,7 @@ export default class Register extends React.Component<AuthProps> {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange = {e => this.setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -67,6 +115,7 @@ export default class Register extends React.Component<AuthProps> {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange = {e => this.setPassword(e.target.value)}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

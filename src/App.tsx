@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/site/Navbar'
 import Register from './components/auth/Register'
-import Login from './components/auth/Auth'
+import Login from './components/auth/Login'
  
 type AppState = {
   token: string,
@@ -39,13 +39,16 @@ class App extends React.Component <{}, AppState> {
    
     return (
       <div> 
-        {console.log(this.state.token)}
+        {console.log("App token " + this.state.token)}
         <Router>
           <Navbar />
           <Switch>
             {/* <Route path='/' exact component={Home}/> */}
-            <Route path='/user/login' exact ><Login setToken={this.setToken}/></Route>
-            <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
+            {/* {!this.state.token || this.state.token === '' 
+            ? <Route path='/user/login' exact ><Login updateToken={this.updateToken} /></Route> 
+            : (console.log('test'))} */}
+            <Route path='/user/register'><Register updateToken={this.state.newToken}/></Route>
+            <Route path='/user/login' exact ><Login updateToken={this.state.newToken}/></Route>
           </Switch>
           {/* <Register/>
           <Login /> */}

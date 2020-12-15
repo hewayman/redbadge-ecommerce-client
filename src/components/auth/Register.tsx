@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import '../../App.css';
+// import Login from './Login';
 
 function Copyright() {
   return (
@@ -26,15 +27,7 @@ function Copyright() {
 }
 
 type RegisterProps = {
-  // firstName?: string;
-  // lastName?: string;
-  // email?: string;
-  // password?: string;
   updateToken: any;
-  // setFirstName (firstName: string): void;
-  // setLastName (lastName: string): void;
-  // setPassword (password: string): void;
-  // setEmail (email: string): void;
 }
 
 export default class Register extends React.Component<RegisterProps> {
@@ -112,9 +105,11 @@ export default class Register extends React.Component<RegisterProps> {
   }
 
   render() {
+    console.log(this.props.updateToken)
     return (
       
       <Container component="main" maxWidth="xs">
+        {/* <Login updateToken={this.props.updateToken} /> */}
         <CssBaseline />
         <div className="paper">
           <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
@@ -188,6 +183,7 @@ export default class Register extends React.Component<RegisterProps> {
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="/user/login" variant="body2">
+                {/* <Login updateToken={this.props.updateToken} email={this.email} password={this.password}/> */}
                   Already have an account? Sign in
                 </Link>
               </Grid>
