@@ -41,20 +41,10 @@ export default class Login extends React.Component<LoginProps> {
     }
   }
 
-  // getEmail = () => {
-  //   console.log(this.email);
-  //   return this.email;
-  // }
-
   setEmail = (email: string) => {
     this.email = email;
     console.log(this.email);
   }
-
-  // getPassword = () => {
-  //   console.log(this.password);
-  //   return this.password;
-  // }
 
   setPassword = (password: string) => {
     this.password = password;
@@ -65,8 +55,8 @@ export default class Login extends React.Component<LoginProps> {
     e.preventDefault();
     const url = 'http://localhost:8080/user/login/';
     const body = {
-      email: this.props.email,
-      password: this.props.password
+      email: this.email,
+      password: this.password
     }
 
     fetch(url, {

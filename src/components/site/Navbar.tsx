@@ -6,8 +6,13 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LockIcon from '@material-ui/icons/Lock';
 
-class Navbar extends React.Component {
+type NavbarProps = {
+  clickLogout: any
+}
+
+class Navbar extends React.Component<NavbarProps> {
   render () {
     return (
       <div>
@@ -27,7 +32,9 @@ class Navbar extends React.Component {
               <Link to='/user/login'>
                 <AccountCircleIcon />
               </Link>
-              {/* <AccountCircleIcon /> */}
+            </IconButton>
+            <IconButton onClick={this.props.clickLogout} edge="start" className="lockIconButton" color="inherit" aria-label="menu">
+                <LockIcon />
             </IconButton>
           </Toolbar>
         </AppBar>

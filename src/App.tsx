@@ -31,6 +31,11 @@ class App extends React.Component <{}, AppState> {
     console.log(newToken)
   }
 
+  clearToken = () => {
+    localStorage.clear();
+    this.setToken('');
+  }
+
   componentWillMount() {
     this.setToken('')
   }
@@ -41,14 +46,14 @@ class App extends React.Component <{}, AppState> {
       <div> 
         {console.log("App token " + this.state.token)}
         <Router>
-          <Navbar />
+          <Navbar clickLogout={this.clearToken} />
           <Switch>
             {/* <Route path='/' exact component={Home}/> */}
             {/* {!this.state.token || this.state.token === '' 
             ? <Route path='/user/login' exact ><Login updateToken={this.updateToken} /></Route> 
             : (console.log('test'))} */}
-            <Route path='/user/register'><Register updateToken={this.state.newToken}/></Route>
-            <Route path='/user/login' exact ><Login updateToken={this.state.newToken}/></Route>
+            <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
+            <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
           </Switch>
           {/* <Register/>
           <Login /> */}
