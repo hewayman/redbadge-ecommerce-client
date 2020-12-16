@@ -25,38 +25,37 @@ function Copyright() {
 }
 
 type LoginProps = {
-  email?: string;
-  password?: string;
   updateToken: any;
 }
 
-export default class Login extends React.Component<LoginProps> {
-  private email: string = '';
-  private password: string = '';
+type LoginState = {
+  email: string;
+  password: string;
+}
 
+export default class Login extends React.Component<LoginProps, LoginState> {
   constructor (props: LoginProps) {
     super(props)
     this.state = {
-      updateToken: this.props.updateToken
+      email: '',
+      password: ''
     }
   }
 
-  setEmail = (email: string) => {
-    this.email = email;
-    console.log(this.email);
+  setEmail = (e: any) => {
+    this.setState({email: e.target.value});
   }
 
-  setPassword = (password: string) => {
-    this.password = password;
-    console.log(this.password);
+  setPassword = (e: any) => {
+    this.setState({password: e.target.value});
   }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = 'http://localhost:8080/user/login/';
     const body = {
-      email: this.email,
-      password: this.password
+      email: this.state.email,
+      password: this.state.password
     }
 
     fetch(url, {
@@ -71,7 +70,6 @@ export default class Login extends React.Component<LoginProps> {
   }
 
   render() {
-    console.log('Login token ' + this.props.updateToken)
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -93,7 +91,7 @@ export default class Login extends React.Component<LoginProps> {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange = {e => this.setEmail(e.target.value)}
+              onChange = {this.setEmail.bind(this)}
             />
             <TextField
               variant="outlined"
@@ -105,7 +103,7 @@ export default class Login extends React.Component<LoginProps> {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange = {e => this.setPassword(e.target.value)}
+              onChange = {this.setPassword.bind(this)}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

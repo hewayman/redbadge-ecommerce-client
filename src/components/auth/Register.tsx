@@ -28,69 +28,51 @@ function Copyright() {
 
 type RegisterProps = {
   updateToken: any;
+  // firstName: string;
 }
 
-export default class Register extends React.Component<RegisterProps> {
-  private firstName: string = '';
-  private lastName: string = '';
-  private email: string = '';
-  private password: string = '';
+type RegisterState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
+export default class Register extends React.Component<RegisterProps, RegisterState> {
   constructor (props: RegisterProps) {
     super(props);
     this.state = {
-      updateToken: this.props.updateToken
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
     }
   }
 
-  getFirstName = () => {
-    console.log(this.firstName);
-    return this.firstName;
+  setFirstName = (e: any) => {
+    this.setState({firstName: e.target.value});
   }
 
-  setFirstName = (firstName: string) => {
-    this.firstName = firstName;
-    console.log(this.firstName);
+  setLastName = (e: any) => {
+    this.setState({lastName: e.target.value});
   }
 
-  getLastName = () => {
-    console.log(this.lastName);
-    return this.lastName;
+  setEmail = (e: any) => {
+    this.setState({email: e.target.value});
   }
 
-  setLastName = (lastName: string) => {
-    this.lastName = lastName;
-    console.log(this.lastName);
-  }
-
-  getEmail = () => {
-    console.log(this.email);
-    return this.email;
-  }
-
-  setEmail = (email: string) => {
-    this.email = email;
-    console.log(this.email);
-  }
-
-  getPassword = () => {
-    console.log(this.password);
-    return this.password;
-  }
-
-  setPassword = (password: string) => {
-    this.password = password;
-    console.log(this.password);
+  setPassword = (e: any) => {
+    this.setState({password: e.target.value});
   }
   
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = 'http://localhost:8080/user/register';
     const body = {
-      email: this.email,
-      password: this.password,
-      firstName: this.firstName,
-      lastName: this.lastName
+      email: this.state.email,
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName
     }
 
     fetch(url, {
@@ -129,7 +111,7 @@ export default class Register extends React.Component<RegisterProps> {
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  onChange = {e => this.setFirstName(e.target.value)}
+                  onChange = {this.setFirstName.bind(this)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -141,7 +123,7 @@ export default class Register extends React.Component<RegisterProps> {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
-                  onChange = {e => this.setLastName(e.target.value)}
+                  onChange = {this.setLastName.bind(this)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -153,7 +135,7 @@ export default class Register extends React.Component<RegisterProps> {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange = {e => this.setEmail(e.target.value)}
+                  onChange = {this.setEmail.bind(this)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -166,7 +148,7 @@ export default class Register extends React.Component<RegisterProps> {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange = {e => this.setPassword(e.target.value)}
+                  onChange = {this.setPassword.bind(this)}
                 />
               </Grid>
             </Grid>
