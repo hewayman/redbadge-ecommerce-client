@@ -11,6 +11,7 @@ type AppState = {
   token: string;
   newToken: string;
   setStoreItems: any;
+  storeItems: any[]
 }
 
 class App extends React.Component <{}, AppState> {
@@ -20,7 +21,8 @@ class App extends React.Component <{}, AppState> {
       // sessionToken: this.props.sessionToken
       token: '',
       newToken: '',
-      setStoreItems: ''
+      setStoreItems: '',
+      storeItems: []
     }
   }
 
@@ -29,7 +31,7 @@ class App extends React.Component <{}, AppState> {
       method: 'GET'
     })
       .then(r => r.json())
-      .then(rArr => this.state.setStoreItems(rArr))
+      .then(obj => this.setState({storeItems: obj.listing}))
   }
 
   setToken = (token: string) => {
@@ -54,6 +56,7 @@ class App extends React.Component <{}, AppState> {
 
   componentWillMount() {
     this.setToken('')
+    this.fetchStoreItems()
   }
 
   render() {
@@ -64,15 +67,16 @@ class App extends React.Component <{}, AppState> {
         <Router>
           <Navbar clickLogout={this.clearToken} />
           <Switch>
-            {/* <Route path='/' exact component={Home}/> */}
-            {!this.state.token || this.state.token === '' 
+            
+            {/* {!this.state.token || this.state.token === '' 
             ? <Route path='/user/login' exact ><Login updateToken={this.updateToken} /></Route> 
-            :  <StoreItemsList sessionToken={this.setState} storeItems={this.state.setStoreItems}/> }
+            :  <StoreItemsList sessionToken={this.state.token} storeItems={this.state.setStoreItems} fetchStoreItems={this.fetchStoreItems()} /> } */}
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
+            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems}/></Route>
           </Switch>
-          {/* <StoreItemsList storeItems={this.state.setStoreItems} /> */}
-          {/* fetchStoreItems={this.fetchStoreItems()}  */}
+          
+           
           {/* <Register/>
           <Login /> */}
         </Router>
