@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Site/Navbar'
 import Register from './components/Auth/Register'
 import Login from './components/Auth/Login'
-import StoreItems from './components/StoreItems/StoreItems'
+import StoreItemsCreate from './components/StoreItems/StoreItemCreate'
 import StoreItemsList from './components/StoreItems/StoreItemsList';
  
 type AppState = {
@@ -71,6 +71,7 @@ class App extends React.Component <{}, AppState> {
             {/* {!this.state.token || this.state.token === '' 
             ? <Route path='/user/login' exact ><Login updateToken={this.updateToken} /></Route> 
             :  <StoreItemsList sessionToken={this.state.token} storeItems={this.state.setStoreItems} fetchStoreItems={this.fetchStoreItems()} /> } */}
+            <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems}/></Route>

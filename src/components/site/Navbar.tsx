@@ -4,8 +4,10 @@ import AppBar from '@material-ui/core/AppBar'
 import CreateIcon from '@material-ui/icons/Create'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import SearchIcon from '@material-ui/icons/Search'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import LockIcon from '@material-ui/icons/Lock'
 
@@ -23,9 +25,22 @@ class Navbar extends React.Component<NavbarProps> {
               <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}}>MollieBurch</Link>
             </Typography>
             {/* <Button color="inherit">Cart</Button> */}
-            <Typography className="welcomeText" style={{marginLeft: "auto"}}>
+            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1em', padding: '0 1.9em 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
+              <div className="searchIcon" style={{height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0 0 14em'}}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search"
+                // classes={{
+                //   root: classes.inputRoot,
+                //   input: classes.inputInput,
+                // }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
+            {/* <Typography className="welcomeText" >
               Welcome!
-            </Typography>
+            </Typography> */}
             <IconButton edge="start" className="createListingButton" color="inherit" aria-label="menu">
               <Link to='/listing/create' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
                 <CreateIcon />
