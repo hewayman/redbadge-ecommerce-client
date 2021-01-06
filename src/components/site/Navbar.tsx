@@ -22,10 +22,10 @@ class Navbar extends React.Component<NavbarProps> {
         <AppBar style={{ background: '#fafafa', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1px solid #cccccc", display: "flex"}} elevation={0} >
           <Toolbar>
             <Typography variant="h6" className="storeName">
-              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}}>MollieBurch</Link>
+              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}}>Store Name</Link>
             </Typography>
             {/* <Button color="inherit">Cart</Button> */}
-            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1em', padding: '0 1.9em 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
+            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', padding: '0 1.8em 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
               <div className="searchIcon" style={{height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0 0 14em'}}>
                 <SearchIcon />
               </div>

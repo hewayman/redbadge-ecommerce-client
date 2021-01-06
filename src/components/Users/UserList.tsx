@@ -1,17 +1,16 @@
 import React from 'react';
-import Item from './Item';
 import Container from '@material-ui/core/Container'
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import User from './User'
 
-type ListProps = {
-  sessionToken: any;
-  fetchStoreItems: any;
-  storeItems: any;
+type UserProps = {
+  users: any;
+  fetchUsers: any;
 }
 
-export default class StoreItemsList extends React.Component<ListProps> {
+export default class UserList extends React.Component<UserProps> {
 
-  constructor (props: ListProps) {
+  constructor (props: UserProps) {
     super(props);
     this.state = {
     } 
@@ -22,7 +21,7 @@ export default class StoreItemsList extends React.Component<ListProps> {
       <div>
         <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
           <Grid container spacing={2} alignItems="center">
-              {this.props.storeItems.map((itemObj: any, i: any) => <Grid item xs={12} sm={6} md={4}><Item item={itemObj} key={i}/></Grid> )}
+              {this.props.users.map((userObj: any, i: any) => <Grid item xs={12} sm={6} md={4}><User user={userObj} key={i}/></Grid> )}
           </Grid>      
         </Container>
       </div>

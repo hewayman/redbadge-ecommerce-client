@@ -6,23 +6,28 @@ import Register from './components/Auth/Register'
 import Login from './components/Auth/Login'
 import StoreItemsCreate from './components/StoreItems/StoreItemCreate'
 import StoreItemsList from './components/StoreItems/StoreItemsList';
+import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
+import UserList from './components/Users/UserList';
  
 type AppState = {
   token: string;
   newToken: string;
   setStoreItems: any;
-  storeItems: any[]
+  storeItems: any[];
+  // searchTerm: string;
+  users: any[];
 }
 
 class App extends React.Component <{}, AppState> {
   constructor (props: {}) {
     super(props);
     this.state = {
-      // sessionToken: this.props.sessionToken
       token: '',
       newToken: '',
       setStoreItems: '',
-      storeItems: []
+      storeItems: [],
+      // searchTerm: '',
+      users: []
     }
   }
 
@@ -31,7 +36,15 @@ class App extends React.Component <{}, AppState> {
       method: 'GET'
     })
       .then(r => r.json())
-      .then(obj => this.setState({storeItems: obj.listing}))
+      .then(obj => this.setState({ storeItems: obj.listing }))
+  }
+
+  fetchUsers = () => {
+    fetch('http://localhost:8080/user/all/', {
+      method: 'GET'
+    })
+      .then(r => r.json())
+      .then(obj => this.setState({ users: obj.user }))
   }
 
   setToken = (token: string) => {
@@ -57,6 +70,7 @@ class App extends React.Component <{}, AppState> {
   componentWillMount() {
     this.setToken('')
     this.fetchStoreItems()
+    this.fetchUsers()
   }
 
   render() {
@@ -67,20 +81,14 @@ class App extends React.Component <{}, AppState> {
         <Router>
           <Navbar clickLogout={this.clearToken} />
           <Switch>
-            
-            {/* {!this.state.token || this.state.token === '' 
-            ? <Route path='/user/login' exact ><Login updateToken={this.updateToken} /></Route> 
-            :  <StoreItemsList sessionToken={this.state.token} storeItems={this.state.setStoreItems} fetchStoreItems={this.fetchStoreItems()} /> } */}
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
+            <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers}/></Route>
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems}/></Route>
           </Switch>
-          
-           
-          {/* <Register/>
-          <Login /> */}
         </Router>
+        {/* {this.searchTerm ? <StoreItemsSearch /> : <StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems}/>} */}
       </div>
     );
   }

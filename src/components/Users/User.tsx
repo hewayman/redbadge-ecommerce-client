@@ -6,10 +6,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
-import Rating from '@material-ui/lab/Rating';
 
-type ItemProps = {
-  item: any;
+type UserProps = {
+  user: any;
   key: any;
   classes: any;
 }
@@ -29,61 +28,52 @@ const styles = (theme: any) => createStyles({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  // expand: {
-  //   transform: 'rotate(0deg)',
-  //   marginLeft: 'auto',
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  // },
-  // expandOpen: {
-  //   transform: 'rotate(180deg)',
-  // },
-  // avatar: {
-  //   backgroundColor: red[500],
-  // },
-
 })
 
-// interface Props extends WithStyles<typeof styles>{ }
-
-class Item extends React.Component<ItemProps> {
+class User extends React.Component<UserProps> {
   state = {
     searchNodes: '',
   }
 
-  
-
   render() {
-    // console.log(this.props.item.imgURL)
     const { classes } = this.props;
-    // const image = require('./../../assets/img1.jpg');
     return (
       <div className={classes.root}>
         <Card className={classes.root} >   
           <CardActionArea>            
-            <CardMedia
+            {/* <CardMedia
               className="media"
-              // image={(this.props.item.imgURL)}
+  
               image={require("./../../assets/" + this.props.item.imgURL + ".jpg").default}
               title="furniture"
               style={{height: 200, paddingTop: '56.25%'}}
-            />
+            /> */}
             <CardHeader
-              title={this.props.item.itemName}
-              subheader={"$" + this.props.item.price}
+              title={this.props.user.firstName  + ' ' + this.props.user.lastName}
+              subheader={String(this.props.user.isAdmin)}
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                {this.props.item.color}
+                {this.props.user.email}
+                <br/>
+                {this.props.user.phone}
+                <br/>
+                {this.props.user.addressLn1}
+                <br/>
+                {this.props.user.addressLn2}
+                <br/>
+                {this.props.user.city}
+                <br/>
+                {this.props.user.state}
+                <br/>
+                {this.props.user.zipcode}
               </Typography>
             </CardContent>
-            <CardContent>
+            {/* <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                {this.props.item.description}
+                {this.props.user.addressLn1}
               </Typography>
-            </CardContent>
-            <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly/>
+            </CardContent> */}
           </CardActionArea>
         </Card>
       </div>
@@ -91,4 +81,4 @@ class Item extends React.Component<ItemProps> {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Item);
+export default withStyles(styles, { withTheme: true })(User);
