@@ -6,6 +6,7 @@ import User from './User'
 type UserProps = {
   users: any;
   fetchUsers: any;
+  sessionToken: any;
 }
 
 export default class UserList extends React.Component<UserProps> {

@@ -9,13 +9,38 @@ import IconButton from '@material-ui/core/IconButton'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LockIcon from '@material-ui/icons/Lock'
 
 type NavbarProps = {
-  clickLogout: any
+  clickLogout: any;
+  sessionToken: any;
 }
 
 class Navbar extends React.Component<NavbarProps> {
+
+  createAdmin = () => {
+    const url = 'http://localhost:8080/user/admin';
+    const body = {
+      // email: this.state.email,
+      // password: this.state.password,
+      // isAdmin: this.state.isAdmin
+    }
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': this.props.sessionToken
+      },
+      body: JSON.stringify(body)
+    })
+      .then(r => r.json())
+      .then(rObj => {
+        // this.props.sessionToken(rObj.sessionToken)
+        console.log(rObj)
+      })
+  }
   render () {
     return (
       <div>
@@ -41,6 +66,11 @@ class Navbar extends React.Component<NavbarProps> {
             {/* <Typography className="welcomeText" >
               Welcome!
             </Typography> */}
+            <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" >
+              <Link to='/user/admin' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+                <SupervisorAccountIcon />
+              </Link>
+            </IconButton>
             <IconButton edge="start" className="createListingButton" color="inherit" aria-label="menu">
               <Link to='/listing/create' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
                 <CreateIcon />

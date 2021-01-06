@@ -2,6 +2,7 @@ import React from 'react';
 import Item from './Item';
 import Container from '@material-ui/core/Container'
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import ItemDetailView from './ItemDetailView';
 
 type ListProps = {
   sessionToken: any;

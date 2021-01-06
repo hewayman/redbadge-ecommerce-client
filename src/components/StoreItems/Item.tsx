@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link} from 'react-router-dom'
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -7,11 +8,16 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
+import ItemDetailView from './ItemDetailView';
 
 type ItemProps = {
   item: any;
   key: any;
   classes: any;
+}
+
+type ItemState = {
+  itemName: string;
 }
 
 const styles = (theme: any) => createStyles({
@@ -29,39 +35,32 @@ const styles = (theme: any) => createStyles({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  // expand: {
-  //   transform: 'rotate(0deg)',
-  //   marginLeft: 'auto',
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  // },
-  // expandOpen: {
-  //   transform: 'rotate(180deg)',
-  // },
-  // avatar: {
-  //   backgroundColor: red[500],
-  // },
-
 })
 
-// interface Props extends WithStyles<typeof styles>{ }
-
-class Item extends React.Component<ItemProps> {
+class Item extends React.Component<ItemProps, ItemState> {
   state = {
     searchNodes: '',
+    itemName: '',
   }
 
-  
+  handleClick = () => {
+    // this.setState({
+    //   itemName: this.props.item.itemName
+    // })
+    fetch(`http://localhost:8080/listing/${this.props.item.id}`, {
+      method: 'GET'
+    })
+      .then(r => r.json())
+      // .then(obj => this.setState({ storeItems: obj.listing }))
+  }
 
   render() {
-    // console.log(this.props.item.imgURL)
     const { classes } = this.props;
-    // const image = require('./../../assets/img1.jpg');
     return (
       <div className={classes.root}>
+        <Link to='/listing/' >
         <Card className={classes.root} >   
-          <CardActionArea>            
+          <CardActionArea onClick={this.handleClick}>            
             <CardMedia
               className="media"
               // image={(this.props.item.imgURL)}
@@ -86,9 +85,12 @@ class Item extends React.Component<ItemProps> {
             <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly/>
           </CardActionArea>
         </Card>
+        </Link>
+        {/* <ItemDetailView itemName={this.state.itemName}/> */}
       </div>
     );
   }
 }
 
+{/* <ItemDetailView item={itemObj} key={i}/> */}
 export default withStyles(styles, { withTheme: true })(Item);
