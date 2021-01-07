@@ -18,6 +18,7 @@ type ItemProps = {
 
 type ItemState = {
   itemName: string;
+  storeItem: any[];
 }
 
 const styles = (theme: any) => createStyles({
@@ -41,6 +42,7 @@ class Item extends React.Component<ItemProps, ItemState> {
   state = {
     searchNodes: '',
     itemName: '',
+    storeItem: []
   }
 
   handleClick = () => {
@@ -51,14 +53,15 @@ class Item extends React.Component<ItemProps, ItemState> {
       method: 'GET'
     })
       .then(r => r.json())
-      // .then(obj => this.setState({ storeItems: obj.listing }))
+      .then(obj => this.setState({ storeItem: obj.listing }))
+ 
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Link to='/listing/' >
+        <Link to={`/listing/${this.props.item.id}`} >
         <Card className={classes.root} >   
           <CardActionArea onClick={this.handleClick}>            
             <CardMedia
@@ -86,7 +89,7 @@ class Item extends React.Component<ItemProps, ItemState> {
           </CardActionArea>
         </Card>
         </Link>
-        {/* <ItemDetailView itemName={this.state.itemName}/> */}
+        {/* <ItemDetailView itemName={this.state.storeItem}/> */}
       </div>
     );
   }

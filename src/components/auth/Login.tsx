@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -31,6 +32,7 @@ type LoginProps = {
 type LoginState = {
   email: string;
   password: string;
+  history: string;
 }
 
 export default class Login extends React.Component<LoginProps, LoginState> {
@@ -38,7 +40,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      history: ''
     }
   }
 
@@ -66,7 +69,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       body: JSON.stringify(body)
     })
       .then(r => r.json())
-      .then(rObj => this.props.updateToken(rObj.sessionToken))
+      .then(rObj =>{ 
+        this.props.updateToken(rObj.sessionToken)
+      })
   }
 
   render() {

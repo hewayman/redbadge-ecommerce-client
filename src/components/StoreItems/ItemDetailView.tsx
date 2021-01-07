@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 type ItemProps = {
-  itemName: string;
+  itemName: any;
 }
 
 class ItemDetailView extends Component<ItemProps> {
@@ -15,8 +15,8 @@ class ItemDetailView extends Component<ItemProps> {
     return (
       
       <div>
-        {/* {console.log(this.props.itemName)} */}
-        <p>'Test'</p>
+        {console.log(this.props.itemName)}
+        <p>Test</p>
       </div>
     );
   }
