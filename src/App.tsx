@@ -107,7 +107,6 @@ class App extends React.Component <{}, AppState> {
         {console.log("App token " + this.state.token)}
         <Router>
           <Navbar clickLogout={this.clearToken} sessionToken={this.state.token}/>
-          {/* <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /> */}
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>

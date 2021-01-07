@@ -61,7 +61,7 @@ class Item extends React.Component<ItemProps, ItemState> {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Link to={`/listing/${this.props.item.id}`} >
+        <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:"none"}} >
         <Card className={classes.root} >   
           <CardActionArea onClick={this.handleClick}>            
             <CardMedia

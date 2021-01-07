@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
+import Container from '@material-ui/core/Container'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 type FilterProps = {
   sort: any;
   handleChangeSort: any;
-  // count: number;
 }
 
 class FilterItems extends React.Component<FilterProps> {
   render() {
     return (
-      <div className="row">
-        <label>
-          Order by
-          <select className="form-control" value={this.props.sort} onChange={this.props.handleChangeSort}>
-            <option value="">Select</option>
-            <option value="lowest">lowest to highest</option>
-            <option value="highest">highest to lowest</option>
-          </select>
-        </label>
-      </div>
+      <Container maxWidth="lg">
+          <InputLabel id="demo-simple-select-outlined-label" style={{float:'right', margin:'0em 1em 0.5em 0em'}}>Sort By
+            <Select label="Sort" className="form-control" value={this.props.sort} onChange={this.props.handleChangeSort} style={{marginLeft:'0.6em'}}>
+              <MenuItem value="">Most Relevant</MenuItem>
+              <MenuItem value="lowest">Price, low to high</MenuItem>
+              <MenuItem value="highest">Price, high to low</MenuItem>
+            </Select>
+          </InputLabel>
+      </Container>
     );
   }
 }
