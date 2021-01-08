@@ -1,7 +1,18 @@
 import React from 'react';
+import { Link} from 'react-router-dom'
+import { withStyles, createStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 type AdminProps = {
   sessionToken: any;
+  classes: any;
 }
 
 type AdminState = {
@@ -9,6 +20,23 @@ type AdminState = {
   // password: string;
   // isAdmin: boolean;
 }
+
+const styles = (theme: any) => createStyles({
+  root: {
+    maxWidth: 345,
+    flexGrow: 1,
+    wrap: 'nowrap'
+  },
+  media: {
+    height: 300,
+    paddingTop: '56.25%', // 16:9
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+})
 
 class Admin extends React.Component <AdminProps, AdminState> {
   constructor (props: AdminProps) {
@@ -48,13 +76,57 @@ class Admin extends React.Component <AdminProps, AdminState> {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        {console.log("Admin loaded")}
-        <h2>Admin</h2>
+      <div >
+        <Container maxWidth="lg" style={{ marginTop:"4.8em", marginBottom:'4em'}}>
+          {console.log("Admin loaded")}
+          <h2>Admin Portal</h2>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} sm={6} md={4}>
+              <Card className={classes.root} >   
+                <Link to={`/listing/create`} style={{textDecoration:"none"}} >
+                  <CardActionArea> 
+                    <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {"Create Listing"}
+                    </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card className={classes.root} >   
+                <Link to={`/user/details`} style={{textDecoration:"none"}} >
+                  <CardActionArea> 
+                    <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {"Edit Customer"}
+                    </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card className={classes.root} >   
+                <Link to={`/user/all`} style={{textDecoration:"none"}} >
+                  <CardActionArea> 
+                    <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {"View All Customers"}
+                    </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
       </div>
     );
   }
 }
 
-export default Admin;
+export default withStyles(styles, { withTheme: true })(Admin);;

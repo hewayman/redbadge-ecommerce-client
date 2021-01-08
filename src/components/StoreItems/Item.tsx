@@ -57,6 +57,16 @@ class Item extends React.Component<ItemProps, ItemState> {
  
   }
 
+  toUpperCase = (str: string) => {
+    return str
+    .toLowerCase()
+    .split(' ')
+    .map(function(word) {
+        return word[0].toUpperCase() + word.substr(1);
+    })
+    .join(' ');
+    }
+
   render() {
     const { classes } = this.props;
     return (
@@ -72,20 +82,26 @@ class Item extends React.Component<ItemProps, ItemState> {
               style={{height: 200, paddingTop: '56.25%'}}
             />
             <CardHeader
-              title={this.props.item.itemName}
-              subheader={"$" + this.props.item.price}
+              title={this.toUpperCase(this.props.item.itemName)}
+              // subheader={"$" + this.props.item.price}
+              style={{paddingBottom:'0'}}
             />
-            <CardContent>
+            <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
+            <CardContent style={{paddingBottom:'0', paddingTop:'0'}}>
               <Typography variant="body2" color="textSecondary" component="p">
-                {this.props.item.color}
+                {"$" + this.props.item.price}
               </Typography>
             </CardContent>
-            <CardContent>
+            <CardContent style={{paddingTop:'0'}}>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {this.toUpperCase(this.props.item.color)}
+              </Typography>
+            </CardContent>
+            <CardContent style={{ paddingTop:'0'}}>
               <Typography variant="body2" color="textSecondary" component="p">
                 {this.props.item.description}
               </Typography>
             </CardContent>
-            <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly/>
           </CardActionArea>
         </Card>
         </Link>
