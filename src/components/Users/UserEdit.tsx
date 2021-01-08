@@ -127,7 +127,7 @@ class UserEdit extends React.Component<UserEditProps, UserEditState> {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className="paper">
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+          <Avatar className="avatar" style={{backgroundColor:'white', color:'black'}}>
             <CreateIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

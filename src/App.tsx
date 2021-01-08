@@ -11,8 +11,8 @@ import StoreItemsList from './components/StoreItems/StoreItemsList';
 // import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
 import UserList from './components/Users/UserList';
 import ItemDetailView from './components/StoreItems/ItemDetailView';
-import UserCreate from './components/Users/UserEdit';
-import UserEdit from './components/Users/UserEdit';
+// import UserCreate from './components/Users/UserEdit';
+// import UserEdit from './components/Users/UserEdit';
  
 type AppState = {
   token: string;
@@ -114,8 +114,8 @@ class App extends React.Component <{}, AppState> {
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
-            <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route>
-            <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route>
+            <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
+            {/* <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route> */}
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
             <Route path='/listing/:id'><ItemDetailView itemName={''}/></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token} /></Route>
