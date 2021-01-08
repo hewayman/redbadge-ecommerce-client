@@ -96,7 +96,7 @@ class Admin extends React.Component <AdminProps, AdminState> {
                 </Link>
               </Card>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            {/* <Grid item xs={12} sm={6} md={4}>
               <Card className={classes.root} >   
                 <Link to={`/user/details`} style={{textDecoration:"none"}} >
                   <CardActionArea> 
@@ -108,7 +108,7 @@ class Admin extends React.Component <AdminProps, AdminState> {
                   </CardActionArea>
                 </Link>
               </Card>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6} md={4}>
               <Card className={classes.root} >   
                 <Link to={`/user/all`} style={{textDecoration:"none"}} >

@@ -9,6 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
 import ItemDetailView from './ItemDetailView';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton'
 
 type ItemProps = {
   item: any;
@@ -39,11 +42,15 @@ const styles = (theme: any) => createStyles({
 })
 
 class Item extends React.Component<ItemProps, ItemState> {
-  state = {
-    searchNodes: '',
-    itemName: '',
-    storeItem: []
-  }
+  constructor (props: ItemProps) {
+    super(props);
+      this.state = {
+        // searchNodes: '',
+        itemName: '',
+        storeItem: []
+      }
+      this.handleClick = this.handleClick.bind(this);
+    }
 
   handleClick = () => {
     // this.setState({
@@ -71,8 +78,17 @@ class Item extends React.Component<ItemProps, ItemState> {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:"none"}} >
+        {/* <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:"none"}} > */}
         <Card className={classes.root} >   
+          <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
+            onClick={e =>
+                    window.confirm("Are you sure you wish to delete this item?")
+            }>
+            <DeleteIcon style={{height:'25px', width:'25px'}}/>
+          </IconButton>
+          <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} >
+            <CreateIcon style={{height:'25px', width:'25px'}}/>
+          </IconButton> 
           <CardActionArea onClick={this.handleClick}>            
             <CardMedia
               className="media"
@@ -104,8 +120,8 @@ class Item extends React.Component<ItemProps, ItemState> {
             </CardContent>
           </CardActionArea>
         </Card>
-        </Link>
-        {/* <ItemDetailView itemName={this.state.storeItem}/> */}
+        {/* </Link> */}
+        {<ItemDetailView storeItem={this.props.item}/>}
       </div>
     );
   }
