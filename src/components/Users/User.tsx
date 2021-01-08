@@ -6,7 +6,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 // import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CreateIcon from '@material-ui/icons/Create'
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography';
 // import UserEdit from '../Users/UserEdit'
@@ -42,6 +43,7 @@ type UserState ={
   state: string;
   zipcode: number;
   phone: number;
+  handlePhone: any;
 }
 
 const styles = (theme: any) => createStyles({
@@ -79,7 +81,8 @@ class User extends React.Component<UserProps, UserState> {
       city: '',
       state: '',
       zipcode: 0,
-      phone: 0
+      phone: 0,
+      handlePhone: ''
     }
   }
 
@@ -160,7 +163,7 @@ class User extends React.Component<UserProps, UserState> {
       })
     }
 
-  handleClick = () => {
+  fetchUsers = () => {
     // this.setState({
     //   itemName: this.props.item.itemName
     // })
@@ -171,9 +174,23 @@ class User extends React.Component<UserProps, UserState> {
       .then(obj => this.setState({ user: obj.user }))
   }
 
+  deleteUser = () => {
+    fetch(`http://localhost:8080/user/${this.props.user.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': this.props.sessionToken
+            })
+        }) .then(() => this.props.fetchUsers())
+  }
+
   toggle = () => {
     const showEdit = this.state.active
     this.setState({active: !showEdit})
+  }
+
+  componentWillMount() {
+    this.fetchUsers()
   }
 
   render() {
@@ -181,11 +198,15 @@ class User extends React.Component<UserProps, UserState> {
     return (
       <div className={classes.root}>
         <Card className={classes.root} >   
-          {/* <CardActionArea onClick={this.handleClick}>             */}
-            <Avatar className="avatar" style={{backgroundColor:'#f50057', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
-              <CreateIcon style={{height:'20px', width:'20px'}}/>
-            </Avatar>
-            
+            <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
+            onClick={e =>
+                    window.confirm("Are you sure you wish to delete this item?") && this.deleteUser()
+            }>
+              <DeleteIcon style={{height:'25px', width:'25px'}}/>
+            </IconButton>
+            <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
+              <CreateIcon style={{height:'25px', width:'25px'}}/>
+            </IconButton>            
           {/* display user edit form when create icon has been clicked, otherwise display user info */}
             {this.state.active === false ? (
               <CardContent> 
@@ -210,7 +231,7 @@ class User extends React.Component<UserProps, UserState> {
                 </Typography>
               </CardContent>) : (
               <div className="paper" style={{marginTop:'0em'}}>
-                <form onSubmit={this.handleSubmit} onClick={this.handleClick} className="formEditListing" style={{ width: '70%' }} noValidate>
+                <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -220,7 +241,7 @@ class User extends React.Component<UserProps, UserState> {
                     label="First Name"
                     name={"firstName"}
                     autoFocus
-                    value={this.props.user.firstName}
+                    defaultValue={this.props.user.firstName}
                     onChange = {this.setFirstName.bind(this)}
                   />
                   <TextField
@@ -231,7 +252,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="lastName"
                     label="Last Name"
                     id="lastName"
-                    value={this.props.user.lastName}
+                    defaultValue={this.props.user.lastName}
                     onChange = {this.setLastName.bind(this)}
                   />
                   <TextField
@@ -242,7 +263,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="isAdmin"
                     label="Admin Access (true or false)"
                     id="isAdmin"
-                    value={this.props.user.isAdmin}
+                    defaultValue={this.props.user.isAdmin}
                     onChange = {this.setIsAdmin.bind(this)}
                   />
                   <TextField
@@ -253,7 +274,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="email"
                     label="Email"
                     id="email"
-                    value={this.props.user.email}
+                    defaultValue={this.props.user.email}
                     onChange = {this.setEmail.bind(this)}
                   />
                   <TextField
@@ -264,7 +285,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="addressLn1"
                     label="Address Line 1"
                     id="addressLn1"
-                    value={this.props.user.addressLn1}
+                    defaultValue={this.props.user.addressLn1}
                     onChange = {this.setAddressLn1.bind(this)}
                   />
                   <TextField
@@ -275,7 +296,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="addressLn2"
                     label="Address Line 2"
                     id="addressLn2"
-                    value={this.props.user.addressLn2}
+                    defaultValue={this.props.user.addressLn2}
                     onChange = {this.setAddressLn2.bind(this)}
                   />
                   <TextField
@@ -286,7 +307,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="city"
                     label="City"
                     id="city"
-                    value={this.props.user.city}
+                    defaultValue={this.props.user.city}
                     onChange = {this.setCity.bind(this)}
                   />
                   <TextField
@@ -297,7 +318,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="state"
                     label="State"
                     id="state"
-                    value={this.props.user.state}
+                    defaultValue={this.props.user.state}
                     onChange = {this.setStateName.bind(this)}
                   />
                   <TextField
@@ -308,7 +329,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="zipcode"
                     label="Zipcode"
                     id="zipcode"
-                    value={this.props.user.zipcode}
+                    defaultValue={this.props.user.zipcode}
                     onChange = {this.setZipcode.bind(this)}
                   />
                   <TextField
@@ -319,7 +340,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="phone"
                     label="Phone"
                     id="phone"
-                    value={this.props.user.phone}
+                    defaultValue={this.props.user.phone}
                     onChange = {this.setPhone.bind(this)}
                   />
                   <Button
@@ -334,7 +355,6 @@ class User extends React.Component<UserProps, UserState> {
                 </form>
               </div>
             )}
-          {/* </CardActionArea> */}
         </Card>
       </div>
     );
