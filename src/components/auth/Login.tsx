@@ -28,7 +28,7 @@ function Copyright() {
 type LoginProps = {
   updateToken: any;
   token: any;
-  // isAdmin: boolean;
+  adminStatus: boolean;
   // fetchUsers: any;
 }
 

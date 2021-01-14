@@ -90,6 +90,7 @@ class App extends React.Component <{}, AppState> {
 
   clearToken = () => {
     localStorage.clear();
+    window.location.reload();
   }
 
   listItems = () => {
@@ -128,7 +129,7 @@ class App extends React.Component <{}, AppState> {
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
-            <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token}/></Route>
+            <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
             {/* <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route> */}
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
