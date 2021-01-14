@@ -73,7 +73,8 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       email: this.state.email,
       password: this.state.password,
       firstName: this.state.firstName,
-      lastName: this.state.lastName
+      lastName: this.state.lastName,
+      isAdmin: false
     }
 
     fetch(url, {

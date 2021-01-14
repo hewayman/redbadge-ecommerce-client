@@ -10,6 +10,7 @@ import StoreItemsCreate from './components/StoreItems/StoreItemCreate';
 import StoreItemsList from './components/StoreItems/StoreItemsList';
 // import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
 import UserList from './components/Users/UserList';
+import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
  
 type AppState = {
   token: string;
@@ -23,6 +24,8 @@ type AppState = {
   sort: any;
   isAdmin: any;
   firstName: string;
+  searchTerm: string;
+  searchItems: any[];
 }
 
 class App extends React.Component <{}, AppState> {
@@ -39,7 +42,9 @@ class App extends React.Component <{}, AppState> {
       filteredItems: [],
       sort: '',
       isAdmin: false,
-      firstName: ''
+      firstName: '',
+      searchTerm: '',
+      searchItems: []
     }
   }
 
@@ -64,17 +69,17 @@ class App extends React.Component <{}, AppState> {
   setToken = (token: string, id: any, isAdmin: boolean) => {
     if (token) {
       this.setState({token: token})
-      this.setState({id: id})
-      this.setState({isAdmin: isAdmin})
+      // this.setState({id: id})
+      // this.setState({isAdmin: isAdmin})
     } else {
       this.setState({token: localStorage.getItem('token') || ''}) 
-      this.setState({id: parseInt(localStorage.getItem('id')!)})
+      // this.setState({id: parseInt(localStorage.getItem('id')!)})
     }
     localStorage.setItem('token', token)
-    localStorage.setItem('id', id)
+    // localStorage.setItem('id', id)
   }
 
-  // updates the state for the token, userId, and admin status when a user logins or registers
+  // updates the state for the token, userId,admin status, and first name when a user logs in or registers
   updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
@@ -86,6 +91,11 @@ class App extends React.Component <{}, AppState> {
     console.log("User id: ", updateId)
     console.log("Admin? :", updateAdmin)
     console.log("User first name:", updateFirstName)
+  }
+
+  updateSearch = (storeItem: any[]) => {
+    this.setState({ storeItems: storeItem})
+    console.log("search", storeItem)
   }
 
   clearToken = () => {
@@ -113,7 +123,6 @@ class App extends React.Component <{}, AppState> {
 
   componentWillMount() {
     this.setToken('', -1, false)
-    // this.setUserId(-2)
     this.fetchStoreItems()
     this.fetchUsers()
   }
@@ -124,20 +133,19 @@ class App extends React.Component <{}, AppState> {
       <div> 
         {/* {console.log("App token " + this.state.token)} */}
         <Router>
-          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName}/>
+          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems}/>
           <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
-            {/* <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route> */}
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
+            {/* <Route path='/listing/name/:name'><StoreItemsSearch searchItems={''} adminStatus={this.state.isAdmin} sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems} /></Route> */}
             <Route path='/listing/:id'><ItemDetailView storeItem={''}/></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token} /></Route>
           </Switch>
         </Router>
-        {/* {this.searchTerm ? <StoreItemsSearch /> : <StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems}/>} */}
       </div>
     );
   }

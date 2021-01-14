@@ -1,5 +1,32 @@
 import React from 'react';
+import Item from './Item';
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid';
 
-export default class StoreItemsSearch extends React.Component {
-
+type StoreItemsProps = {
+  searchItems: any;
+  fetchStoreItems: any;
+  // storeItems: any;
+  // sort: any;
+  // handleChangeSort: any;
+  adminStatus: boolean;
+  sessionToken: any;
 }
+
+class StoreItemsSearch extends React.Component<StoreItemsProps> {
+
+  render() {
+    return (
+      <div>
+        <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
+          <Grid container spacing={2} alignItems="center">
+            {this.props.searchItems.map((itemObj: any, i: any) => <Item item={itemObj} key={i} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems}/>)}
+          </Grid>
+        </Container>
+      </div>
+      
+    )
+  }
+}
+
+export default StoreItemsSearch;

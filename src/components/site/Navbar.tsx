@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -10,15 +11,32 @@ import SearchIcon from '@material-ui/icons/Search'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LockIcon from '@material-ui/icons/Lock'
+import StoreItemsSearch from '../StoreItems/StoreItemsSearch'
 
 type NavbarProps = {
   clickLogout: any;
   sessionToken: any;
   adminStatus: boolean;
   userFirstName: string;
+  fetchStoreItems: any;
+  // searchTerm: string;
+  searchItems: any[];
+  updateSearch: any;
 }
 
-class Navbar extends React.Component<NavbarProps> {
+type NavbarState = {
+  searchTerm: string;
+  // searchItems: any[];
+}
+
+class Navbar extends React.Component<NavbarProps, NavbarState> {
+  constructor (props: NavbarProps) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+      // searchItems: []
+    }
+  }
 
   // automatically creates admin account when the '/user/admin' endpoint is reached
   createAdmin = () => {
@@ -43,27 +61,49 @@ class Navbar extends React.Component<NavbarProps> {
         console.log(rObj)
       })
   }
+
+  handleSearch = () => {
+    fetch(`http://localhost:8080/listing/name/${this.state.searchTerm}`, {
+      method: 'GET'
+    })
+    .then(r => r.json())
+    .then(obj => { this.props.updateSearch(obj.item )
+      console.log(obj.item)
+    })
+  }
+
+  setSearch = (e: any) => {
+    if (e.target.value) {
+      this.setState({ searchTerm: e.target.value });
+    } else {
+      this.props.fetchStoreItems()
+    }
+    
+  }
+
   render () {
     return (
       <div>
         <AppBar style={{ background: '#fafafa', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1px solid #cccccc", display: "flex"}} elevation={0} >
           <Toolbar>
             <Typography variant="h6" className="storeName">
-              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}}>Store Name</Link>
+              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}} onClick={this.props.fetchStoreItems}>Store Name</Link>
             </Typography>
-            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', padding: '0 1.8em 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
-              <div className="searchIcon" style={{height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0 0 14em'}}>
-                <SearchIcon />
-              </div>
+            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', 
+              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
               <InputBase
                 placeholder="Search"
-                // classes={{
-                //   root: classes.inputRoot,
-                //   input: classes.inputInput,
-                // }}
+                id="searchTerm"
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={this.setSearch.bind(this)}
               />
+              <IconButton edge="start" size="small" className="accountIconButton" color="inherit" aria-label="menu" onClick={this.handleSearch}>
+                <SearchIcon />
+              </IconButton>
             </div>
+            {/* {this.state.searchTerm ? <StoreItemsSearch searchItems={this.state.searchItems} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems}/> : 
+            <StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/>} */}
+
           {/* if the user is logged in, display a welcome message with the user's name */}
             {this.props.userFirstName ?
               <Typography className="welcomeText" >
