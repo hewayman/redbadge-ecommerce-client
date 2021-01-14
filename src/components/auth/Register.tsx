@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -28,7 +29,7 @@ function Copyright() {
 
 type RegisterProps = {
   updateToken: any;
-  // firstName: string;
+  token: any;
 }
 
 type RegisterState = {
@@ -83,11 +84,15 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       body: JSON.stringify(body)
     })
       .then(r => r.json())
-      .then(rObj => this.props.updateToken(rObj.sessionToken))
+      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName))
   }
 
   render() {
     console.log(this.props.updateToken)
+    // if user logs in, redirect to home page
+    if (this.props.token) {
+      return (<Redirect to="/" />)
+    } 
     return (
       
       <Container component="main" maxWidth="xs">

@@ -14,12 +14,15 @@ import UserList from './components/Users/UserList';
 type AppState = {
   token: string;
   newToken: string;
+  id: number;
   setStoreItems: any;
   storeItems: any[];
   // searchTerm: string;
   users: any[];
   filteredItems: any[];
   sort: any;
+  isAdmin: any;
+  firstName: string;
 }
 
 class App extends React.Component <{}, AppState> {
@@ -28,12 +31,15 @@ class App extends React.Component <{}, AppState> {
     this.state = {
       token: '',
       newToken: '',
+      id: -1,
       setStoreItems: '',
       storeItems: [],
       // searchTerm: '',
       users: [],
       filteredItems: [],
-      sort: ''
+      sort: '',
+      isAdmin: false,
+      firstName: ''
     }
   }
 
@@ -55,24 +61,35 @@ class App extends React.Component <{}, AppState> {
       .then(obj => this.setState({ users: obj.user }))
   }
 
-  setToken = (token: string) => {
+  setToken = (token: string, id: any, isAdmin: boolean) => {
     if (token) {
       this.setState({token: token})
+      this.setState({id: id})
+      this.setState({isAdmin: isAdmin})
     } else {
       this.setState({token: localStorage.getItem('token') || ''}) 
+      this.setState({id: parseInt(localStorage.getItem('id')!)})
     }
     localStorage.setItem('token', token)
+    localStorage.setItem('id', id)
   }
 
-  updateToken = (newToken: any) => {
+  // updates the state for the token, userId, and admin status when a user logins or registers
+  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string) => {
     localStorage.setItem('token', newToken);
+    localStorage.setItem('id', updateId)
     this.setState({token: newToken});
-    console.log(newToken)
+    this.setState({id: updateId});
+    this.setState({isAdmin: updateAdmin})
+    this.setState({firstName: updateFirstName})
+    console.log('Token: ', newToken)
+    console.log("User id: ", updateId)
+    console.log("Admin? :", updateAdmin)
+    console.log("User first name:", updateFirstName)
   }
 
   clearToken = () => {
     localStorage.clear();
-    this.setToken('');
   }
 
   listItems = () => {
@@ -94,7 +111,8 @@ class App extends React.Component <{}, AppState> {
   }
 
   componentWillMount() {
-    this.setToken('')
+    this.setToken('', -1, false)
+    // this.setUserId(-2)
     this.fetchStoreItems()
     this.fetchUsers()
   }
@@ -103,14 +121,14 @@ class App extends React.Component <{}, AppState> {
    
     return (
       <div> 
-        {console.log("App token " + this.state.token)}
+        {/* {console.log("App token " + this.state.token)} */}
         <Router>
-          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token}/>
+          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName}/>
           <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
-            <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>
-            <Route path='/user/login' exact ><Login updateToken={this.updateToken}/></Route>
+            <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
+            <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
             {/* <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route> */}
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>

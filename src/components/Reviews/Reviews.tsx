@@ -21,6 +21,7 @@ const styles = (theme: any) => createStyles({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    // overflow:'scroll',
   },
 })
 
@@ -39,7 +40,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
         <div  className={classes.paper}>
           <h2 id="simple-modal-title">{this.props.reviewItem}</h2>
           <p id="simple-modal-description">
-          {this.props.reviewItem}
+          {this.props.reviewItem.itemName}
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.

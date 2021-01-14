@@ -159,7 +159,7 @@ class Item extends React.Component<ItemProps, ItemState> {
             onClose={this.closeModal}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
-            style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh',}}
+            style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh', overflow:'scroll'}}
           >
             <Reviews showState={this.state.show} reviewItem={this.state.storeItem}/>
           </Modal>

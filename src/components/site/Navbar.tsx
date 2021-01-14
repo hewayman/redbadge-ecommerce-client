@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
-import CreateIcon from '@material-ui/icons/Create'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import InputBase from '@material-ui/core/InputBase'
@@ -15,17 +14,20 @@ import LockIcon from '@material-ui/icons/Lock'
 type NavbarProps = {
   clickLogout: any;
   sessionToken: any;
+  adminStatus: boolean;
+  userFirstName: string;
 }
 
 class Navbar extends React.Component<NavbarProps> {
 
+  // automatically creates admin account when the '/user/admin' endpoint is reached
   createAdmin = () => {
     const url = 'http://localhost:8080/user/admin';
-    const body = {
+    // const body = {
       // email: this.state.email,
       // password: this.state.password,
       // isAdmin: this.state.isAdmin
-    }
+    // }
   
     fetch(url, {
       method: 'POST',
@@ -33,7 +35,7 @@ class Navbar extends React.Component<NavbarProps> {
         'Content-Type': 'application/json',
         // 'Authorization': this.props.sessionToken
       },
-      body: JSON.stringify(body)
+      // body: JSON.stringify(body)
     })
       .then(r => r.json())
       .then(rObj => {
@@ -49,7 +51,6 @@ class Navbar extends React.Component<NavbarProps> {
             <Typography variant="h6" className="storeName">
               <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}}>Store Name</Link>
             </Typography>
-            {/* <Button color="inherit">Cart</Button> */}
             <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', padding: '0 1.8em 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
               <div className="searchIcon" style={{height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0 0 14em'}}>
                 <SearchIcon />
@@ -63,19 +64,23 @@ class Navbar extends React.Component<NavbarProps> {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
-            {/* <Typography className="welcomeText" >
-              Welcome!
-            </Typography> */}
-            <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" >
-              <Link to='/user/admin' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
-                <SupervisorAccountIcon />
-              </Link>
-            </IconButton>
-            {/* <IconButton edge="start" className="createListingButton" color="inherit" aria-label="menu">
-              <Link to='/listing/create' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
-                <CreateIcon />
-              </Link>
-            </IconButton> */}
+          {/* if the user is logged in, display a welcome message with the user's name */}
+            {this.props.userFirstName ?
+              <Typography className="welcomeText" >
+                Welcome, {this.props.userFirstName}!
+              </Typography> :
+              null
+            } 
+          {/* if the user is an admin, show the admin portal button */}
+            {this.props.adminStatus ? 
+              <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" >
+                <Link to='/user/admin' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+                  <SupervisorAccountIcon />
+                </Link>
+              </IconButton> :
+              null
+            }
+          {/* display the login, shopping cart, and logout buttons for all users*/}
             <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu">
               <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
                 <AccountCircleIcon />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,12 +27,16 @@ function Copyright() {
 
 type LoginProps = {
   updateToken: any;
+  token: any;
+  // isAdmin: boolean;
+  // fetchUsers: any;
 }
 
 type LoginState = {
   email: string;
   password: string;
   history: string;
+  // admin: boolean
 }
 
 export default class Login extends React.Component<LoginProps, LoginState> {
@@ -41,7 +45,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     this.state = {
       email: '',
       password: '',
-      history: ''
+      history: '',
+      // admin: false
     }
   }
 
@@ -69,12 +74,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       body: JSON.stringify(body)
     })
       .then(r => r.json())
-      .then(rObj =>{ 
-        this.props.updateToken(rObj.sessionToken)
-      })
+      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName))
   }
 
   render() {
+    // if user logs in, redirect to home page
+    if (this.props.token) {
+      return (<Redirect to="/" />)
+    } 
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
