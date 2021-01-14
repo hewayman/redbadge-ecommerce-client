@@ -1,18 +1,15 @@
 import React from 'react';
-// import Auth from './components/Auth/Auth';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Admin from './components/Users/Admin';
 import FilterItems from './components/StoreItems/FilterItems';
-import Navbar from './components/Site/Navbar'
-import Register from './components/Auth/Register'
-import Login from './components/Auth/Login'
-import StoreItemsCreate from './components/StoreItems/StoreItemCreate'
+import ItemDetailView from './components/StoreItems/ItemDetailView';
+import Login from './components/Auth/Login';
+import Navbar from './components/Site/Navbar';
+import Register from './components/Auth/Register';
+import StoreItemsCreate from './components/StoreItems/StoreItemCreate';
 import StoreItemsList from './components/StoreItems/StoreItemsList';
 // import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
 import UserList from './components/Users/UserList';
-import ItemDetailView from './components/StoreItems/ItemDetailView';
-// import UserCreate from './components/Users/UserEdit';
-// import UserEdit from './components/Users/UserEdit';
  
 type AppState = {
   token: string;
@@ -109,7 +106,7 @@ class App extends React.Component <{}, AppState> {
         {console.log("App token " + this.state.token)}
         <Router>
           <Navbar clickLogout={this.clearToken} sessionToken={this.state.token}/>
-          {/* <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /> */}
+          <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken}/></Route>

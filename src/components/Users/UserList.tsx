@@ -23,7 +23,7 @@ export default class UserList extends React.Component<UserProps> {
       <div>
         <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
           <Grid container spacing={2} alignItems="center">
-              {this.props.users.map((userObj: any, i: any) => <Grid item xs={12} sm={6} md={4}>
+              {this.props.users.map((userObj: any, i: any) => <Grid item xs={12} sm={6}>
                 <User user={userObj} key={i}users={this.props.users} fetchUsers={this.props.fetchUsers} sessionToken={this.props.token}/>
                 </Grid> )}
           </Grid>      

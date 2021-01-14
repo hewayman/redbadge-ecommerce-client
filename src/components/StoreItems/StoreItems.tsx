@@ -21,13 +21,13 @@ export default class StoreItems extends React.Component<ItemsProps, ItemState> {
     }
   }
 
-  fetchStoreItems = () => {
-    fetch('http://localhost:8080/listing/', {
-      method: 'GET'
-    })
-      .then(r => r.json())
-      .then(rArr => this.state.setStoreItems(rArr))
-  }
+  // fetchStoreItems = () => {
+  //   fetch('http://localhost:8080/listing/', {
+  //     method: 'GET'
+  //   })
+  //     .then(r => r.json())
+  //     .then(rArr => this.state.setStoreItems(rArr))
+  // }
 
   render() {
     return (

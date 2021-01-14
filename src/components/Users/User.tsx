@@ -1,24 +1,13 @@
 import React from 'react';
-import { Link} from 'react-router-dom'
 import { withStyles, createStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography';
-// import UserEdit from '../Users/UserEdit'
-
-import Avatar from '@material-ui/core/Avatar';
-// import CreateIcon from '@material-ui/icons/Create'
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-// import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 type UserProps = {
   user: any;
@@ -43,7 +32,6 @@ type UserState ={
   state: string;
   zipcode: number;
   phone: number;
-  handlePhone: any;
 }
 
 const styles = (theme: any) => createStyles({
@@ -82,7 +70,6 @@ class User extends React.Component<UserProps, UserState> {
       state: '',
       zipcode: 0,
       phone: 0,
-      handlePhone: ''
     }
   }
 
@@ -164,9 +151,6 @@ class User extends React.Component<UserProps, UserState> {
     }
 
   fetchUsers = () => {
-    // this.setState({
-    //   itemName: this.props.item.itemName
-    // })
     fetch(`http://localhost:8080/user/${this.props.user.id}`, {
       method: 'GET'
     })

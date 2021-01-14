@@ -71,11 +71,11 @@ class Navbar extends React.Component<NavbarProps> {
                 <SupervisorAccountIcon />
               </Link>
             </IconButton>
-            <IconButton edge="start" className="createListingButton" color="inherit" aria-label="menu">
+            {/* <IconButton edge="start" className="createListingButton" color="inherit" aria-label="menu">
               <Link to='/listing/create' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
                 <CreateIcon />
               </Link>
-            </IconButton>
+            </IconButton> */}
             <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu">
               <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
                 <AccountCircleIcon />

@@ -17,7 +17,8 @@ class ItemDetailView extends Component<ItemProps, ItemState> {
   }
 
   getItemDetails = () => {
-    this.setState({ itemName: this.props.storeItem.itemName })
+    this.setState({ itemName: this.props.storeItem.id })
+        console.log(this.props.storeItem.id, 'testingdetails')
   }
 
   componentDidMount = () => {
@@ -27,9 +28,10 @@ class ItemDetailView extends Component<ItemProps, ItemState> {
   render() {
     return (
       
-      <div>
-        {console.log(this.props.storeItem.itemName)}
-        <p>{this.state.itemName}</p>
+      <div style={{ marginTop:"6em", marginBottom:'4em' }}>
+        {console.log(this.state.itemName)}
+        {/* <p>{this.props.storeItem.id}</p> */}
+        <p>Test</p>
       </div>
     );
   }
