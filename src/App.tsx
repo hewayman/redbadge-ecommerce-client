@@ -132,7 +132,7 @@ class App extends React.Component <{}, AppState> {
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
             {/* <Route path='/user/details' ><UserEdit users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token}/></Route> */}
-            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
+            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
             <Route path='/listing/:id'><ItemDetailView storeItem={''}/></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token} /></Route>
           </Switch>
