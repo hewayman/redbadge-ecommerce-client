@@ -15,10 +15,10 @@ import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
 type AppState = {
   token: string;
   newToken: string;
-  id: number;
+  userId: number;
   setStoreItems: any;
   storeItems: any[];
-  // searchTerm: string;
+  itemId: number;
   users: any[];
   filteredItems: any[];
   sort: any;
@@ -34,10 +34,10 @@ class App extends React.Component <{}, AppState> {
     this.state = {
       token: '',
       newToken: '',
-      id: -1,
+      userId: -1,
       setStoreItems: '',
       storeItems: [],
-      // searchTerm: '',
+      itemId: 0,
       users: [],
       filteredItems: [],
       sort: '',
@@ -66,7 +66,7 @@ class App extends React.Component <{}, AppState> {
       .then(obj => this.setState({ users: obj.user }))
   }
 
-  setToken = (token: string, id: any, isAdmin: boolean) => {
+  setToken = (token: string) => {
     if (token) {
       this.setState({token: token})
       // this.setState({id: id})
@@ -84,7 +84,7 @@ class App extends React.Component <{}, AppState> {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
     this.setState({token: newToken});
-    this.setState({id: updateId});
+    this.setState({userId: updateId});
     this.setState({isAdmin: updateAdmin})
     this.setState({firstName: updateFirstName})
     console.log('Token: ', newToken)
@@ -94,8 +94,13 @@ class App extends React.Component <{}, AppState> {
   }
 
   updateSearch = (storeItem: any[]) => {
-    this.setState({ storeItems: storeItem})
+    this.setState({ storeItems: storeItem })
     console.log("search", storeItem)
+  }
+
+  updateItemId = (itemId: any) => {
+    this.setState({ itemId: itemId })
+    console.log('itemid', itemId)
   }
 
   clearToken = () => {
@@ -122,7 +127,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   componentWillMount() {
-    this.setToken('', -1, false)
+    this.setToken('')
     this.fetchStoreItems()
     this.fetchUsers()
   }
@@ -133,16 +138,15 @@ class App extends React.Component <{}, AppState> {
       <div> 
         {/* {console.log("App token " + this.state.token)} */}
         <Router>
-          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems}/>
+          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
           <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
-            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/></Route>
-            {/* <Route path='/listing/name/:name'><StoreItemsSearch searchItems={''} adminStatus={this.state.isAdmin} sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems} /></Route> */}
-            <Route path='/listing/:id'><ItemDetailView storeItem={''}/></Route>
+            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId}/></Route>
+            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId}/></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token} /></Route>
           </Switch>
         </Router>

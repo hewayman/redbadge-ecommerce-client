@@ -24,6 +24,7 @@ type ItemProps = {
   adminStatus: boolean;
   sessionToken: any;
   fetchStoreItems: any;
+  updateItemId: any;
 }
 
 type ItemState = {
@@ -36,6 +37,7 @@ type ItemState = {
   itemNum: number;
   imgURL: string;
   active: boolean;
+  id: number;
 }
 
 function rand() {
@@ -57,7 +59,7 @@ const styles = (theme: any) => createStyles({
   root: {
     maxWidth: 345,
     flexGrow: 1,
-    wrap: 'nowrap'
+    wrap: 'nowrap',
   },
   media: {
     height: 300,
@@ -90,6 +92,7 @@ class Item extends React.Component<ItemProps, ItemState> {
         itemNum: 0,
         imgURL: '',
         active: false,
+        id: 0
       }
       this.handleClick = this.handleClick.bind(this);
       this.showModal = this.showModal.bind(this);
@@ -149,13 +152,9 @@ class Item extends React.Component<ItemProps, ItemState> {
   }
 
   handleClick = () => {
-    fetch(`http://localhost:8080/listing/${this.props.item.id}`, {
-      method: 'GET'
-    }).then(r => r.json())
-      .then(obj => {
-        this.setState({ storeItem: obj.listing })
-        console.log(obj.listing)
-      })
+    //   this.setState({id: this.props.itemId});
+    // }
+    this.props.updateItemId(this.props.item.id)
   }
 
   deleteListing = () => {
@@ -216,130 +215,120 @@ class Item extends React.Component<ItemProps, ItemState> {
             null
           }
           
-            {/* display user edit form when create icon has been clicked, otherwise display user info */}
-            {this.state.active === false ? 
-              <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
-                <CardActionArea onClick={this.handleClick}>            
-                  <CardMedia
-                    className="media"
-                    image={require("./../../assets/" + this.props.item.imgURL + ".jpg").default}
-                    title="furniture"
-                    style={{height: 200, paddingTop: '56.25%'}}
-                  />
-                  <CardHeader
-                    title={this.toUpperCase(this.props.item.itemName)}
-                    style={{paddingBottom:'0'}}
-                  />
-                  <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
-                  <CardContent style={{paddingBottom:'0', paddingTop:'0'}}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {"$" + this.props.item.price}
-                    </Typography>
-                  </CardContent>
-                  <CardContent style={{paddingTop:'0'}}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {this.toUpperCase(this.props.item.color)}
-                    </Typography>
-                  </CardContent>
-                  <CardContent style={{ paddingTop:'0'}}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {this.props.item.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Link>
-            :
-              <div className="paper" style={{marginTop:'0em'}}>
-                <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="itemName"
-                    label="Item Name"
-                    name="itemName"
-                    autoFocus
-                    defaultValue={this.props.item.itemName}
-                    onChange = {this.setItemName.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="itemColor"
-                    label="Color"
-                    id="itemColor"
-                    defaultValue={this.props.item.color}
-                    onChange = {this.setColor.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="itemDescription"
-                    label="Description"
-                    id="itemDescription"
-                    defaultValue={this.props.item.description}
-                    onChange = {this.setDescription.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="itemPrice"
-                    label="Price (Do not include $)"
-                    id="itemPrice"
-                    defaultValue={this.props.item.price}
-                    onChange = {this.setPrice.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="itemNum"
-                    label="Item Number"
-                    id="itemNum"
-                    defaultValue={this.props.item.itemNum}
-                    onChange = {this.setItemNum.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="email"
-                    label="Email"
-                    id="email"
-                    defaultValue={this.props.item.imgURL}
-                    onChange = {this.setImgURL.bind(this)}
-                  />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    style={{marginTop:"1em", marginBottom:'5em'}}
-                    className="submitEdit" >
-                    Edit Listing
-                  </Button>
-                </form>
-              </div>
-            }
-          <Button size="small" color="secondary" onClick={this.showModal}>Reviews</Button>
-          <Modal
-            open={this.state.show}
-            onClose={this.closeModal}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh', overflow:'scroll'}}
-          >
-            <Reviews showState={this.state.show} reviewItem={this.state.storeItem}/>
-          </Modal>
+        {/* display user edit form when create icon has been clicked, otherwise display user info */}
+          {this.state.active === false ? 
+            <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
+              <CardActionArea onClick={this.handleClick}>            
+                <CardMedia
+                  className="media"
+                  image={require('./../../assets/' + `${this.props.item.imgURL}.jpg`).default}
+                  title="furniture"
+                  style={{height: 200, paddingTop: '56.25%'}}
+                />
+                <CardHeader
+                  title={this.toUpperCase(this.props.item.itemName)}
+                  style={{paddingBottom:'0'}}
+                />
+                <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
+                <CardContent style={{paddingBottom:'2em', paddingTop:'0'}}>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {"$" + this.props.item.price}
+                  </Typography>
+                </CardContent>
+                {/* <CardContent style={{paddingTop:'0'}}>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {this.toUpperCase(this.props.item.color)}
+                  </Typography>
+                </CardContent>
+                <CardContent style={{ paddingTop:'0'}}>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {this.props.item.description}
+                  </Typography>
+                </CardContent> */}
+              </CardActionArea>
+            </Link>
+          :
+            <div className="paper" style={{marginTop:'0em'}}>
+              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="itemName"
+                  label="Item Name"
+                  name="itemName"
+                  autoFocus
+                  defaultValue={this.props.item.itemName}
+                  onChange = {this.setItemName.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="itemColor"
+                  label="Color"
+                  id="itemColor"
+                  defaultValue={this.props.item.color}
+                  onChange = {this.setColor.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="itemDescription"
+                  label="Description"
+                  id="itemDescription"
+                  defaultValue={this.props.item.description}
+                  onChange = {this.setDescription.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="itemPrice"
+                  label="Price (Do not include $)"
+                  id="itemPrice"
+                  defaultValue={this.props.item.price}
+                  onChange = {this.setPrice.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="itemNum"
+                  label="Item Number"
+                  id="itemNum"
+                  defaultValue={this.props.item.itemNum}
+                  onChange = {this.setItemNum.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="email"
+                  label="Email"
+                  id="email"
+                  defaultValue={this.props.item.imgURL}
+                  onChange = {this.setImgURL.bind(this)}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  style={{marginTop:"1em", marginBottom:'5em'}}
+                  className="submitEdit" >
+                  Edit Listing
+                </Button>
+              </form>
+            </div>
+          }
         </Card>
         
       </div>

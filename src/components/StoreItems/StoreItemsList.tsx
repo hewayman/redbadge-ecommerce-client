@@ -11,6 +11,7 @@ type ListProps = {
   sort: any;
   handleChangeSort: any;
   adminStatus: boolean;
+  updateItemId: any;
 }
 
 export default class StoreItemsList extends React.Component<ListProps> {
@@ -26,7 +27,7 @@ export default class StoreItemsList extends React.Component<ListProps> {
       <div>
         <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
           <Grid container spacing={2} alignItems="center">
-              {this.props.storeItems.map((itemObj: any, i: any) => <Grid item xs={12} sm={6} md={4}><Item item={itemObj} key={i}adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems}/></Grid> )}
+              {this.props.storeItems.map((itemObj: any, i: any) => <Grid item xs={12} sm={6} md={4}><Item item={itemObj} key={i}adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems} updateItemId={this.props.updateItemId}/></Grid> )}
           </Grid>      
         </Container>
       </div>

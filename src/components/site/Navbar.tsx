@@ -19,45 +19,33 @@ type NavbarProps = {
   adminStatus: boolean;
   userFirstName: string;
   fetchStoreItems: any;
-  // searchTerm: string;
   searchItems: any[];
   updateSearch: any;
 }
 
 type NavbarState = {
   searchTerm: string;
-  // searchItems: any[];
 }
 
 class Navbar extends React.Component<NavbarProps, NavbarState> {
   constructor (props: NavbarProps) {
     super(props);
     this.state = {
-      searchTerm: '',
-      // searchItems: []
+      searchTerm: ''
     }
   }
 
   // automatically creates admin account when the '/user/admin' endpoint is reached
   createAdmin = () => {
     const url = 'http://localhost:8080/user/admin';
-    // const body = {
-      // email: this.state.email,
-      // password: this.state.password,
-      // isAdmin: this.state.isAdmin
-    // }
-  
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': this.props.sessionToken
-      },
-      // body: JSON.stringify(body)
+        'Content-Type': 'application/json'
+      }
     })
       .then(r => r.json())
       .then(rObj => {
-        // this.props.sessionToken(rObj.sessionToken)
         console.log(rObj)
       })
   }
@@ -101,9 +89,6 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
                 <SearchIcon />
               </IconButton>
             </div>
-            {/* {this.state.searchTerm ? <StoreItemsSearch searchItems={this.state.searchItems} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems}/> : 
-            <StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort}/>} */}
-
           {/* if the user is logged in, display a welcome message with the user's name */}
             {this.props.userFirstName ?
               <Typography className="welcomeText" >
