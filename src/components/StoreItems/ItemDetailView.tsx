@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button'
-import { Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -30,6 +30,7 @@ type ItemState = {
   totalRating: number;
   count: number;
   avgRating: number;
+  errorStatus: boolean;
 }
 
 const styles = (theme: any) => createStyles({
@@ -63,7 +64,8 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       imgPath: '',
       totalRating: 0,
       count: 0,
-      avgRating: 0
+      avgRating: 0,
+      errorStatus: false
     } 
   }
 
@@ -82,6 +84,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
           imgURL: obj.listing.imgURL
         })
       })
+      .catch(err => {this.setState({errorStatus: true})})
   }
 
   getItemReviews = () => {
@@ -94,11 +97,14 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
         })
         console.log(obj)
     })
+    .catch(err => {this.setState({errorStatus: true})})
   }
 
   calculateTotalRating = (rating: any) => {
     this.setState(prevState => {
       return {
+        totalRating: (prevState.totalRating + rating),
+        count: (prevState.count + 1),
         avgRating: (prevState.totalRating + rating) / (prevState.count + 1)
       }
     })
@@ -121,7 +127,11 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
   
   render() {
     const { classes } = this.props;
-    {console.log('totalrating', this.state.totalRating, 'count', this.state.count, 'avgRating', this.state.avgRating)}
+    // if there is an issue fetching data, redirect to home page
+    if (this.state.errorStatus) {
+      return (<Redirect to="/" />)
+    } 
+    // {console.log('totalrating', this.state.totalRating, 'count', this.state.count, 'avgRating', this.state.avgRating)}
     return (
       <div>
         <Container maxWidth="md" style={{ marginTop:'6em', marginBottom:'0' }}>
@@ -144,9 +154,9 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                 {/* if itemName is not null, format to upper case */}
                   {this.state.itemName ? this.toUpperCase(this.state.itemName) : this.state.itemName}
                 </Typography>
-                <Rating name="size-medium" value={this.state.avgRating} /> 
+                <Rating name="size-medium" value={this.state.avgRating} precision={0.5} readOnly /> 
                 <Typography variant="subtitle1" color="textSecondary">
-                  ${this.state.price}
+                  ${this.state.price.toLocaleString()}
                   <br/>
                   {/* if color is not null, format to upper case */}
                   {this.state.color ? this.toUpperCase(this.state.color) : this.state.color}

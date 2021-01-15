@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Admin from './components/Users/Admin';
 import FilterItems from './components/StoreItems/FilterItems';
 import ItemDetailView from './components/StoreItems/ItemDetailView';
@@ -25,6 +25,8 @@ type AppState = {
   searchTerm: string;
   searchItems: any[];
   rating: number;
+  redirect: boolean;
+  errorStatus: boolean;
 }
 
 class App extends React.Component <{}, AppState> {
@@ -44,7 +46,9 @@ class App extends React.Component <{}, AppState> {
       firstName: '',
       searchTerm: '',
       searchItems: [],
-      rating: 0
+      rating: 0,
+      redirect: false,
+      errorStatus: false
     }
   }
 
@@ -56,6 +60,7 @@ class App extends React.Component <{}, AppState> {
       .then(obj => this.setState({ 
         storeItems: obj.listing, 
         filteredItems: obj.listing })) // filters items based on price
+      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
   }
 
   fetchUsers = () => {
@@ -64,19 +69,16 @@ class App extends React.Component <{}, AppState> {
     })
       .then(r => r.json())
       .then(obj => this.setState({ users: obj.user }))
+      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
   }
 
   setToken = (token: string) => {
     if (token) {
       this.setState({token: token})
-      // this.setState({id: id})
-      // this.setState({isAdmin: isAdmin})
     } else {
       this.setState({token: localStorage.getItem('token') || ''}) 
-      // this.setState({id: parseInt(localStorage.getItem('id')!)})
     }
     localStorage.setItem('token', token)
-    // localStorage.setItem('id', id)
   }
 
   // updates the state for the token, userId,admin status, and first name when a user logs in or registers
@@ -103,16 +105,11 @@ class App extends React.Component <{}, AppState> {
     console.log('itemid', itemId)
   }
 
-  // updateAvgRating = (rating: any) => {
-  //   if (rating !== 0) {
-  //     this.setState({rating: rating})
-  //     console.log('avgRating', rating)
-  //   }
-  // }
-
+  // when user logs out, it redirects to '/' and resets the first name
   clearToken = () => {
     localStorage.clear();
-    window.location.reload();
+    this.setState({ redirect: true })
+    this.setState({ firstName: ''})
   }
 
   listItems = () => {
@@ -139,22 +136,26 @@ class App extends React.Component <{}, AppState> {
     this.fetchUsers()
   }
 
-  render() {
-   
+  render() {  
+    
     return (
       <div> 
         {/* {console.log("App token " + this.state.rating)} */}
         <Router>
           <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
-          <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
+          // redirect to '/' when user logs out
+          {this.state.redirect ? (<Redirect to='/'/>) : null}
+          // if there is an issue fetching data, redirect to home page
+          {this.state.errorStatus ? (<Redirect to="/" />) : null}
           <Switch>
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
             <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} /></Route>
-            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token}/></Route>
+            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} /></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token}/></Route>
+            <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
           </Switch>
         </Router>
       </div>

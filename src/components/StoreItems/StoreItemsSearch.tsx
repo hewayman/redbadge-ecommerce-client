@@ -9,7 +9,6 @@ type StoreItemsProps = {
   adminStatus: boolean;
   sessionToken: any;
   updateItemId: any;
-  // avgRating: any;
 }
 
 class StoreItemsSearch extends React.Component<StoreItemsProps> {

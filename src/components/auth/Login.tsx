@@ -36,7 +36,7 @@ type LoginState = {
   email: string;
   password: string;
   history: string;
-  // admin: boolean
+  errorStatus: boolean;
 }
 
 export default class Login extends React.Component<LoginProps, LoginState> {
@@ -46,7 +46,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       email: '',
       password: '',
       history: '',
-      // admin: false
+      errorStatus: false
     }
   }
 
@@ -75,6 +75,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     })
       .then(r => r.json())
       .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName))
+      .catch(err => {this.setState({errorStatus: true}); window.alert('Unable to login. Please check email and password and try again.')})
   }
 
   render() {
@@ -82,6 +83,10 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     if (this.props.token) {
       return (<Redirect to="/" />)
     } 
+    if (this.state.errorStatus) {
+      // window.alert('Unable to login. Please check email and password and try again.')
+      this.setState({errorStatus: false})
+    }
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

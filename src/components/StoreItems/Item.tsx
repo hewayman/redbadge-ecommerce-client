@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -36,6 +36,7 @@ type ItemState = {
   imgURL: string;
   active: boolean;
   id: number;
+  errorStatus: boolean;
 }
 
 const styles = (theme: any) => createStyles({
@@ -75,7 +76,8 @@ class Item extends React.Component<ItemProps, ItemState> {
         itemNum: 0,
         imgURL: '',
         active: false,
-        id: 0
+        id: 0,
+        errorStatus: false
       }
       this.handleClick = this.handleClick.bind(this);
       this.showModal = this.showModal.bind(this);
@@ -132,6 +134,7 @@ class Item extends React.Component<ItemProps, ItemState> {
         this.props.fetchStoreItems()
         this.setState({ active: false }) // turn toggle off after editing item
       })
+      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
   }
 
   handleClick = () => {
@@ -149,6 +152,7 @@ class Item extends React.Component<ItemProps, ItemState> {
       })
     }) 
     .then(() => this.props.fetchStoreItems())
+    .catch(err => console.log(err))
   }
 
   showModal = () => {
@@ -176,7 +180,10 @@ class Item extends React.Component<ItemProps, ItemState> {
 
   render() {
     const { classes } = this.props;
-    // {console.log('average rating in item', this.props.avgRating)}
+     // if there is an issue fetching data, redirect to home page
+     if (this.state.errorStatus) {
+      return (<Redirect to="/" />)
+    } 
     return (
       <div className={classes.root}>
         <Card className={classes.root} >
@@ -214,10 +221,10 @@ class Item extends React.Component<ItemProps, ItemState> {
                   title={this.toUpperCase(this.props.item.itemName)}
                   style={{paddingBottom:'0'}}
                 />
-                <Rating id="rating" name="size-small" value={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
+                {/* <Rating id="rating" name="size-small" value={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/> */}
                 <CardContent style={{paddingBottom:'2em', paddingTop:'0'}}>
                   <Typography variant="body2" color="textSecondary" component="p">
-                    {"$" + this.props.item.price}
+                  ${this.props.item.price.toLocaleString()}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -305,7 +312,6 @@ class Item extends React.Component<ItemProps, ItemState> {
             </div>
           }
         </Card>
-        
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -47,6 +47,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
       .then(rObj => {
         console.log(rObj)
       })
+      .catch(err => console.log(err))
   }
 
   handleSearch = () => {
@@ -57,6 +58,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
     .then(obj => { this.props.updateSearch(obj.item )
       console.log(obj.item)
     })
+    .catch(err => console.log(err))
   }
 
   setSearch = (e: any) => {
@@ -65,7 +67,6 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
     } else {
       this.props.fetchStoreItems()
     }
-    
   }
 
   render () {
