@@ -7,11 +7,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
-import Reviews from './../Reviews/Reviews';
-import ItemDetailView from './ItemDetailView';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,6 +22,7 @@ type ItemProps = {
   sessionToken: any;
   fetchStoreItems: any;
   updateItemId: any;
+  // avgRating: any;
 }
 
 type ItemState = {
@@ -38,21 +36,6 @@ type ItemState = {
   imgURL: string;
   active: boolean;
   id: number;
-}
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function modalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
 }
 
 const styles = (theme: any) => createStyles({
@@ -161,10 +144,11 @@ class Item extends React.Component<ItemProps, ItemState> {
     fetch(`http://localhost:8080/listing/${this.props.item.id}`, {
       method: 'DELETE',
       headers: new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': this.props.sessionToken
+        'Content-Type': 'application/json',
+        'Authorization': this.props.sessionToken
       })
-    }) .then(() => this.props.fetchStoreItems())
+    }) 
+    .then(() => this.props.fetchStoreItems())
   }
 
   showModal = () => {
@@ -192,6 +176,7 @@ class Item extends React.Component<ItemProps, ItemState> {
 
   render() {
     const { classes } = this.props;
+    // {console.log('average rating in item', this.props.avgRating)}
     return (
       <div className={classes.root}>
         <Card className={classes.root} >
@@ -221,7 +206,7 @@ class Item extends React.Component<ItemProps, ItemState> {
               <CardActionArea onClick={this.handleClick}>            
                 <CardMedia
                   className="media"
-                  image={require('./../../assets/' + `${this.props.item.imgURL}.jpg`).default}
+                  image={require(`./../../assets/${this.props.item.imgURL}.jpg`).default}
                   title="furniture"
                   style={{height: 200, paddingTop: '56.25%'}}
                 />
@@ -229,22 +214,12 @@ class Item extends React.Component<ItemProps, ItemState> {
                   title={this.toUpperCase(this.props.item.itemName)}
                   style={{paddingBottom:'0'}}
                 />
-                <Rating id="rating" name="size-small" defaultValue={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
+                <Rating id="rating" name="size-small" value={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/>
                 <CardContent style={{paddingBottom:'2em', paddingTop:'0'}}>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {"$" + this.props.item.price}
                   </Typography>
                 </CardContent>
-                {/* <CardContent style={{paddingTop:'0'}}>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {this.toUpperCase(this.props.item.color)}
-                  </Typography>
-                </CardContent>
-                <CardContent style={{ paddingTop:'0'}}>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {this.props.item.description}
-                  </Typography>
-                </CardContent> */}
               </CardActionArea>
             </Link>
           :
@@ -336,5 +311,4 @@ class Item extends React.Component<ItemProps, ItemState> {
   }
 }
 
-{/* <ItemDetailView item={itemObj} key={i}/> */}
 export default withStyles(styles, { withTheme: true })(Item);

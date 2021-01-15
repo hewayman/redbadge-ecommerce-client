@@ -1,19 +1,19 @@
 import React from 'react';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Button from '@material-ui/core/Button'
 import { Link} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
+import Rating from '@material-ui/lab/Rating';
 import Reviews from './../Reviews/Reviews'
 
 type ItemProps = {
-  // storeItems: any;
-  // fetchStoreItems: any;
+  sessionToken: any;
   storeItemId: number;
   classes: any;
 }
@@ -24,13 +24,18 @@ type ItemState = {
   description: string;
   price: number;
   itemNum: number;
-  imgURL: string
+  imgURL: any;
   reviews: any[];
+  imgPath: string;
+  totalRating: number;
+  count: number;
+  avgRating: number;
 }
 
 const styles = (theme: any) => createStyles({
   root: {
     display: 'flex',
+    // display: 'inline-block'
   },
   details: {
     display: 'flex',
@@ -40,17 +45,7 @@ const styles = (theme: any) => createStyles({
     flex: '1 0 auto',
   },
   cover: {
-    width: 151,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+    // width: 151,
   },
 })
 
@@ -64,7 +59,11 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       price: 0,
       itemNum: 0,
       imgURL: '',
-      reviews: []
+      reviews: [],
+      imgPath: '',
+      totalRating: 0,
+      count: 0,
+      avgRating: 0
     } 
   }
 
@@ -80,8 +79,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
           description: obj.listing.description,
           price: obj.listing.price,
           itemNum: obj.listing.itemNum,
-          imgURL: obj.listing.imgURL,
-          // reviews: obj.listing.reviews
+          imgURL: obj.listing.imgURL
         })
       })
   }
@@ -98,6 +96,24 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     })
   }
 
+  calculateTotalRating = (rating: any) => {
+    this.setState(prevState => {
+      return {
+        avgRating: (prevState.totalRating + rating) / (prevState.count + 1)
+      }
+    })
+  }
+  
+  toUpperCase = (str: string) => {
+    return str
+    .toLowerCase()
+    .split(' ')
+    .map(function(word) {
+        return word[0].toUpperCase() + word.substr(1);
+    })
+    .join(' ');
+  }
+
   componentDidMount = () => {
     this.getItemDetails();
     this.getItemReviews();
@@ -105,47 +121,61 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
   
   render() {
     const { classes } = this.props;
+    {console.log('totalrating', this.state.totalRating, 'count', this.state.count, 'avgRating', this.state.avgRating)}
     return (
-      <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
-        <Link to="/">
-          <ArrowBackIosIcon /> Back
-        </Link>
+      <div>
+        <Container maxWidth="md" style={{ marginTop:'6em', marginBottom:'0' }}>
+          <Link to="/">
+            <ArrowBackIosIcon /> Back
+          </Link>
 
-        <Card className={classes.root}>
-          <div className={classes.details}>
-            <CardContent className={classes.content}>
-              <Typography component="h5" variant="h5">
-                Live From Space
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                Mac Miller
-              </Typography>
-            </CardContent>
-          </div>
-          <CardMedia
-            className={classes.cover}
-            // image={require('./../../assets/' + `${this.state.imgURL}.jpg`).default}
-            title="Listing img"
-            style={{height: 200, paddingTop: '56.25%'}}
-          />
-        </Card>
-       
-        <div style={{ marginTop:"6em", marginBottom:'4em' }}>
-        {/* {console.log(this.state.itemName)} */}
-        <p>{this.state.itemName}</p>
-        <p>{this.state.color}</p>
-        <p>{this.state.description}</p>
-        <p>{this.state.price}</p>
-        <p>{this.state.itemNum}</p>
-        <p>{this.state.imgURL}</p>
-      </div>
-          <Grid container spacing={2} alignItems="center">
-          
-              {this.state.reviews.map((revObj: any, i: any) => <Grid item xs={12} sm={6} md={4}>
-                <Reviews revObj={revObj} key={i} /></Grid> )}
+          <Card className={classes.root} style={{ marginTop:'2em' }}>
+            {this.state.imgURL ? 
+              <CardMedia
+                className={classes.cover}
+                image={require(`../../assets/${this.state.imgURL}.jpg`).default}
+                title="Listing img"
+                style={{height: 200, width: '60%', paddingTop: '35%'}}
+              />
+            : null}
+            <div className={classes.details} style={{width:'40%'}}>
+              <CardContent className={classes.content} >
+                <Typography component="h5" variant="h5">
+                {/* if itemName is not null, format to upper case */}
+                  {this.state.itemName ? this.toUpperCase(this.state.itemName) : this.state.itemName}
+                </Typography>
+                <Rating name="size-medium" value={this.state.avgRating} /> 
+                <Typography variant="subtitle1" color="textSecondary">
+                  ${this.state.price}
+                  <br/>
+                  {/* if color is not null, format to upper case */}
+                  {this.state.color ? this.toUpperCase(this.state.color) : this.state.color}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  <br/>
+                  {this.state.description}
+                  <br/>
+                  <br/>
+                  Item: {this.state.itemNum}
+                </Typography>
+              </CardContent>
+            </div>
+          </Card>
+        </Container>
+        <Container maxWidth="sm" style={{ marginTop:"6em", marginBottom:'4em' }}>
+          <Grid container spacing={2} alignItems="center" style={{justifyContent: 'center'}}>
+            {!this.props.sessionToken ? 
+              <Button variant="outlined" disabled style={{width:'98%', marginBottom:'1em'}}>
+                Sign-in to Leave Review
+              </Button> :
+              <Button variant="outlined" style={{width:'98%', marginBottom:'1em'}}>
+                Write A Review
+                </Button>}
+            {this.state.reviews.map((revObj: any, i: any) => <Grid item xs={12}>
+              <Reviews revObj={revObj} key={i} calculateTotalRating={this.calculateTotalRating}/></Grid> )}
           </Grid>      
         </Container>
-    
+      </div>
     );
   }
 }

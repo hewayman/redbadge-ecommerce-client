@@ -2,7 +2,7 @@ import React from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { Link} from 'react-router-dom';
 import Container from '@material-ui/core/Container'
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import User from './User'
 
 type UserProps = {

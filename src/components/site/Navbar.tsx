@@ -1,17 +1,15 @@
-import React from 'react'
-import { Link} from 'react-router-dom'
-import { Redirect } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
-import IconButton from '@material-ui/core/IconButton'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import SearchIcon from '@material-ui/icons/Search'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import React from 'react';
+import { Link} from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SearchIcon from '@material-ui/icons/Search';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import LockIcon from '@material-ui/icons/Lock'
-import StoreItemsSearch from '../StoreItems/StoreItemsSearch'
+import LockIcon from '@material-ui/icons/Lock';
 
 type NavbarProps = {
   clickLogout: any;
@@ -21,6 +19,7 @@ type NavbarProps = {
   fetchStoreItems: any;
   searchItems: any[];
   updateSearch: any;
+  // avgRating: any
 }
 
 type NavbarState = {

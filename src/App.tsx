@@ -8,9 +8,7 @@ import Navbar from './components/Site/Navbar';
 import Register from './components/Auth/Register';
 import StoreItemsCreate from './components/StoreItems/StoreItemCreate';
 import StoreItemsList from './components/StoreItems/StoreItemsList';
-// import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
 import UserList from './components/Users/UserList';
-import StoreItemsSearch from './components/StoreItems/StoreItemsSearch';
  
 type AppState = {
   token: string;
@@ -26,6 +24,7 @@ type AppState = {
   firstName: string;
   searchTerm: string;
   searchItems: any[];
+  rating: number;
 }
 
 class App extends React.Component <{}, AppState> {
@@ -44,7 +43,8 @@ class App extends React.Component <{}, AppState> {
       isAdmin: false,
       firstName: '',
       searchTerm: '',
-      searchItems: []
+      searchItems: [],
+      rating: 0
     }
   }
 
@@ -103,6 +103,13 @@ class App extends React.Component <{}, AppState> {
     console.log('itemid', itemId)
   }
 
+  // updateAvgRating = (rating: any) => {
+  //   if (rating !== 0) {
+  //     this.setState({rating: rating})
+  //     console.log('avgRating', rating)
+  //   }
+  // }
+
   clearToken = () => {
     localStorage.clear();
     window.location.reload();
@@ -136,7 +143,7 @@ class App extends React.Component <{}, AppState> {
    
     return (
       <div> 
-        {/* {console.log("App token " + this.state.token)} */}
+        {/* {console.log("App token " + this.state.rating)} */}
         <Router>
           <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
           <FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} />
@@ -145,9 +152,9 @@ class App extends React.Component <{}, AppState> {
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
-            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId}/></Route>
-            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId}/></Route>
-            <Route path='/user/admin'><Admin sessionToken={this.state.token} /></Route>
+            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} /></Route>
+            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token}/></Route>
+            <Route path='/user/admin'><Admin sessionToken={this.state.token}/></Route>
           </Switch>
         </Router>
       </div>

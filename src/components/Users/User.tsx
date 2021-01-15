@@ -56,7 +56,6 @@ class User extends React.Component<UserProps, UserState> {
   constructor (props: UserProps) {
     super(props);
     this.state = {
-      // searchNodes: '',
       user: [],
       active: false,
       firstName: '',
@@ -154,18 +153,19 @@ class User extends React.Component<UserProps, UserState> {
     fetch(`http://localhost:8080/user/${this.props.user.id}`, {
       method: 'GET'
     })
-      .then(r => r.json())
-      .then(obj => this.setState({ user: obj.user }))
+    .then(r => r.json())
+    .then(obj => this.setState({ user: obj.user }))
   }
 
   deleteUser = () => {
     fetch(`http://localhost:8080/user/${this.props.user.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.sessionToken
-            })
-        }) .then(() => this.props.fetchUsers())
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': this.props.sessionToken
+      })
+    }) 
+    .then(() => this.props.fetchUsers())
   }
 
   toggle = () => {
