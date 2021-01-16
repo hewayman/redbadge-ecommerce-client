@@ -6,16 +6,20 @@ import { Link, Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
-import Reviews from './../Reviews/Reviews'
+import Reviews from './../Reviews/Reviews';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 type ItemProps = {
   sessionToken: any;
   storeItemId: number;
   classes: any;
+  userId: number;
+  adminStatus: boolean;
 }
 
 type ItemState = {
@@ -31,6 +35,12 @@ type ItemState = {
   count: number;
   avgRating: number;
   errorStatus: boolean;
+  active: boolean;
+  rating: number;
+  review: string;
+  date: any;
+  // userId: number;
+  // storeitemId: number;
 }
 
 const styles = (theme: any) => createStyles({
@@ -65,10 +75,35 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       totalRating: 0,
       count: 0,
       avgRating: 0,
-      errorStatus: false
+      errorStatus: false,
+      active: false,
+      rating: 0,
+      review: '',
+      date: '',
+      // userId: 0,
+      // storeitemId: 0
     } 
   }
 
+  setRating = (e: any) => {
+    this.setState({rating: e.target.value});
+  }
+
+  setReview = (e: any) => {
+    this.setState({review: e.target.value});
+  }
+
+  setDate = (e: any) => {
+    this.setState({date: e.target.value});
+  }
+
+  // setUserId = (e: any) => {
+  //   this.setState({userId: e.target.value});
+  // }
+
+  // setDate = (e: any) => {
+  //   this.setState({date: e.target.value});
+  // }
 
   getItemDetails = () => {
     fetch(`http://localhost:8080/listing/${this.props.storeItemId}`, {
@@ -98,6 +133,40 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
         console.log(obj)
     })
     .catch(err => {this.setState({errorStatus: true})})
+  }
+  
+
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    const url = 'http://localhost:8080/review/create';
+    const body = {
+      rating: this.state.rating,
+      review: this.state.review,
+      date: this.state.date,
+      userId: this.props.userId,
+      storeitemId: this.props.storeItemId
+    }
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.props.sessionToken
+      },
+      body: JSON.stringify(body)
+    })
+      .then(r => r.json())
+      .then(rObj => {
+        console.log(rObj)
+        this.getItemReviews()
+        this.setState({ active: false }) // turn toggle off after creating review
+      })
+      .catch(err => console.log(err, this.props.userId, this.props.storeItemId))
+  }
+
+  toggle = () => {
+    const showEdit = this.state.active
+    this.setState({active: !showEdit})
   }
 
   calculateTotalRating = (rating: any) => {
@@ -178,11 +247,56 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
               <Button variant="outlined" disabled style={{width:'98%', marginBottom:'1em'}}>
                 Sign-in to Leave Review
               </Button> :
-              <Button variant="outlined" style={{width:'98%', marginBottom:'1em'}}>
+              <Button variant="outlined" style={{width:'98%', marginBottom:'1em'}} onClick={this.toggle}>
                 Write A Review
                 </Button>}
+            {this.state.active ?
+            <div className="paper" style={{marginTop:'0em'}}>
+              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
+                <Rating
+                  name="customized-empty"
+                  defaultValue={0}
+                  // value={this.state.rating}
+                  emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                  onClick={this.setRating.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="review"
+                  label="Review"
+                  id="review"
+                  onChange = {this.setReview.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="date"
+                  name="date"
+                  // label="Date"
+                  id="date"
+                  onChange = {this.setDate.bind(this)}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  style={{marginTop:"1em", marginBottom:'5em'}}
+                  className="submitCreate" >
+                  Create Review
+                </Button>
+              </form> 
+            </div>:
+            null
+            }
+            
             {this.state.reviews.map((revObj: any, i: any) => <Grid item xs={12}>
-              <Reviews revObj={revObj} key={i} calculateTotalRating={this.calculateTotalRating}/></Grid> )}
+              <Reviews revObj={revObj} key={i} calculateTotalRating={this.calculateTotalRating} userId={this.props.userId} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchReviews={this.getItemReviews}/></Grid> )}
           </Grid>      
         </Container>
       </div>
