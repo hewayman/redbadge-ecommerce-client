@@ -1,10 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link as LinkTo } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -88,72 +89,79 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       this.setState({errorStatus: false})
     }
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className="paper">
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange = {this.setEmail.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange = {this.setPassword.bind(this)}
-            />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              style={{marginTop:"1em", marginBottom:'0.8em'}}
-              className="submitRegister"
-            >
-              Sign In
-            </Button>
-            <Grid container justify="flex-end">
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
-              <Grid item>
-                <Link href="/user/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+      <div>
+        <Container component="main" maxWidth="lg">
+          <LinkTo to="/" >
+            <ArrowBackIosIcon style={{marginTop:'130px'}}/> Back
+          </LinkTo>
+        </Container>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className="paper" style={{marginTop:'30px'}}>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange = {this.setEmail.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange = {this.setPassword.bind(this)}
+              />
+              {/* <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{marginTop:"1em", marginBottom:'0.8em'}}
+                className="submitRegister"
+              >
+                Sign In
+              </Button>
+              <Grid container justify="flex-end">
+                {/* <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid> */}
+                <Grid item>
+                  <Link href="/user/register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
     );
   }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link as LinkTo } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -95,93 +96,101 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       return (<Redirect to="/" />)
     } 
     return (
+      <div>
+        <Container component="main" maxWidth="lg">
+          <LinkTo to="/" >
+            <ArrowBackIosIcon style={{marginTop:'130px'}}/> Back
+          </LinkTo>
+        </Container>
       
-      <Container component="main" maxWidth="xs">
-        {/* <Login updateToken={this.props.updateToken} /> */}
-        <CssBaseline />
-        <div className="paper">
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-          </Typography>
-          <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  onChange = {this.setFirstName.bind(this)}
-                />
+        <Container component="main" maxWidth="xs">
+          {/* <Login updateToken={this.props.updateToken} /> */}
+          <CssBaseline />
+          <div className="paper" style={{marginTop:'30px'}}>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Register
+            </Typography>
+            <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="fname"
+                    name="firstName"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                    onChange = {this.setFirstName.bind(this)}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lname"
+                    onChange = {this.setLastName.bind(this)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    onChange = {this.setEmail.bind(this)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange = {this.setPassword.bind(this)}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange = {this.setLastName.bind(this)}
-                />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{marginTop:"1.1em", marginBottom:'0.8em', backgroundColor:'black', color:'white'}}
+                className="submitRegister"
+              >
+                Sign Up
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link href="/user/login" variant="body2">
+                  {/* <Login updateToken={this.props.updateToken} email={this.email} password={this.password}/> */}
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange = {this.setEmail.bind(this)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange = {this.setPassword.bind(this)}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              style={{marginTop:"1.1em", marginBottom:'0.8em'}}
-              className="submitRegister"
-            >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="/user/login" variant="body2">
-                {/* <Login updateToken={this.props.updateToken} email={this.email} password={this.password}/> */}
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
+            </form>
+          </div>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
     );
   }
 }

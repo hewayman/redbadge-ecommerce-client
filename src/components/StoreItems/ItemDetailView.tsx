@@ -97,14 +97,6 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     this.setState({date: e.target.value});
   }
 
-  // setUserId = (e: any) => {
-  //   this.setState({userId: e.target.value});
-  // }
-
-  // setDate = (e: any) => {
-  //   this.setState({date: e.target.value});
-  // }
-
   getItemDetails = () => {
     fetch(`http://localhost:8080/listing/${this.props.storeItemId}`, {
       method: 'GET'
@@ -203,12 +195,12 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     // {console.log('totalrating', this.state.totalRating, 'count', this.state.count, 'avgRating', this.state.avgRating)}
     return (
       <div>
-        <Container maxWidth="md" style={{ marginTop:'6em', marginBottom:'0' }}>
+        <Container maxWidth="lg" style={{ marginTop:'6em', marginBottom:'0' }}>
           <Link to="/">
-            <ArrowBackIosIcon /> Back
+            <ArrowBackIosIcon style={{marginTop:'40px'}}/> Back
           </Link>
 
-          <Card className={classes.root} style={{ marginTop:'2em' }}>
+          <Card className={classes.root} style={{ marginTop:'2em', borderRadius:'0px', border:'none'}} variant="outlined">
             {this.state.imgURL ? 
               <CardMedia
                 className={classes.cover}
@@ -217,7 +209,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                 style={{height: 200, width: '60%', paddingTop: '35%'}}
               />
             : null}
-            <div className={classes.details} style={{width:'40%'}}>
+            <div className={classes.details} style={{width:'40%', paddingLeft:'1em'}}>
               <CardContent className={classes.content} >
                 <Typography component="h5" variant="h5">
                 {/* if itemName is not null, format to upper case */}

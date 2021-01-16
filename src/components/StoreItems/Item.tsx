@@ -184,8 +184,8 @@ class Item extends React.Component<ItemProps, ItemState> {
       return (<Redirect to="/" />)
     } 
     return (
-      <div className={classes.root}>
-        <Card className={classes.root} >
+      <div className={classes.root} >
+        <Card className={classes.root} style={{borderRadius:'0px', border:'none'}} variant="outlined">
         {/* if the user is an admin, show the delete button */}
           {this.props.adminStatus ?    
             <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
@@ -218,10 +218,10 @@ class Item extends React.Component<ItemProps, ItemState> {
                 />
                 <CardHeader
                   title={this.toUpperCase(this.props.item.itemName)}
-                  style={{paddingBottom:'0'}}
+                  style={{paddingBottom:'0', paddingLeft:'0'}}
                 />
                 {/* <Rating id="rating" name="size-small" value={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/> */}
-                <CardContent style={{paddingBottom:'2em', paddingTop:'0'}}>
+                <CardContent style={{paddingBottom:'1em', paddingTop:'0', paddingLeft:'0', marginBottom:'2em'}}>
                   <Typography variant="body2" color="textSecondary" component="p">
                   ${this.props.item.price.toLocaleString()}
                   </Typography>

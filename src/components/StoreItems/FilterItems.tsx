@@ -12,7 +12,7 @@ type FilterProps = {
 class FilterItems extends React.Component<FilterProps> {
   render() {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" >
           <InputLabel id="demo-simple-select-outlined-label" style={{float:'right', margin:'0em 1em 0.5em 0em'}}>Sort By
             <Select label="Sort" className="form-control" value={this.props.sort} onChange={this.props.handleChangeSort} style={{marginLeft:'0.6em', minWidth:'4em'}}>
               <MenuItem value="">Most Relevant</MenuItem>
