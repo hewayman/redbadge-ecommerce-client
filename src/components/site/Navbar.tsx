@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
+import Container from '@material-ui/core/Container'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -72,21 +73,26 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
   render () {
     return (
       <div>
-        <AppBar style={{ background: 'black', color: "white", height:'40px', display: "flex", textAlign:'center', justifyContent:'center'}} elevation={0}>
-          <Typography>
+        {/* <AppBar style={{ background:'#33333d', color:"white", height:'40px', display: "flex", textAlign:'center', justifyContent:'center', fontFamily:'Open Sans'}} elevation={0}>
+          <Typography style={{ fontFamily:'Open Sans' }}>
             TAKE 10% OFF ALL ITEMS
           </Typography>
-        </AppBar>
-        <AppBar style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1px solid #cccccc", marginTop:'40px', display: "flex"}} elevation={0} >
-          <Toolbar>
+        </AppBar> */}
+        <AppBar style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
+        <Container maxWidth="lg">
+          <Toolbar disableGutters={true}>
             <Typography variant="h6" className="storeName">
-              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px'}} onClick={this.props.fetchStoreItems}>Store Name</Link>
+              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
+                <Typography style={{ fontFamily:'Playfair Display', display:'inline-block', fontSize:'1.5em'}}>Mollie</Typography>
+                <Typography style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'1.6em'}}>Birch</Typography>
+              </Link>
             </Typography>
             <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', 
-              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey'}}>
+              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey', fontFamily:'Open Sans', backgroundColor:'white'}}>
               <InputBase
                 placeholder="Search"
                 id="searchTerm"
+                style={{ fontFamily:'Open Sans', backgroundColor:'white' }}
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={this.setSearch.bind(this)}
               />
@@ -96,7 +102,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             </div>
           {/* if the user is logged in, display a welcome message with the user's name */}
             {this.props.userFirstName ?
-              <Typography className="welcomeText" >
+              <Typography className="welcomeText" style={{ fontFamily:'Open Sans' }}>
                 Welcome, {this.props.userFirstName}!
               </Typography> :
               null
@@ -123,6 +129,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
                 <LockOutlinedIcon />
             </IconButton>
           </Toolbar>
+          </Container>
         </AppBar>
       </div>
     )

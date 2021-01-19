@@ -17,7 +17,7 @@ import '../../App.css';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Store Name
@@ -98,8 +98,9 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
     return (
       <div>
         <Container component="main" maxWidth="lg">
-          <LinkTo to="/" >
-            <ArrowBackIosIcon style={{marginTop:'130px'}}/> Back
+          <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
+            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
+            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>
       
@@ -113,7 +114,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
             <Typography component="h1" variant="h5">
               Register
             </Typography>
-            <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
+            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Open Sans' }} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -125,6 +126,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    style={{ fontFamily:'Open Sans' }}
                     onChange = {this.setFirstName.bind(this)}
                   />
                 </Grid>
@@ -137,6 +139,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     label="Last Name"
                     name="lastName"
                     autoComplete="lname"
+                    style={{ fontFamily:'Open Sans' }}
                     onChange = {this.setLastName.bind(this)}
                   />
                 </Grid>
@@ -149,6 +152,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    style={{ fontFamily:'Open Sans' }}
                     onChange = {this.setEmail.bind(this)}
                   />
                 </Grid>
@@ -162,6 +166,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    style={{ fontFamily:'Open Sans' }}
                     onChange = {this.setPassword.bind(this)}
                   />
                 </Grid>
@@ -171,14 +176,14 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{marginTop:"1.1em", marginBottom:'0.8em', backgroundColor:'black', color:'white'}}
+                style={{marginTop:"1.1em", marginBottom:'0.8em', backgroundColor:'black', color:'white', fontFamily:'Open Sans' }}
                 className="submitRegister"
               >
                 Sign Up
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/user/login" variant="body2">
+                  <Link href="/user/login" variant="body2" style={{ fontFamily:'Open Sans' }}>
                   {/* <Login updateToken={this.props.updateToken} email={this.email} password={this.password}/> */}
                     Already have an account? Sign in
                   </Link>
@@ -186,7 +191,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
               </Grid>
             </form>
           </div>
-          <Box mt={5}>
+          <Box mt={5} >
             <Copyright />
           </Box>
         </Container>

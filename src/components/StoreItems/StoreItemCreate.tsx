@@ -90,92 +90,101 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
   render() {
     return (
 
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className="paper">
-          <Link to="/user/admin">
-            <ArrowBackIosIcon /> Back
+      <Container component="main" maxWidth="lg">
+          <Link to="/user/admin" style={{textDecoration:'none', color:'black'}}>
+            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
+            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
           </Link>
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
-            <CreateIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Create Item Listing
-          </Typography>
-          <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="itemName"
-              label="Name"
-              name="itemName"
-              autoFocus
-              onChange = {this.setName.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="color"
-              label="Color"
-              id="color"
-              onChange = {this.setColor.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="description"
-              label="Description"
-              id="description"
-              onChange = {this.setDescription.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="price"
-              label="Price (Do not use $)"
-              id="price"
-              onChange = {this.setPrice.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="itemNum"
-              label="Number"
-              id="itemNum"
-              onChange = {this.setItemNum.bind(this)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="imgURL"
-              label="Image URL"
-              id="imgURL"
-              onChange = {this.setImgURL.bind(this)}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              style={{marginTop:"1em", marginBottom:'5em'}}
-              className="submitRegister"
-            >
-              Create Listing
-            </Button>
-          </form>
-        </div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className="paper" style={{marginTop:'30px'}}>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+              <CreateIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Open Sans' }}>
+              Create Item Listing
+            </Typography>
+            <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="itemName"
+                label="Name"
+                name="itemName"
+                autoFocus
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setName.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="color"
+                label="Color"
+                id="color"
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setColor.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="description"
+                label="Description"
+                id="description"
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setDescription.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="price"
+                label="Price (Do not use $)"
+                id="price"
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setPrice.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="itemNum"
+                label="Number"
+                id="itemNum"
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setItemNum.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="imgURL"
+                label="Image URL"
+                id="imgURL"
+                style={{ fontFamily:'Open Sans' }}
+                onChange = {this.setImgURL.bind(this)}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
+                className="submitRegister"
+              >
+                Create Listing
+              </Button>
+            </form>
+          </div>
+        </Container>
       </Container>
     )
   }

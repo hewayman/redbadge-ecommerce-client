@@ -77,16 +77,16 @@ class Admin extends React.Component <AdminProps, AdminState> {
     const { classes } = this.props;
     return (
       <div >
-        <Container maxWidth="lg" style={{ marginTop:"4.8em", marginBottom:'4em'}}>
+        <Container maxWidth="lg" style={{ marginTop:"10em", marginBottom:'4em'}}>
           {console.log("Admin loaded")}
-          <h2>Admin Portal</h2>
+          <h2 style={{ fontFamily:'Open Sans', fontWeight:500 }}>Admin Portal</h2>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={6} md={4}>
               <Card className={classes.root} >   
                 <Link to={`/listing/create`} style={{textDecoration:"none"}} >
                   <CardActionArea> 
                     <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                       {"Create Listing"}
                     </Typography>
                     </CardContent>
@@ -99,7 +99,7 @@ class Admin extends React.Component <AdminProps, AdminState> {
                 <Link to={`/user/all`} style={{textDecoration:"none"}} >
                   <CardActionArea> 
                     <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                       {"View All Customers"}
                     </Typography>
                     </CardContent>

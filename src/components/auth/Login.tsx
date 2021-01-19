@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
       Store Name
@@ -91,20 +91,22 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return (
       <div>
         <Container component="main" maxWidth="lg">
-          <LinkTo to="/" >
-            <ArrowBackIosIcon style={{marginTop:'130px'}}/> Back
+          <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
+            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
+            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>
+        
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
             <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Open Sans' }}>
               Sign in
             </Typography>
-            <form onSubmit={this.handleSubmit} className="formRegister" noValidate>
+            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Open Sans' }} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -138,7 +140,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{marginTop:"1em", marginBottom:'0.8em'}}
+                style={{marginTop:"1em", marginBottom:'0.8em', fontFamily:'Open Sans' }}
                 className="submitRegister"
               >
                 Sign In
@@ -150,14 +152,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                   </Link>
                 </Grid> */}
                 <Grid item>
-                  <Link href="/user/register" variant="body2">
+                  <Link href="/user/register" variant="body2" style={{ fontFamily:'Open Sans' }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
             </form>
           </div>
-          <Box mt={8}>
+          <Box mt={8} >
             <Copyright />
           </Box>
         </Container>

@@ -195,11 +195,12 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     // {console.log('totalrating', this.state.totalRating, 'count', this.state.count, 'avgRating', this.state.avgRating)}
     return (
       <div>
-        <Container maxWidth="lg" style={{ marginTop:'6em', marginBottom:'0' }}>
-          <Link to="/">
-            <ArrowBackIosIcon style={{marginTop:'40px'}}/> Back
+        <Container component="main" maxWidth="lg">
+          <Link to="/" style={{textDecoration:'none', color:'black'}}>
+            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
+            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
           </Link>
-
+        
           <Card className={classes.root} style={{ marginTop:'2em', borderRadius:'0px', border:'none'}} variant="outlined">
             {this.state.imgURL ? 
               <CardMedia
@@ -211,18 +212,18 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
             : null}
             <div className={classes.details} style={{width:'40%', paddingLeft:'1em'}}>
               <CardContent className={classes.content} >
-                <Typography component="h5" variant="h5">
+                <Typography component="h5" variant="h5" style={{ fontFamily:'Open Sans' }}>
                 {/* if itemName is not null, format to upper case */}
                   {this.state.itemName ? this.toUpperCase(this.state.itemName) : this.state.itemName}
                 </Typography>
                 <Rating name="size-medium" value={this.state.avgRating} precision={0.5} readOnly /> 
-                <Typography variant="subtitle1" color="textSecondary">
+                <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily:'Open Sans' }}>
                   ${this.state.price.toLocaleString()}
                   <br/>
                   {/* if color is not null, format to upper case */}
                   {this.state.color ? this.toUpperCase(this.state.color) : this.state.color}
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" color="textSecondary" style={{ fontFamily:'Open Sans' }}>
                   <br/>
                   {this.state.description}
                   <br/>
@@ -236,7 +237,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
         <Container maxWidth="sm" style={{ marginTop:"6em", marginBottom:'4em' }}>
           <Grid container spacing={2} alignItems="center" style={{justifyContent: 'center'}}>
             {!this.props.sessionToken ? 
-              <Button variant="outlined" disabled style={{width:'98%', marginBottom:'1em'}}>
+              <Button variant="outlined" disabled style={{width:'98%', marginBottom:'1em', fontFamily:'Open Sans' }}>
                 Sign-in to Leave Review
               </Button> :
               <Button variant="outlined" style={{width:'98%', marginBottom:'1em'}} onClick={this.toggle}>
@@ -244,7 +245,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                 </Button>}
             {this.state.active ?
             <div className="paper" style={{marginTop:'0em'}}>
-              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
+              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%', fontFamily:'Open Sans' }} noValidate>
                 <Rating
                   name="customized-empty"
                   defaultValue={0}
@@ -260,6 +261,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                   name="review"
                   label="Review"
                   id="review"
+                  style={{ fontFamily:'Open Sans' }}
                   onChange = {this.setReview.bind(this)}
                 />
                 <TextField
@@ -269,8 +271,8 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                   fullWidth
                   type="date"
                   name="date"
-                  // label="Date"
                   id="date"
+                  style={{ fontFamily:'Open Sans' }}
                   onChange = {this.setDate.bind(this)}
                 />
                 <Button
@@ -278,7 +280,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  style={{marginTop:"1em", marginBottom:'5em'}}
+                  style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
                   className="submitCreate" >
                   Create Review
                 </Button>

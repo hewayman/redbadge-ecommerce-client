@@ -40,6 +40,7 @@ const styles = (theme: any) => createStyles({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    fontFamily: 'Open Sans'
     // overflow:'scroll',
   },
 })
@@ -134,7 +135,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-          <Card className={classes.root} >
+          <Card className={classes.root} style={{borderRadius:'0px', border:'none'}}>
           {/* if user created the review or is an admin, show the delete button */}
             {this.props.userId === this.props.revObj.userId || this.props.adminStatus ? 
               <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
@@ -158,7 +159,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
             {this.state.active === false ? 
               <div>
                 <CardContent style={{ paddingTop:'1em'}}>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                     <PersonIcon /> {this.state.user.firstName}
                     <br/>
                     {this.props.revObj.date}
@@ -174,14 +175,14 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
                   emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 />
                 <CardContent style={{ paddingTop:'0'}}>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                     {this.props.revObj.review}
                   </Typography>
                 </CardContent>
               </div>
               :
               <div className="paper" style={{marginTop:'0em'}}>
-                <form onSubmit={this.handleSubmit} className="formEditReview" style={{ width: '70%' }} noValidate>
+                <form onSubmit={this.handleSubmit} className="formEditReview" style={{ width: '70%', fontFamily:'Open Sans' }} noValidate>
                   <Rating
                     name="customized-empty"
                     defaultValue={this.props.revObj.rating}
@@ -196,6 +197,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
                     name="review"
                     label="Review"
                     id="review"
+                    style={{ fontFamily:'Open Sans' }}
                     defaultValue={this.props.revObj.review}
                     onChange = {this.setReview.bind(this)}
                   />
@@ -207,6 +209,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
                     type="date"
                     name="date"
                     id="date"
+                    style={{ fontFamily:'Open Sans' }}
                     defaultValue={this.props.revObj.date}
                     onChange = {this.setDate.bind(this)}
                   />
@@ -215,7 +218,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    style={{marginTop:"1em", marginBottom:'5em'}}
+                    style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
                     className="submitCreate" >
                     Edit Review
                   </Button>

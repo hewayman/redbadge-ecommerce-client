@@ -57,8 +57,7 @@ const styles = (theme: any) => createStyles({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    // padding: theme.spacing(2, 4, 3),
-  },
+  }
 })
 
 class Item extends React.Component<ItemProps, ItemState> {
@@ -167,16 +166,6 @@ class Item extends React.Component<ItemProps, ItemState> {
     this.setState({active: !showEdit})
   }
 
-  toUpperCase = (str: string) => {
-    return str
-    .toLowerCase()
-    .split(' ')
-    .map(function(word) {
-        return word[0].toUpperCase() + word.substr(1);
-    })
-    .join(' ');
-  }
-
   render() {
     const { classes } = this.props;
      // if there is an issue fetching data, redirect to home page
@@ -216,21 +205,19 @@ class Item extends React.Component<ItemProps, ItemState> {
                   title="furniture"
                   style={{height: 200, paddingTop: '56.25%'}}
                 />
-                <CardHeader
-                  title={this.toUpperCase(this.props.item.itemName)}
-                  style={{paddingBottom:'0', paddingLeft:'0'}}
-                />
-                {/* <Rating id="rating" name="size-small" value={5} size="small" readOnly style={{paddingLeft:'0.7em', color:'black'}}/> */}
                 <CardContent style={{paddingBottom:'1em', paddingTop:'0', paddingLeft:'0', marginBottom:'2em'}}>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                  ${this.props.item.price.toLocaleString()}
+                  <Typography variant="body2" color="textSecondary" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1.6em', textTransform:"capitalize", color:'black'}}>
+                    {this.props.item.itemName}
+                  </Typography>                
+                  <Typography variant="body2" color="textSecondary" component="p" style={{fontFamily:'Montserrat', fontWeight:'bold', fontSize:'16px'}}>
+                    ${this.props.item.price.toLocaleString()}
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Link>
           :
             <div className="paper" style={{marginTop:'0em'}}>
-              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%' }} noValidate>
+              <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%', fontFamily:'Open Sans' }} noValidate>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -303,7 +290,7 @@ class Item extends React.Component<ItemProps, ItemState> {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  style={{marginTop:"1em", marginBottom:'5em'}}
+                  style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans'}}
                   className="submitEdit" >
                   Edit Listing
                 </Button>
