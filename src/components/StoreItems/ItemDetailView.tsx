@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles, createStyles } from '@material-ui/core/styles';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button'
 import { Link, Redirect } from 'react-router-dom';
@@ -13,6 +14,8 @@ import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import Reviews from './../Reviews/Reviews';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import IconButton from '@material-ui/core/IconButton';
+import Cart from '../Site/Cart';
 
 type ItemProps = {
   sessionToken: any;
@@ -20,6 +23,8 @@ type ItemProps = {
   classes: any;
   userId: number;
   adminStatus: boolean;
+  addToCart: any;
+  storeItemObj: any;
 }
 
 type ItemState = {
@@ -28,7 +33,7 @@ type ItemState = {
   description: string;
   price: number;
   itemNum: number;
-  imgURL: any;
+  imgURL: string;
   reviews: any[];
   imgPath: string;
   totalRating: number;
@@ -38,9 +43,8 @@ type ItemState = {
   active: boolean;
   rating: number;
   review: string;
-  date: any;
-  // userId: number;
-  // storeitemId: number;
+  date: string;
+  // cart: any[];
 }
 
 const styles = (theme: any) => createStyles({
@@ -80,9 +84,9 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       rating: 0,
       review: '',
       date: '',
-      // userId: 0,
-      // storeitemId: 0
+      // cart: []
     } 
+    // this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   setRating = (e: any) => {
@@ -122,7 +126,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
         this.setState({ 
           reviews: obj
         })
-        console.log(obj)
+        // console.log(obj)
     })
     .catch(err => {this.setState({errorStatus: true})})
   }
@@ -170,16 +174,26 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       }
     })
   }
-  
-  toUpperCase = (str: string) => {
-    return str
-    .toLowerCase()
-    .split(' ')
-    .map(function(word) {
-        return word[0].toUpperCase() + word.substr(1);
-    })
-    .join(' ');
-  }
+
+  // handleAddToCart = (product: any) => {
+  //   try {
+  //     const cartItems = this.state.cart.slice();
+  //     let alreadyInCart = false;
+  //     cartItems.forEach((item) => {
+  //       if (item.id === product) {
+  //         item.count++;
+  //         alreadyInCart = true;
+  //       }
+  //     });
+  //     if (!alreadyInCart) {
+  //       cartItems.push({...product, count: 1});
+  //     }
+  //     this.setState({cart: cartItems})
+  //       console.log('add to cart: ', product)
+  //   } catch {
+  //     console.log('did not add to cart')
+  //   }
+  // }
 
   componentDidMount = () => {
     this.getItemDetails();
@@ -197,8 +211,8 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       <div>
         <Container component="main" maxWidth="lg">
           <Link to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
-            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
         
           <Card className={classes.root} style={{ marginTop:'2em', borderRadius:'0px', border:'none'}} variant="outlined">
@@ -212,16 +226,14 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
             : null}
             <div className={classes.details} style={{width:'40%', paddingLeft:'1em'}}>
               <CardContent className={classes.content} >
-                <Typography component="h5" variant="h5" style={{ fontFamily:'Open Sans' }}>
-                {/* if itemName is not null, format to upper case */}
-                  {this.state.itemName ? this.toUpperCase(this.state.itemName) : this.state.itemName}
+                <Typography component="h5" variant="h5" style={{ fontFamily:'Open Sans', textTransform:'capitalize' }}>
+                  {this.state.itemName}
                 </Typography>
                 <Rating name="size-medium" value={this.state.avgRating} precision={0.5} readOnly /> 
-                <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily:'Open Sans' }}>
+                <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily:'Open Sans', textTransform:'capitalize' }}>
                   ${this.state.price.toLocaleString()}
                   <br/>
-                  {/* if color is not null, format to upper case */}
-                  {this.state.color ? this.toUpperCase(this.state.color) : this.state.color}
+                  {this.state.color}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" style={{ fontFamily:'Open Sans' }}>
                   <br/>
@@ -230,6 +242,9 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
                   <br/>
                   Item: {this.state.itemNum}
                 </Typography>
+                <Button variant="contained" color="secondary" style={{width:'98%', marginTop:'3em', fontFamily:'Open Sans'}} onClick={() => this.props.addToCart(this.props.storeItemObj)}>
+                  Add to Cart
+                </Button>
               </CardContent>
             </div>
           </Card>
@@ -293,6 +308,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
               <Reviews revObj={revObj} key={i} calculateTotalRating={this.calculateTotalRating} userId={this.props.userId} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchReviews={this.getItemReviews}/></Grid> )}
           </Grid>      
         </Container>
+        {/* <Cart cartItems={this.state.cart} /> */}
       </div>
     );
   }

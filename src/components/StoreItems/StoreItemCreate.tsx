@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 type CreateProps = {
-  sessionToken: any;
+  sessionToken: string;
   fetchStoreItems: any;
 }
 
@@ -92,8 +92,8 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
 
       <Container component="main" maxWidth="lg">
           <Link to="/user/admin" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
-            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

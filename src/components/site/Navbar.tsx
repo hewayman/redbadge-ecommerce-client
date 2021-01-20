@@ -14,7 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 type NavbarProps = {
   clickLogout: any;
-  sessionToken: any;
+  sessionToken: string;
   adminStatus: boolean;
   userFirstName: string;
   fetchStoreItems: any;
@@ -123,7 +123,9 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
               </Link>
             </IconButton>
             <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu">
-              <ShoppingCartOutlinedIcon />
+              <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+                <ShoppingCartOutlinedIcon />
+              </Link>
             </IconButton>
             <IconButton onClick={this.props.clickLogout} edge="start" className="lockIconButton" color="inherit" aria-label="menu">
                 <LockOutlinedIcon />

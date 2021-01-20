@@ -11,8 +11,8 @@ import User from './User'
 type UserProps = {
   users: any;
   fetchUsers: any;
-  sessionToken: any;
-  token: any;
+  sessionToken: string;
+  token: string;
 }
 
 export default class UserList extends React.Component<UserProps> {
@@ -28,8 +28,8 @@ export default class UserList extends React.Component<UserProps> {
       <div>
         <Container component="main" maxWidth="lg">
           <Link to="/user/admin" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
-            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <div className="paper" style={{marginTop:'30px'}}>
             <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>

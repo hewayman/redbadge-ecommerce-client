@@ -9,14 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 type AdminProps = {
-  sessionToken: any;
+  sessionToken: string;
   classes: any;
-}
-
-type AdminState = {
-  // email: string;
-  // password: string;
-  // isAdmin: boolean;
 }
 
 const styles = (theme: any) => createStyles({
@@ -36,15 +30,7 @@ const styles = (theme: any) => createStyles({
   },
 })
 
-class Admin extends React.Component <AdminProps, AdminState> {
-  constructor (props: AdminProps) {
-    super(props);
-    this.state = {
-      // email: '',
-      // password: '',
-      // isAdmin: false,
-    }
-  }
+class Admin extends React.Component <AdminProps> {
 
   createAdmin = () => {
     const url = 'http://localhost:8080/user/admin';

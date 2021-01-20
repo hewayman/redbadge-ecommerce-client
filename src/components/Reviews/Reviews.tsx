@@ -19,7 +19,7 @@ type ReviewsProps = {
   calculateTotalRating: any;
   userId: number;
   adminStatus: boolean;
-  sessionToken: any;
+  sessionToken: string;
   fetchReviews: any;
 }
 
@@ -28,7 +28,7 @@ type ReviewsState = {
   active: boolean;
   rating: number;
   review: string;
-  date: any;
+  date: string;
   errorStatus: boolean;
 }
 

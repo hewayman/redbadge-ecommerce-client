@@ -11,11 +11,11 @@ import Typography from '@material-ui/core/Typography';
 
 type UserProps = {
   user: any;
-  key: any;
+  key: number;
   classes: any;
   users: any;
   fetchUsers: any;
-  sessionToken: any;
+  sessionToken: string;
 }
 
 type UserState ={

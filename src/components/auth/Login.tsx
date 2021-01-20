@@ -28,9 +28,8 @@ function Copyright() {
 
 type LoginProps = {
   updateToken: any;
-  token: any;
+  token: string;
   adminStatus: boolean;
-  // fetchUsers: any;
 }
 
 type LoginState = {
@@ -92,8 +91,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       <div>
         <Container component="main" maxWidth="lg">
           <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
-            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>
         

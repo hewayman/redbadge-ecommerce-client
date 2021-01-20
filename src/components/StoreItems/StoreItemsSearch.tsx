@@ -7,8 +7,9 @@ type StoreItemsProps = {
   searchItems: any;
   fetchStoreItems: any;
   adminStatus: boolean;
-  sessionToken: any;
+  sessionToken: string;
   updateItemId: any;
+  updateItem: any;
 }
 
 class StoreItemsSearch extends React.Component<StoreItemsProps> {
@@ -18,7 +19,7 @@ class StoreItemsSearch extends React.Component<StoreItemsProps> {
       <div>
         <Container maxWidth="lg" style={{ marginTop:"6em", marginBottom:'4em' }}>
           <Grid container spacing={2} alignItems="center">
-            {this.props.searchItems.map((itemObj: any, i: any) => <Item item={itemObj} key={i} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems} updateItemId={this.props.updateItemId} />)}
+            {this.props.searchItems.map((itemObj: any, i: any) => <Item item={itemObj} key={i} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchStoreItems={this.props.fetchStoreItems} updateItemId={this.props.updateItemId} updateItem={this.props.updateItem} />)}
           </Grid>
         </Container>
       </div>

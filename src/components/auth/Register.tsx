@@ -30,7 +30,7 @@ function Copyright() {
 
 type RegisterProps = {
   updateToken: any;
-  token: any;
+  token: string;
 }
 
 type RegisterState = {
@@ -99,8 +99,8 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       <div>
         <Container component="main" maxWidth="lg">
           <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', fontFamily:'Open Sans', fontSize:28, marginRight:'-8px' }}/> 
-            <Typography style={{ display:'inline', verticalAlign:'7px' }}>Back</Typography>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>
       

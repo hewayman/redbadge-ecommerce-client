@@ -15,13 +15,13 @@ import TextField from '@material-ui/core/TextField';
 
 type ItemProps = {
   item: any;
-  key: any;
+  key: number;
   classes: any;
   adminStatus: boolean;
-  sessionToken: any;
+  sessionToken: string;
   fetchStoreItems: any;
   updateItemId: any;
-  // avgRating: any;
+  updateItem: any;
 }
 
 type ItemState = {
@@ -136,9 +136,8 @@ class Item extends React.Component<ItemProps, ItemState> {
   }
 
   handleClick = () => {
-    //   this.setState({id: this.props.itemId});
-    // }
     this.props.updateItemId(this.props.item.id)
+    this.props.updateItem(this.props.item)
   }
 
   deleteListing = () => {
