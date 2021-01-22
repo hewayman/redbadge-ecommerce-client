@@ -125,12 +125,12 @@ class App extends React.Component <{}, AppState> {
   listItems = () => {
     this.setState(state => {
       // if state of sort is not empty, sort based on lowest or highest price
-      if(state.sort !== '') {
-        this.state.storeItems.sort((a,b) => (this.state.sort === 'lowest') ? (a.price < b.price ? 1 : -1) : (a.price > b.price ? 1 : -1))
-      } 
-      else {
-        state.storeItems.sort((a,b) => (a.id > b.id ? 1: -1));
+      if (state.sort !== '') {
+        this.state.storeItems.sort((a,b) => (state.sort === 'lowest') ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1))
+      } else {
+        state.storeItems.sort((a,b) => (a.id > b.id ? 1: -1)); // set default sort by id
       }
+      
       return {filteredItems: this.state.storeItems};
     })
   }

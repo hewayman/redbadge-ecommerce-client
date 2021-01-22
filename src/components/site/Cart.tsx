@@ -49,7 +49,7 @@ class Cart extends React.Component<CartProps, CartState> {
         </Link>
         <Container component="main" maxWidth="md">
         {/* Check to see if the cart is empty or contains items */}
-          {this.props.cartItems.length === 0 ? <div>Cart is Empty{console.log('empty cart')}</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
+          {this.props.cartItems.length === 0 ? <div>Your cart is empty.</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none'}} variant="outlined">
             {this.props.cartItems.map((item: any) => (
@@ -88,31 +88,34 @@ class Cart extends React.Component<CartProps, CartState> {
                 </Grid>
               </Grid>
             ))}
-
-              <Grid container direction="column" alignItems="flex-end" style={{marginTop:'10px', marginBottom:'100px'}}>
-                {/* Display the subtotal, tax amount, and total of the order */}
-                <Grid item>
-                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:500, fontSize:'1em', color:'black'}}>
-                  Subtotal: ${preTax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-                  <br />
-                  Tax: ${this.setTax(preTax).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-                  </Typography>
-                  <Typography variant="body2" component="h2" style={{padding:'0 0 0 0', fontFamily:'Open Sans', fontWeight:'bold', fontSize:'1em', color:'black'}}>
-                    Total: ${(preTax + this.setTax(preTax)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-                  </Typography>
+              {/* if the cart is empty, do not show the total and checkout button */}
+              { this.props.cartItems.length !== 0 ?
+                <Grid container direction="column" alignItems="flex-end" style={{marginTop:'10px', marginBottom:'100px'}}>
+                  {/* Display the subtotal, tax amount, and total of the order */}
+                  <Grid item>
+                    <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:500, fontSize:'1em', color:'black'}}>
+                    Subtotal: ${preTax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                    <br />
+                    Tax: ${this.setTax(preTax).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                    </Typography>
+                    <Typography variant="body2" component="h2" style={{padding:'0 0 0 0', fontFamily:'Open Sans', fontWeight:'bold', fontSize:'1em', color:'black'}}>
+                      Total: ${(preTax + this.setTax(preTax)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                    </Typography>
+                  </Grid>
+                  <Grid item style={{marginTop:'10px'}}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      style={{ fontFamily:'Open Sans' }}
+                      className="submitCreate" >
+                        Proceed to Checkout
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item style={{marginTop:'10px'}}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    style={{ fontFamily:'Open Sans' }}
-                    className="submitCreate" >
-                      Proceed to Checkout
-                  </Button>
-                </Grid>
-              </Grid>
+                : null 
+              }
           </Paper>
         </Container>
       </Container>
