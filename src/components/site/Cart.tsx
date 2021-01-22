@@ -49,7 +49,7 @@ class Cart extends React.Component<CartProps, CartState> {
         </Link>
         <Container component="main" maxWidth="md">
         {/* Check to see if the cart is empty or contains items */}
-          {this.props.cartItems.length === 0 ? <div>Your cart is empty.</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
+          {this.props.cartItems.length === 0 ? <div>Your cart is empty{console.log('empty cart')}</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none'}} variant="outlined">
             {this.props.cartItems.map((item: any) => (

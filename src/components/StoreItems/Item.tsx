@@ -22,6 +22,8 @@ type ItemProps = {
   fetchStoreItems: any;
   updateItemId: any;
   updateItem: any;
+  addToCart: any;
+  storeItemObj: any;
 }
 
 type ItemState = {
@@ -36,6 +38,7 @@ type ItemState = {
   active: boolean;
   id: number;
   errorStatus: boolean;
+  showBtn: boolean;
 }
 
 const styles = (theme: any) => createStyles({
@@ -75,11 +78,10 @@ class Item extends React.Component<ItemProps, ItemState> {
         imgURL: '',
         active: false,
         id: 0,
-        errorStatus: false
+        errorStatus: false,
+        showBtn: false
       }
       this.handleClick = this.handleClick.bind(this);
-      this.showModal = this.showModal.bind(this);
-      this.closeModal = this.closeModal.bind(this);
   }
 
   setItemName = (e: any) => {
@@ -140,6 +142,14 @@ class Item extends React.Component<ItemProps, ItemState> {
     this.props.updateItem(this.props.item)
   }
 
+  showCartButton = () => {
+    this.setState({ showBtn: true })
+  }
+
+  hideCartButton = () => {
+    this.setState({ showBtn: false })
+  }
+
   deleteListing = () => {
     fetch(`http://localhost:8080/listing/${this.props.item.id}`, {
       method: 'DELETE',
@@ -152,14 +162,7 @@ class Item extends React.Component<ItemProps, ItemState> {
     .catch(err => console.log(err))
   }
 
-  showModal = () => {
-    this.setState({ show: true });
-  }
-
-  closeModal = () => {
-    this.setState({ show: false });
-  }
-
+  // toggle to show edit/delete options
   toggle = () => {
     const showEdit = this.state.active
     this.setState({active: !showEdit})
@@ -173,7 +176,7 @@ class Item extends React.Component<ItemProps, ItemState> {
     } 
     return (
       <div className={classes.root} >
-        <Card className={classes.root} style={{borderRadius:'0px', border:'none'}} variant="outlined">
+        <Card className={classes.root} style={{borderRadius:'0px', border:'none', position:'relative'}} variant="outlined" onMouseOver={this.showCartButton} onMouseLeave={this.hideCartButton} >
         {/* if the user is an admin, show the delete button */}
           {this.props.adminStatus ?    
             <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
@@ -196,15 +199,31 @@ class Item extends React.Component<ItemProps, ItemState> {
           
         {/* display user edit form when create icon has been clicked, otherwise display user info */}
           {this.state.active === false ? 
-            <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
-              <CardActionArea onClick={this.handleClick}>            
+            <>
+              <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
+              <CardActionArea>            
                 <CardMedia
                   className="media"
                   image={require(`./../../assets/${this.props.item.imgURL}.jpg`).default}
                   title="furniture"
                   style={{height: 200, paddingTop: '56.25%'}}
+                  onClick={this.handleClick}
                 />
-                <CardContent style={{paddingBottom:'1em', paddingTop:'0', paddingLeft:'0', marginBottom:'2em'}}>
+                </CardActionArea>
+              </Link>
+              {this.state.showBtn ? 
+                <Button 
+                  variant="contained" 
+                  color="secondary" 
+                  onClick={() => this.props.addToCart(this.props.item)}
+                  style={{position:'absolute', top:'35%', left:'33%', fontFamily:'Open Sans'}}>
+                  Add to Cart
+                </Button>
+                :
+                null
+              }
+              <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
+                <CardContent style={{paddingBottom:'1em', paddingTop:'0', paddingLeft:'0', marginBottom:'2em'}} onClick={this.handleClick}>
                   <Typography variant="body2" color="textSecondary" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1.6em', textTransform:"capitalize", color:'black'}}>
                     {this.props.item.itemName}
                   </Typography>                
@@ -212,8 +231,9 @@ class Item extends React.Component<ItemProps, ItemState> {
                     ${this.props.item.price.toLocaleString()}
                   </Typography>
                 </CardContent>
-              </CardActionArea>
-            </Link>
+              </Link>
+            </>
+            
           :
             <div className="paper" style={{marginTop:'0em'}}>
               <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%', fontFamily:'Open Sans' }} noValidate>

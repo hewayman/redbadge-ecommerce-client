@@ -191,7 +191,7 @@ class App extends React.Component <{}, AppState> {
           {/* if there is an issue fetching data, redirect to home page */}
           {this.state.errorStatus ? (<Redirect to="/" />) : null}
           <Switch>
-            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem}/></Route>
+            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
             <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
             <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
             <Route path='/user/admin'><Admin sessionToken={this.state.token}/></Route>
