@@ -140,12 +140,24 @@ class App extends React.Component <{}, AppState> {
     this.listItems();
   }
 
+  removeFromCart = (product: any) => {
+    try {
+      this.setState({cart: this.state.cart.slice()});
+      this.setState({ cart: this.state.cart.filter(item => item.id !== product)})
+      // this.setState({ redirect: true })
+      console.log('Item removed from cart.')
+      console.log('cart: ', this.state.cart)
+    } catch {
+      console.log('Item not removed from cart.')
+    }
+  }
+
   addToCart = (product: any) => {
     try {
-      this.setState({cart: this.state.cart.slice()} ) ;
+      this.setState({cart: this.state.cart.slice()});
       let alreadyInCart = false;
       this.state.cart.forEach((item: any) => {
-        if (item.id === product) {
+        if (item.id === product.id) {
           item.count++;
           alreadyInCart = true;
         }
@@ -187,7 +199,7 @@ class App extends React.Component <{}, AppState> {
             <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
             <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
             <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
-            <Route path='/cart'><Cart cartItems={this.state.cart}/></Route>
+            <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
           </Switch>
         </Router>
       </div>

@@ -175,26 +175,6 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     })
   }
 
-  // handleAddToCart = (product: any) => {
-  //   try {
-  //     const cartItems = this.state.cart.slice();
-  //     let alreadyInCart = false;
-  //     cartItems.forEach((item) => {
-  //       if (item.id === product) {
-  //         item.count++;
-  //         alreadyInCart = true;
-  //       }
-  //     });
-  //     if (!alreadyInCart) {
-  //       cartItems.push({...product, count: 1});
-  //     }
-  //     this.setState({cart: cartItems})
-  //       console.log('add to cart: ', product)
-  //   } catch {
-  //     console.log('did not add to cart')
-  //   }
-  // }
-
   componentDidMount = () => {
     this.getItemDetails();
     this.getItemReviews();
