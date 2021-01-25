@@ -14,7 +14,7 @@ class Footer extends React.Component {
               <Typography style={{ fontFamily:'Playfair Display', display:'inline-block', fontSize:'2em', color:'#eeeeee', paddingBottom:'10px'}}>Mollie</Typography>
               <Typography style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'2.2em', fontWeight:200, color:'#eeeeee', paddingRight:'200px', paddingBottom:'10px'}}>Birch</Typography>
             <div style={{display:'inline-block'}}>
-              <Typography style={{fontFamily:'Montserrat', fontSize:'0.9em', fontWeight:'bold'}}>Contact Us</Typography>
+              <Typography style={{fontFamily:'Montserrat', fontSize:'0.9em', fontWeight:900}}>Contact Us</Typography>
               <Typography style={{fontFamily:'Montserrat', fontSize:'0.8em'}}>123-456-7890</Typography>
               <Typography style={{fontFamily:'Montserrat', fontSize:'0.8em'}}>contact@molliebirch.com</Typography>
             </div>

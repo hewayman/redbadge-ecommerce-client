@@ -49,7 +49,7 @@ class Cart extends React.Component<CartProps, CartState> {
         </Link>
         <Container component="main" maxWidth="md">
         {/* Check to see if the cart is empty or contains items */}
-          {this.props.cartItems.length === 0 ? <div>Your cart is empty.</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
+          {this.props.cartItems.length === 0 ? <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>Your cart is empty.</div> : <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>You have {this.props.cartItems.length} items in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none', borderTop:'1px solid #cccccc', marginTop:'20px'}} variant="outlined">
             {this.props.cartItems.map((item: any) => (
@@ -64,12 +64,12 @@ class Cart extends React.Component<CartProps, CartState> {
                   : null}
                 </Grid>
                 <Grid item xs={12} sm={3} style={{ paddingTop:'0', paddingBottom:'0' }}>
-                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:400, fontSize:'1em', textTransform:"capitalize", color:'black'}}>
+                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1em', textTransform:"capitalize", color:'black'}}>
                     {item.itemName}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={3} style={{ paddingTop:'0', paddingBottom:'0' }}>
-                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:400, fontSize:'1em', color:'black'}}>
+                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1em', color:'black'}}>
                     ${item.price.toLocaleString()} x {item.count}
                   </Typography> 
                 </Grid>
@@ -92,12 +92,12 @@ class Cart extends React.Component<CartProps, CartState> {
                 <Grid container direction="column" alignItems="flex-end" style={{marginTop:'50px', marginBottom:'100px', borderTop:'1px solid #cccccc'}}>
                   {/* Display the subtotal, tax amount, and total of the order */}
                   <Grid item>
-                    <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:500, fontSize:'1em', color:'black'}}>
+                    <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:500, fontSize:'1em', color:'black'}}>
                     Subtotal: ${preTax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     <br />
                     Tax: ${this.setTax(preTax).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     </Typography>
-                    <Typography variant="body2" component="h2" style={{padding:'0 0 0 0', fontFamily:'Open Sans', fontWeight:'bold', fontSize:'1em', color:'black'}}>
+                    <Typography variant="body2" component="h2" style={{padding:'0 0 0 0', fontFamily:'Montserrat', fontWeight:'bold', fontSize:'1em', color:'black'}}>
                       Total: ${(preTax + this.setTax(preTax)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     </Typography>
                   </Grid>

@@ -224,7 +224,7 @@ class Item extends React.Component<ItemProps, ItemState> {
               }
               <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
                 <CardContent style={{paddingBottom:'1em', paddingTop:'0', paddingLeft:'0', marginBottom:'2em'}} onClick={this.handleClick}>
-                  <Typography variant="body2" color="textSecondary" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1.6em', textTransform:"capitalize", color:'black'}}>
+                  <Typography variant="body2" color="textSecondary" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1.4em', textTransform:"capitalize", color:'black'}}>
                     {this.props.item.itemName}
                   </Typography>                
                   <Typography variant="body2" color="textSecondary" component="p" style={{fontFamily:'Montserrat', fontWeight:'bold', fontSize:'16px'}}>
@@ -298,9 +298,9 @@ class Item extends React.Component<ItemProps, ItemState> {
                   margin="normal"
                   required
                   fullWidth
-                  name="email"
-                  label="Email"
-                  id="email"
+                  name="image"
+                  label="Image URL"
+                  id="image"
                   defaultValue={this.props.item.imgURL}
                   onChange = {this.setImgURL.bind(this)}
                 />
