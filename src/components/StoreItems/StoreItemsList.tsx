@@ -3,6 +3,8 @@ import Item from './Item';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import FilterItems from './FilterItems';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
 
 type ListProps = {
   sessionToken: string;

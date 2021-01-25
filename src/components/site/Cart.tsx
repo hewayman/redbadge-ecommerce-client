@@ -49,15 +49,14 @@ class Cart extends React.Component<CartProps, CartState> {
         </Link>
         <Container component="main" maxWidth="md">
         {/* Check to see if the cart is empty or contains items */}
-          {this.props.cartItems.length === 0 ? <div>Your cart is empty{console.log('empty cart')}</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
+          {this.props.cartItems.length === 0 ? <div>Your cart is empty.</div> : <div>You have {this.props.cartItems.length} items in your cart.</div>}
 
-          <Paper style={{ borderRadius:'0px', border:'none'}} variant="outlined">
+          <Paper style={{ borderRadius:'0px', border:'none', borderTop:'1px solid #cccccc', marginTop:'20px'}} variant="outlined">
             {this.props.cartItems.map((item: any) => (
               <Grid container direction="row" spacing={3} alignItems="center">
                 <Grid item xs={12} md={3} style={{ marginTop:'40px', paddingBottom:'0' }}>
                   {item.imgURL ? 
                     <CardMedia
-                      // className={classes.cover}
                       image={require(`../../assets/${item.imgURL}.jpg`).default}
                       title="Listing img"
                       style={{height: 5, width: '60%', paddingTop: '35%'}}
@@ -90,7 +89,7 @@ class Cart extends React.Component<CartProps, CartState> {
             ))}
               {/* if the cart is empty, do not show the total and checkout button */}
               { this.props.cartItems.length !== 0 ?
-                <Grid container direction="column" alignItems="flex-end" style={{marginTop:'10px', marginBottom:'100px'}}>
+                <Grid container direction="column" alignItems="flex-end" style={{marginTop:'50px', marginBottom:'100px', borderTop:'1px solid #cccccc'}}>
                   {/* Display the subtotal, tax amount, and total of the order */}
                   <Grid item>
                     <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Open Sans', fontWeight:500, fontSize:'1em', color:'black'}}>

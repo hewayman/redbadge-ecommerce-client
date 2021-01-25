@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Admin from './components/Users/Admin';
 import FilterItems from './components/StoreItems/FilterItems';
+import Footer from './components/Site/Footer';
 import ItemDetailView from './components/StoreItems/ItemDetailView';
 import Login from './components/Auth/Login';
 import Navbar from './components/Site/Navbar';
@@ -201,6 +202,7 @@ class App extends React.Component <{}, AppState> {
             <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
             <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
           </Switch>
+          <Footer />
         </Router>
       </div>
     );

@@ -73,9 +73,9 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
   render () {
     return (
       <div>
-        {/* <AppBar style={{ background:'#33333d', color:"white", height:'40px', display: "flex", textAlign:'center', justifyContent:'center', fontFamily:'Open Sans'}} elevation={0}>
-          <Typography style={{ fontFamily:'Open Sans' }}>
-            TAKE 10% OFF ALL ITEMS
+        {/* <AppBar style={{ background:'#333333', color:"white", height:'30px', display: "flex", textAlign:'center', justifyContent:'center'}} elevation={0}>
+          <Typography style={{ fontFamily:'Montserrat', fontSize:'0.9em' }}>
+            Free Shipping Over $100
           </Typography>
         </AppBar> */}
         <AppBar style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
@@ -87,12 +87,12 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
                 <Typography style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'1.6em'}}>Birch</Typography>
               </Link>
             </Typography>
-            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.9em', 
-              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey', fontFamily:'Open Sans', backgroundColor:'white'}}>
+            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.5em', 
+              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey', fontFamily:'Montserrat', backgroundColor:'white'}}>
               <InputBase
                 placeholder="Search"
                 id="searchTerm"
-                style={{ fontFamily:'Open Sans', backgroundColor:'white' }}
+                style={{ fontFamily:'Montserrat', backgroundColor:'white' }}
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={this.setSearch.bind(this)}
               />
@@ -102,7 +102,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             </div>
           {/* if the user is logged in, display a welcome message with the user's name */}
             {this.props.userFirstName ?
-              <Typography className="welcomeText" style={{ fontFamily:'Open Sans' }}>
+              <Typography className="welcomeText" style={{ fontFamily:'Montserrat', fontWeight:'bold' }}>
                 Welcome, {this.props.userFirstName}!
               </Typography> :
               null

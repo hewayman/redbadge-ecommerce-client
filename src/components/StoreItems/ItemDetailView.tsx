@@ -206,7 +206,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
             : null}
             <div className={classes.details} style={{width:'40%', paddingLeft:'1em'}}>
               <CardContent className={classes.content} >
-                <Typography component="h5" variant="h5" style={{ fontFamily:'Open Sans', textTransform:'capitalize' }}>
+                <Typography component="h5" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:'bold',  textTransform:'capitalize' }}>
                   {this.state.itemName}
                 </Typography>
                 <Rating name="size-medium" value={this.state.avgRating} precision={0.5} readOnly /> 
