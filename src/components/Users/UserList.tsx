@@ -27,7 +27,7 @@ export default class UserList extends React.Component<UserProps> {
     return (
       <div>
         <Container component="main" maxWidth="lg">
-          <Link to="/user/admin" style={{textDecoration:'none', color:'black'}}>
+          <Link to="/admin" style={{textDecoration:'none', color:'black'}}>
             <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>

@@ -15,18 +15,18 @@ import Container from '@material-ui/core/Container';
 import '../../App.css';
 // import Login from './Login';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Store Name
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Store Name
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 type RegisterProps = {
   updateToken: any;
@@ -104,7 +104,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
           </LinkTo>
         </Container>
       
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           {/* <Login updateToken={this.props.updateToken} /> */}
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
@@ -176,7 +176,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{marginTop:"1.1em", marginBottom:'0.8em', backgroundColor:'black', color:'white', fontFamily:'Open Sans' }}
+                style={{marginTop:"1.1em", marginBottom:'0.8em', fontFamily:'Open Sans' }}
                 className="submitRegister"
               >
                 Sign Up
@@ -191,9 +191,9 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
               </Grid>
             </form>
           </div>
-          <Box mt={5} >
+          {/* <Box mt={5} >
             <Copyright />
-          </Box>
+          </Box> */}
         </Container>
       </div>
     );

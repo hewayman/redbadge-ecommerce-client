@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import Admin from './components/Users/Admin';
 import FilterItems from './components/StoreItems/FilterItems';
 import Footer from './components/Site/Footer';
@@ -11,6 +12,8 @@ import StoreItemsCreate from './components/StoreItems/StoreItemCreate';
 import StoreItemsList from './components/StoreItems/StoreItemsList';
 import UserList from './components/Users/UserList';
 import Cart from './components/Site/Cart';
+import AdminCreate from './components/Users/AdminCreate';
+import NotFound from './components/Site/NotFound';
  
 type AppState = {
   token: string;
@@ -123,6 +126,17 @@ class App extends React.Component <{}, AppState> {
     this.setState({ firstName: ''})
   }
 
+  requireLogin = (to: any, from: any, next: any)  => {
+    if (to.meta.auth) {
+      if (this.state.isAdmin === true) {
+        next();
+      }
+      next.redirect('/user/login');
+    } else {
+      next();
+    }
+  }
+
   listItems = () => {
     this.setState(state => {
       // if state of sort is not empty, sort based on lowest or highest price
@@ -186,23 +200,27 @@ class App extends React.Component <{}, AppState> {
       <div> 
         {/* {console.log("App token " + this.state.rating)} */}
         <Router>
-          <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
-          {/* redirect to '/' when user logs out */}
-          {this.state.redirect ? (<Redirect to='/'/> && window.location.reload()) : null}
-          {/* if there is an issue fetching data, redirect to home page */}
-          {this.state.errorStatus ? (<Redirect to="/" />) : null}
-          <Switch>
-            <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
-            <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
-            <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-            <Route path='/user/admin'><Admin sessionToken={this.state.token}/></Route>
-            <Route path='/user/all' ><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></Route>
-            <Route path='/listing/create'><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></Route>
-            <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
-            <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
-            <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
-          </Switch>
-          <Footer />
+          <GuardProvider guards={[this.requireLogin]} error={ NotFound }>
+            <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
+            {/* redirect to '/' when user logs out */}
+            {this.state.redirect ? (<Redirect to='/'/> && window.location.reload()) : null}
+            {/* if there is an issue fetching data, redirect to home page */}
+            {this.state.errorStatus ? (<Redirect to="/" />) : null}
+            <Switch>
+              <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
+              <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
+              <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
+              <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
+              <Route path='/create/admin'><AdminCreate /></Route>
+              <GuardedRoute path='/user/all' meta={{ auth: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>
+              <GuardedRoute path='/listing/create' meta={{ auth: true }}><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></GuardedRoute>
+              <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
+              <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
+              <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
+              <Route component={ NotFound} />
+            </Switch>
+            <Footer />
+          </GuardProvider>
         </Router>
       </div>
     );

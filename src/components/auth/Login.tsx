@@ -13,18 +13,18 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 // import Register from './Register';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-      Store Name
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//       MollieBirch
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 type LoginProps = {
   updateToken: any;
@@ -96,7 +96,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
           </LinkTo>
         </Container>
         
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
             <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
@@ -158,9 +158,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               </Grid>
             </form>
           </div>
-          <Box mt={8} >
+          {/* <Box mt={8} >
             <Copyright />
-          </Box>
+          </Box> */}
         </Container>
       </div>
     );

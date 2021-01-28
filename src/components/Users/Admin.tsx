@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link} from 'react-router-dom'
 import { withStyles, createStyles } from '@material-ui/core/styles';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -32,68 +33,74 @@ const styles = (theme: any) => createStyles({
 
 class Admin extends React.Component <AdminProps> {
 
-  createAdmin = () => {
-    const url = 'http://localhost:8080/user/admin';
-    const body = {
-      // email: this.state.email,
-      // password: this.state.password,
-      // isAdmin: this.state.isAdmin
-    }
+  // createAdmin = () => {
+  //   const url = 'http://localhost:8080/user/admin';
+  //   // const body = {
+  //     // email: this.state.email,
+  //     // password: this.state.password,
+  //     // isAdmin: this.state.isAdmin
+  //   // }
   
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': this.props.sessionToken
-      },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(rObj => {
-        // this.props.sessionToken(rObj.sessionToken)
-        console.log(rObj)
-      })
-  }
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       // 'Authorization': this.props.sessionToken
+  //     },
+  //     // body: JSON.stringify(body)
+  //   })
+  //     .then(r => r.json())
+  //     .then(rObj => {
+  //       // this.props.sessionToken(rObj.sessionToken)
+  //       console.log(rObj)
+  //     })
+  // }
 
-  componentDidMount() {
-    this.createAdmin()
-  }
+  // componentDidMount() {
+  //   this.createAdmin()
+  // }
 
   render() {
     const { classes } = this.props;
     return (
       <div >
-        <Container maxWidth="lg" style={{ marginTop:"10em", marginBottom:'4em'}}>
-          {console.log("Admin loaded")}
-          <h2 style={{ fontFamily:'Open Sans', fontWeight:500 }}>Admin Portal</h2>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={classes.root} >   
-                <Link to={`/listing/create`} style={{textDecoration:"none"}} >
-                  <CardActionArea> 
-                    <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
-                      {"Create Listing"}
-                    </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Link>
-              </Card>
+        <Container component="main" maxWidth="lg" >
+          <Link to="/" style={{textDecoration:'none', color:'black'}}>
+            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
+          </Link>
+          <Container maxWidth="md" style={{minHeight:'65vh', marginBottom:'80px'}}>
+            {console.log("Admin loaded")}
+            <h2 style={{ fontFamily:'Open Sans', fontWeight:500 }}>Admin Portal</h2>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} sm={6} md={4}>
+                <Card className={classes.root} >   
+                  <Link to={`/listing/create`} style={{textDecoration:"none"}} >
+                    <CardActionArea> 
+                      <CardContent>
+                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                        {"Create Listing"}
+                      </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Link>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Card className={classes.root} >   
+                  <Link to={`/user/all`} style={{textDecoration:"none"}} >
+                    <CardActionArea> 
+                      <CardContent>
+                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                        {"View All Customers"}
+                      </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Link>
+                </Card>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={classes.root} >   
-                <Link to={`/user/all`} style={{textDecoration:"none"}} >
-                  <CardActionArea> 
-                    <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
-                      {"View All Customers"}
-                    </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Link>
-              </Card>
-            </Grid>
-          </Grid>
+          </Container>
         </Container>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+// import * as  styles from './Navbar.css';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container'
 import Toolbar from '@material-ui/core/Toolbar';
@@ -81,10 +82,10 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
         <AppBar style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
         <Container maxWidth="lg">
           <Toolbar disableGutters={true}>
-            <Typography variant="h6" className="storeName">
-              <Link to="/" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
+            <Typography >
+              <Link to="/" className="storeName" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
                 <Typography style={{ fontFamily:'Playfair Display', display:'inline-block', fontSize:'1.5em'}}>Mollie</Typography>
-                <Typography style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'1.6em'}}>Birch</Typography>
+                <Typography className="storeName" style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'1.6em'}}>Birch</Typography>
               </Link>
             </Typography>
             <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.5em', 
@@ -109,21 +110,21 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             } 
           {/* if the user is an admin, show the admin portal button */}
             {this.props.adminStatus ? 
-              <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" >
-                <Link to='/user/admin' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+              <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px', marginLeft:'5px'}}>
+                <Link to='/admin' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
                   <SupervisorAccountOutlinedIcon />
                 </Link>
               </IconButton> :
               null
             }
           {/* display the login, shopping cart, and logout buttons for all users*/}
-            <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu">
-              <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+            <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px'}}>
+              <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
                 <AccountCircleOutlinedIcon />
               </Link>
             </IconButton>
-            <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu">
-              <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)', padding: '0.3em 0 0 0.4em'}} >
+            <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'5px'}}>
+              <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
                 <ShoppingCartOutlinedIcon />
               </Link>
             </IconButton>

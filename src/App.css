@@ -20,6 +20,48 @@
   margin-top: 1.5px;
   margin-bottom: 15px;
 }
+
+/* .storeName {
+  color: blue;
+  /* font-size: 200px; */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .storeName {
+    /* font-size: 1px; */
+    color:red;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .storeName {
+    font-size: 20px;
+    font-weight: 200;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .storeName {
+    font-size: 1.8em;
+    font-weight: 200;
+  }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .storeNameMollie {
+    font-size: 1.5em;
+  }
+  .storeNameBirch {
+    font-size: 1.5em;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {} 
   /* 
   //   submit: {
   //     margin: theme.spacing(3, 0, 2),

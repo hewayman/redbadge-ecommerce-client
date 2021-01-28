@@ -42,14 +42,14 @@ class Cart extends React.Component<CartProps, CartState> {
     const preTax = (this.props.cartItems.reduce((a: any, c: any) => a + (c.price * c.count), 0));
 
     return (
-      <Container component="main" maxWidth="lg">
+      <Container component="main" maxWidth="lg" >
         <Link to="/" style={{textDecoration:'none', color:'black'}}>
           <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
-        <Container component="main" maxWidth="md">
+        <Container component="main" maxWidth="md" style={{minHeight: '65vh'}}>
         {/* Check to see if the cart is empty or contains items */}
-          {this.props.cartItems.length === 0 ? <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>Your cart is empty.</div> : <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>You have {this.props.cartItems.length} items in your cart.</div>}
+          {this.props.cartItems.length === 0 ? <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>Your cart is empty.</div> : <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>You have {this.props.cartItems.length} item(s) in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none', borderTop:'1px solid #cccccc', marginTop:'20px'}} variant="outlined">
             {this.props.cartItems.map((item: any) => (
