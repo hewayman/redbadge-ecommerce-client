@@ -44,7 +44,7 @@ class Cart extends React.Component<CartProps, CartState> {
     return (
       <Container component="main" maxWidth="lg" >
         <Link to="/" style={{textDecoration:'none', color:'black'}}>
-          <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+          <ArrowBackIosIcon className="backArrow"/> 
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
         <Container component="main" maxWidth="md" style={{minHeight: '65vh'}}>

@@ -197,7 +197,7 @@ class App extends React.Component <{}, AppState> {
   render() {  
     
     return (
-      <div> 
+      <div className="wrapper"> 
         {/* {console.log("App token " + this.state.rating)} */}
         <Router>
           <GuardProvider guards={[this.requireLogin]} error={ NotFound }>
@@ -217,7 +217,7 @@ class App extends React.Component <{}, AppState> {
               <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
               <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
-              <Route component={ NotFound} />
+              <Route component={ NotFound } />
             </Switch>
             <Footer />
           </GuardProvider>

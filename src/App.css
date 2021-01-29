@@ -1,3 +1,30 @@
+/* html, body {
+  /* display: flex; */
+  /* direction: column; */
+  /* width: 100%; */
+  /* height: 100%;
+  margin: 0;
+} */
+
+/* body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.spacer { 
+  flex-grow: 1;
+}  */
+
+footer {
+  background-color: #333333;
+  color: white;
+  height: 200px;
+  padding-top: 50px;
+  margin-top:calc(5% + 40px);
+  bottom: 0;
+}
+
 /* Register Component */
 
 .paper {
@@ -21,47 +48,246 @@
   margin-bottom: 15px;
 }
 
-/* .storeName {
-  color: blue;
-  /* font-size: 200px; */
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .storeName {
-    /* font-size: 1px; */
-    color:red;
+  /* NAVBAR */
+  .navbar {
+    height: 130px;
+  }
+
+  .navbarToolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .storeNameMollie {
+    font-size: 0.9em;
+    font-weight: 200;
+    display: inline-block;
+  }
+
+  .storeNameBirch {
+    font-size: 1em;
+    font-weight: 200;
+    display: inline-block;
+  }
+
+  .search {
+    position: absolute;
+    top: 70px;
+    width: 98%;
+    padding: 0 0 0 0.6em;
+    /* border-radius: 4px; */
+    border: 1px solid grey;
+    font-family: Montserrat;
+    font-size: 0.6em;
+    background-color: white;
+  }
+
+  .searchButton {
+    float: right;
+  }
+
+  .welcomeText {
+    display: none;
+  }
+
+  .adminButton {
+    margin-left: 0;
+    margin-top: 4px;
+    padding: 9px 12px;
+  }
+
+  /* FOOTER */
+  .footerStoreName {
+    display: block;
+    padding-right: 0px;
+  }
+
+  .footerMollie {
+    font-size: 1.5em;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .footerBirch {
+    font-size: 1.6em;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .footerContact {
+    padding-bottom: 15px;
+  }
+
+  /* SITE NAVIGATION */
+  .backArrow {
+    margin-top: 150px;
+    margin-right: -7px;
+  }
+
+  /* HOME PAGE */
+  .homeContainer {
+    margin-top: 10em; 
+  }
+
+  /* ITEM DETAIL VIEW */
+  .listingCard { 
+    margin-top: 2em;
+  } 
+
+  .listingImg {
+    /* height: 600;  */
+    width: 100%; 
+    padding-top: 100%;
+  }
+
+  .listingDetails {
+    display: block;
+    clear: both;
+  }
+
+  #itemName {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    font-weight: 900;
+    text-transform: capitalize;
+  }
+
+  .listingDesc {
+    color: rgba(0, 0, 0, 0.70);
+    font-weight: 200;
+    font-size: 0.9em;
+    margin-top: 0;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  /* NAVBAR */
   .storeName {
-    font-size: 20px;
+    margin-right: 16px;
+  }
+
+  .storeNameMollie {
+    font-size: 1.5em;
+    display: inline-block;
     font-weight: 200;
+  }
+
+  .storeNameBirch {
+    font-size: 1.6em;
+    display: inline-block;
+    font-weight: 200;
+  }
+
+  .search {
+    position: relative;
+    margin-left: auto;
+    margin-right: 1.5em;
+    padding: 0 0 0 0.6em;
+    /* border-radius: 4px; */
+    border: 1px solid grey;
+    font-family: Montserrat;
+    background-color: white;
+  }
+
+  .adminButton {
+    margin-left: 5px;
+    margin-top: 4px;
+    padding: 9px 12px;
+  }
+
+  /* FOOTER */
+  .footerStoreName {
+    display: inline-block;
+    padding-right: 150px;
+  }
+
+  .footerMollie {
+    font-size: 2.2em;
+    display: inline;
+  }
+
+  .footerBirch {
+    font-size: 2.3em;
+    display: inline;
+  }
+
+  .footerContact {
+    padding: 5px 0 15px 0;
+  }
+
+  .footerRights {
+    padding: 0;
+  }
+
+  /* SITE NAVIGATION */
+  .backArrow {
+    margin-top: 140px;
+    margin-right: -7px;
+  }
+
+  /* HOME PAGE */
+  .homeContainer {
+    margin-top: 9em; 
+    margin-bottom: 4em;
+  }
+
+  /* ITEM DETAIL VIEW */
+  .listingCard {
+    display: flex;
+    direction: column;
+    margin-top: 2em;
+  }
+
+  .listingImg {
+    height: 200; 
+    width: 60%; 
+    padding-top: 35%;
+  }
+
+  .listingDetails {
+    width: 40%; 
+    padding-left: 1em;
+  }
+
+  #itemName {
+    font-size: 1.6em;
+    margin-bottom: 5px;
+    font-weight: 900;
+    text-transform: capitalize;
+  }
+
+  .listingDesc {
+    color: rgba(0, 0, 0, 0.70);
+    font-weight: 200;
+    font-size: 1em;
+    margin-top: 0;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .storeName {
     font-size: 1.8em;
     font-weight: 200;
-  }
+  } */
 
-}
+/* } */
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
   .storeNameMollie {
     font-size: 1.5em;
   }
   .storeNameBirch {
     font-size: 1.5em;
   }
-}
+} */
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {} 
+/* @media only screen and (min-width: 1200px) {}  */
   /* 
   //   submit: {
   //     margin: theme.spacing(3, 0, 2),

@@ -49,18 +49,15 @@ type ItemState = {
 
 const styles = (theme: any) => createStyles({
   root: {
-    display: 'flex',
+    // display: 'flex',
     // display: 'inline-block'
   },
   details: {
-    display: 'flex',
-    flexDirection: 'column',
+    // display: 'flex',
+    // flexDirection: 'column',
   },
   content: {
     flex: '1 0 auto',
-  },
-  cover: {
-    // width: 151,
   },
 })
 
@@ -191,37 +188,37 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       <div>
         <Container component="main" maxWidth="lg">
           <Link to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <ArrowBackIosIcon className="backArrow" /> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
         
-          <Card className={classes.root} style={{ marginTop:'2em', borderRadius:'0px', border:'none'}} variant="outlined">
+          <Card className="listingCard" style={{borderRadius:'0px', border:'none'}} variant="outlined">
             {this.state.imgURL ? 
               <CardMedia
-                className={classes.cover}
+                className="listingImg"
                 image={require(`../../assets/${this.state.imgURL}.jpg`).default}
                 title="Listing img"
-                style={{height: 200, width: '60%', paddingTop: '35%'}}
+                // style={{height: 200, width: '60%', paddingTop: '35%'}}
               />
             : null}
-            <div className={classes.details} style={{width:'40%', paddingLeft:'1em'}}>
+            <div className="listingDetails">
               <CardContent className={classes.content} >
-                <Typography component="h5" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:'bold',  textTransform:'capitalize' }}>
+                <h2 id="itemName" style={{ fontFamily:'Montserrat'}}>
                   {this.state.itemName}
-                </Typography>
+                </h2>
                 <Rating name="size-medium" value={this.state.avgRating} precision={0.5} readOnly /> 
-                <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily:'Open Sans', textTransform:'capitalize' }}>
+                <h3 className="listingDesc" style={{ fontFamily:'Open Sans', textTransform:'capitalize' }}>
                   ${this.state.price.toLocaleString()}
                   <br/>
-                  {this.state.color}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" style={{ fontFamily:'Open Sans' }}>
+                  Color: {this.state.color}
+                </h3>
+                <p className="listingDesc" style={{ fontFamily:'Open Sans' }}>
                   <br/>
                   {this.state.description}
                   <br/>
                   <br/>
                   Item: {this.state.itemNum}
-                </Typography>
+                </p>
                 <Button variant="contained" color="secondary" style={{width:'98%', marginTop:'3em', fontFamily:'Open Sans'}} onClick={() => this.props.addToCart(this.props.storeItemObj)}>
                   Add to Cart
                 </Button>

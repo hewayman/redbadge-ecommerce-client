@@ -66,7 +66,7 @@ class Admin extends React.Component <AdminProps> {
       <div >
         <Container component="main" maxWidth="lg" >
           <Link to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <ArrowBackIosIcon className="backArrow" /> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <Container maxWidth="md" style={{minHeight:'65vh', marginBottom:'80px'}}>

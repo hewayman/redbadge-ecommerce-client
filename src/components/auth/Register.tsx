@@ -7,13 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import '../../App.css';
-// import Login from './Login';
 
 // function Copyright() {
 //   return (
@@ -99,7 +95,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       <div>
         <Container component="main" maxWidth="lg">
           <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <ArrowBackIosIcon className="backArrow"/> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>

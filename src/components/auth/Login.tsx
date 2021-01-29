@@ -7,24 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-// import Register from './Register';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//       MollieBirch
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 type LoginProps = {
   updateToken: any;
@@ -91,7 +76,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       <div>
         <Container component="main" maxWidth="lg">
           <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <ArrowBackIosIcon className="backArrow"/> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </LinkTo>
         </Container>
@@ -130,10 +115,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 autoComplete="current-password"
                 onChange = {this.setPassword.bind(this)}
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               <Button
                 type="submit"
                 fullWidth
@@ -145,11 +126,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 Sign In
               </Button>
               <Grid container justify="flex-end">
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
                 <Grid item>
                   <Link href="/user/register" variant="body2" style={{ fontFamily:'Open Sans' }}>
                     {"Don't have an account? Sign Up"}
@@ -158,9 +134,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               </Grid>
             </form>
           </div>
-          {/* <Box mt={8} >
-            <Copyright />
-          </Box> */}
         </Container>
       </div>
     );

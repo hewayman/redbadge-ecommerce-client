@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-// import * as  styles from './Navbar.css';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container'
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import './../../App.css'
 
 type NavbarProps = {
   clickLogout: any;
@@ -79,17 +79,16 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             Free Shipping Over $100
           </Typography>
         </AppBar> */}
-        <AppBar style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
-        <Container maxWidth="lg">
-          <Toolbar disableGutters={true}>
-            <Typography >
-              <Link to="/" className="storeName" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', marginRight: '16px', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
-                <Typography style={{ fontFamily:'Playfair Display', display:'inline-block', fontSize:'1.5em'}}>Mollie</Typography>
-                <Typography className="storeName" style={{ fontFamily:'Montserrat', display:'inline-block', fontSize:'1.6em'}}>Birch</Typography>
+        <AppBar className="navbar" style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
+        <Container className="navbarContainer" maxWidth="lg">
+          <Toolbar className="navbarToolbar" disableGutters={true}>
+            {/* <Typography > */}
+              <Link to="/" className="storeName" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
+                <h1 className="storeNameMollie" style={{ fontFamily:'Playfair Display'}}>Mollie</h1>
+                <h1 className="storeNameBirch" style={{ fontFamily:'Montserrat'}}>Birch</h1>
               </Link>
-            </Typography>
-            <div className="search" style={{position: 'relative', marginLeft: 'auto', marginRight: '1.5em', 
-              padding: '0 0 0 0.6em', borderRadius: '4px', border: '1px solid grey', fontFamily:'Montserrat', backgroundColor:'white'}}>
+            {/* </Typography> */}
+            <div className="search" >
               <InputBase
                 placeholder="Search"
                 id="searchTerm"
@@ -97,7 +96,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={this.setSearch.bind(this)}
               />
-              <IconButton edge="start" size="small" className="accountIconButton" color="inherit" aria-label="menu" onClick={this.handleSearch}>
+              <IconButton edge="start" size="small" className="searchButton" color="inherit" aria-label="menu" onClick={this.handleSearch}>
                 <SearchIcon />
               </IconButton>
             </div>
@@ -108,29 +107,31 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
               </Typography> :
               null
             } 
-          {/* if the user is an admin, show the admin portal button */}
-            {this.props.adminStatus ? 
-              <IconButton edge="start" className="adminButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px', marginLeft:'5px'}}>
-                <Link to='/admin' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                  <SupervisorAccountOutlinedIcon />
+            <div className="">
+            {/* if the user is an admin, show the admin portal button */}
+              {this.props.adminStatus ? 
+                <IconButton className="adminButton" color="inherit" aria-label="menu" >
+                  <Link to='/admin' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
+                    <SupervisorAccountOutlinedIcon />
+                  </Link>
+                </IconButton> :
+                null
+              }
+            {/* display the login, shopping cart, and logout buttons for all users*/}
+              <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px'}}>
+                <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
+                  <AccountCircleOutlinedIcon />
                 </Link>
-              </IconButton> :
-              null
-            }
-          {/* display the login, shopping cart, and logout buttons for all users*/}
-            <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px'}}>
-              <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                <AccountCircleOutlinedIcon />
-              </Link>
-            </IconButton>
-            <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'5px'}}>
-              <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                <ShoppingCartOutlinedIcon />
-              </Link>
-            </IconButton>
-            <IconButton onClick={this.props.clickLogout} edge="start" className="lockIconButton" color="inherit" aria-label="menu">
-                <LockOutlinedIcon />
-            </IconButton>
+              </IconButton>
+              <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'5px'}}>
+                <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
+                  <ShoppingCartOutlinedIcon />
+                </Link>
+              </IconButton>
+              <IconButton onClick={this.props.clickLogout} edge="start" className="lockIconButton" color="inherit" aria-label="menu">
+                  <LockOutlinedIcon />
+              </IconButton>
+            </div>
           </Toolbar>
           </Container>
         </AppBar>
