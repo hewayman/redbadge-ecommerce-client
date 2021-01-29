@@ -110,10 +110,9 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
                 margin="normal"
                 required
                 fullWidth
-                id="itemName"
+                id="itemNameField"
                 label="Name"
                 name="itemName"
-                autoFocus
                 style={{ fontFamily:'Open Sans' }}
                 onChange = {this.setName.bind(this)}
               />

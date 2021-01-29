@@ -7,11 +7,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import LockIcon from '@material-ui/icons/Lock';
 
 type NavbarProps = {
   clickLogout: any;
@@ -106,7 +106,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
               {this.props.adminStatus ? 
                 <IconButton className="adminButton" color="inherit" aria-label="menu" >
                   <Link to='/admin' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                    <SupervisorAccountOutlinedIcon />
+                    <SupervisorAccountIcon />
                   </Link>
                 </IconButton> :
                 null
@@ -114,16 +114,16 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             {/* display the login, shopping cart, and logout buttons for all users*/}
               <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px'}}>
                 <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                  <AccountCircleOutlinedIcon />
+                  <AccountCircleIcon />
                 </Link>
               </IconButton>
               <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'5px'}}>
-                <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                  <ShoppingCartOutlinedIcon />
+                <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.9)'}} >
+                  <ShoppingCartIcon />
                 </Link>
               </IconButton>
               <IconButton onClick={this.props.clickLogout} edge="start" className="lockIconButton" color="inherit" aria-label="menu">
-                  <LockOutlinedIcon />
+                  <LockIcon style={{color: 'rgba(0, 0, 0, 0.87)'}}/>
               </IconButton>
             </div>
           </Toolbar>

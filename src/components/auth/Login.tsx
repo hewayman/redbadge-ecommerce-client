@@ -1,15 +1,15 @@
 import React from 'react';
 import { Redirect, Link as LinkTo } from 'react-router-dom';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 type LoginProps = {
   updateToken: any;
@@ -68,12 +68,13 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     if (this.props.token) {
       return (<Redirect to="/" />)
     } 
+    // if there was an error logging in, reset the errorStatus to false
     if (this.state.errorStatus) {
-      // window.alert('Unable to login. Please check email and password and try again.')
       this.setState({errorStatus: false})
     }
     return (
       <div>
+        {/* container for the back arrow */}
         <Container component="main" maxWidth="lg">
           <LinkTo to="/" style={{textDecoration:'none', color:'black'}}>
             <ArrowBackIosIcon className="backArrow"/> 
@@ -81,6 +82,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
           </LinkTo>
         </Container>
         
+        {/* container for the login form */}
         <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>

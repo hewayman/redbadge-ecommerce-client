@@ -6,11 +6,11 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Typography from '@material-ui/core/Typography';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 type ItemProps = {
   item: any;
@@ -65,7 +65,6 @@ class Item extends React.Component<ItemProps, ItemState> {
   constructor (props: ItemProps) {
     super(props);
       this.state = {
-        // searchNodes: '',
         storeItem: [],
         show: false,
         itemName: '',
@@ -211,10 +210,12 @@ class Item extends React.Component<ItemProps, ItemState> {
               </Link>
               {this.state.showBtn ? 
                 <Button 
+                  className="addCartButton"
                   variant="contained" 
                   color="secondary" 
                   onClick={() => this.props.addToCart(this.props.item)}
-                  style={{position:'absolute', top:'35%', left:'33%', fontFamily:'Open Sans'}}>
+                  style={{position:'absolute', fontFamily:'Open Sans'}}
+                  >
                   Add to Cart
                 </Button>
                 :
@@ -240,7 +241,7 @@ class Item extends React.Component<ItemProps, ItemState> {
                   margin="normal"
                   required
                   fullWidth
-                  id="itemName"
+                  id="itemNameField"
                   label="Item Name"
                   name="itemName"
                   autoFocus
