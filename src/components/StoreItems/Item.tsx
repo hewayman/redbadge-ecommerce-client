@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -15,7 +14,6 @@ import TextField from '@material-ui/core/TextField';
 
 type ItemProps = {
   item: any;
-  key: number;
   classes: any;
   adminStatus: boolean;
   sessionToken: string;
@@ -134,7 +132,7 @@ class Item extends React.Component<ItemProps, ItemState> {
         this.props.fetchStoreItems()
         this.setState({ active: false }) // turn toggle off after editing item
       })
-      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
+      .catch(err => {console.log(err); this.setState({errorStatus: true})})
   }
 
   handleClick = () => {

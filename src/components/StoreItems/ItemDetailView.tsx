@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button'
 import { Link, Redirect } from 'react-router-dom';
@@ -14,8 +13,6 @@ import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import Reviews from './../Reviews/Reviews';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import IconButton from '@material-ui/core/IconButton';
-import Cart from '../Site/Cart';
 
 type ItemProps = {
   sessionToken: any;
@@ -281,11 +278,10 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
             null
             }
             
-            {this.state.reviews.map((revObj: any, i: any) => <Grid item xs={12}>
-              <Reviews revObj={revObj} key={i} calculateTotalRating={this.calculateTotalRating} userId={this.props.userId} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchReviews={this.getItemReviews}/></Grid> )}
+            {this.state.reviews.map((revObj: any, i: any) => <Grid key={i} item xs={12}>
+              <Reviews revObj={revObj}  calculateTotalRating={this.calculateTotalRating} userId={this.props.userId} adminStatus={this.props.adminStatus} sessionToken={this.props.sessionToken} fetchReviews={this.getItemReviews}/></Grid> )}
           </Grid>      
         </Container>
-        {/* <Cart cartItems={this.state.cart} /> */}
       </div>
     );
   }

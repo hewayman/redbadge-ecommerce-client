@@ -69,7 +69,7 @@ class App extends React.Component <{}, AppState> {
       .then(obj => this.setState({ 
         storeItems: obj.listing, 
         filteredItems: obj.listing })) // filters items based on price
-      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
+      .catch(err => {console.log(err); this.setState({errorStatus: true})})
   }
 
   fetchUsers = () => {
@@ -78,7 +78,7 @@ class App extends React.Component <{}, AppState> {
     })
       .then(r => r.json())
       .then(obj => this.setState({ users: obj.user }))
-      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
+      .catch(err => {console.log(err); this.setState({errorStatus: true})})
   }
 
   setToken = (token: string) => {

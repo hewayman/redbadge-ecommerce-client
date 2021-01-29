@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -16,7 +15,6 @@ type CartProps = {
 
 type CartState = {
   tax: number;
-  // taxAmount: number;
   total: number;
 }
 
@@ -52,8 +50,8 @@ class Cart extends React.Component<CartProps, CartState> {
           {this.props.cartItems.length === 0 ? <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>Your cart is empty.</div> : <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>You have {this.props.cartItems.length} item(s) in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none', borderTop:'1px solid #cccccc', marginTop:'20px'}} variant="outlined">
-            {this.props.cartItems.map((item: any) => (
-              <Grid container direction="row" spacing={3} alignItems="center">
+            {this.props.cartItems.map((item: any, i: any) => (
+              <Grid key={i} container direction="row" spacing={3} alignItems="center">
                 <Grid item xs={12} md={3} style={{ marginTop:'40px', paddingBottom:'0' }}>
                   {item.imgURL ? 
                     <CardMedia

@@ -15,7 +15,6 @@ import Typography from '@material-ui/core/Typography'
 type ReviewsProps = {
   classes: any;
   revObj: any;
-  key: number;
   calculateTotalRating: any;
   userId: number;
   adminStatus: boolean;
@@ -114,7 +113,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
         this.props.fetchReviews()
         this.setState({ active: false }) // turn toggle off after editing item
       })
-      .catch(err => {console.log(err); {this.setState({errorStatus: true})}})
+      .catch(err => {console.log(err); this.setState({errorStatus: true})})
   }
 
   toggle = () => {
@@ -139,9 +138,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
           {/* if user created the review or is an admin, show the delete button */}
             {this.props.userId === this.props.revObj.userId || this.props.adminStatus ? 
               <IconButton className="deleteButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} 
-              onClick={e =>
-                      window.confirm("Are you sure you wish to delete this item?") && this.deleteReview()
-              }>
+              onClick={e => window.confirm("Are you sure you wish to delete this item?") && this.deleteReview()}>
                 <DeleteIcon style={{height:'25px', width:'25px'}}/>
               </IconButton> 
               : 

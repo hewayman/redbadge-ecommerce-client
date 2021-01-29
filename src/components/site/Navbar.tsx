@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import './../../App.css'
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container'
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import './../../App.css'
 
 type NavbarProps = {
   clickLogout: any;
@@ -21,7 +21,6 @@ type NavbarProps = {
   fetchStoreItems: any;
   searchItems: any[];
   updateSearch: any;
-  // avgRating: any
 }
 
 type NavbarState = {
@@ -74,11 +73,6 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
   render () {
     return (
       <div>
-        {/* <AppBar style={{ background:'#333333', color:"white", height:'30px', display: "flex", textAlign:'center', justifyContent:'center'}} elevation={0}>
-          <Typography style={{ fontFamily:'Montserrat', fontSize:'0.9em' }}>
-            Free Shipping Over $100
-          </Typography>
-        </AppBar> */}
         <AppBar className="navbar" style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
         <Container className="navbarContainer" maxWidth="lg">
           <Toolbar className="navbarToolbar" disableGutters={true}>
