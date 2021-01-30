@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import APIURL from '../../helpers/environment';
 
 type UserProps = {
   user: any;
@@ -118,7 +119,7 @@ class User extends React.Component<UserProps, UserState> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = 'http://localhost:8080/user/details';
+    const url = `${APIURL}/user/details`;
     const body = {
       firstName: this.state.firstName || this.props.user.firstName,
       lastName: this.state.lastName || this.props.user.lastName,
@@ -150,7 +151,7 @@ class User extends React.Component<UserProps, UserState> {
     }
 
   fetchUsers = () => {
-    fetch(`http://localhost:8080/user/${this.props.user.id}`, {
+    fetch(`${APIURL}/user/${this.props.user.id}`, {
       method: 'GET'
     })
     .then(r => r.json())
@@ -158,7 +159,7 @@ class User extends React.Component<UserProps, UserState> {
   }
 
   deleteUser = () => {
-    fetch(`http://localhost:8080/user/${this.props.user.id}`, {
+    fetch(`${APIURL}/user/${this.props.user.id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',

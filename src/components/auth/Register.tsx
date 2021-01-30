@@ -10,19 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center" style={{ fontFamily:'Open Sans' }}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Store Name
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+import APIURL from '../../helpers/environment';
 
 type RegisterProps = {
   updateToken: any;
@@ -65,7 +53,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
   
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = 'http://localhost:8080/user/register';
+    const url = `${APIURL}user/register`;
     const body = {
       email: this.state.email,
       password: this.state.password,
@@ -101,7 +89,6 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
         </Container>
       
         <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
-          {/* <Login updateToken={this.props.updateToken} /> */}
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
             <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
@@ -180,16 +167,12 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
               <Grid container justify="flex-end">
                 <Grid item>
                   <Link href="/user/login" variant="body2" style={{ fontFamily:'Open Sans' }}>
-                  {/* <Login updateToken={this.props.updateToken} email={this.email} password={this.password}/> */}
                     Already have an account? Sign in
                   </Link>
                 </Grid>
               </Grid>
             </form>
           </div>
-          {/* <Box mt={5} >
-            <Copyright />
-          </Box> */}
         </Container>
       </div>
     );

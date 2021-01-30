@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import Reviews from './../Reviews/Reviews';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import APIURL from '../../helpers/environment';
 
 type ItemProps = {
   sessionToken: any;
@@ -41,18 +42,9 @@ type ItemState = {
   rating: number;
   review: string;
   date: string;
-  // cart: any[];
 }
 
 const styles = (theme: any) => createStyles({
-  root: {
-    // display: 'flex',
-    // display: 'inline-block'
-  },
-  details: {
-    // display: 'flex',
-    // flexDirection: 'column',
-  },
   content: {
     flex: '1 0 auto',
   },
@@ -78,9 +70,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
       rating: 0,
       review: '',
       date: '',
-      // cart: []
     } 
-    // this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   setRating = (e: any) => {
@@ -96,7 +86,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
   }
 
   getItemDetails = () => {
-    fetch(`http://localhost:8080/listing/${this.props.storeItemId}`, {
+    fetch(`${APIURL}/listing/${this.props.storeItemId}`, {
       method: 'GET'
     }).then(r => r.json())
       .then(obj => {
@@ -113,7 +103,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
   }
 
   getItemReviews = () => {
-    fetch(`http://localhost:8080/review/item/${this.props.storeItemId}`, {
+    fetch(`${APIURL}/review/item/${this.props.storeItemId}`, {
       method: 'GET'
     }).then(r => r.json())
       .then(obj => {
@@ -128,7 +118,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = 'http://localhost:8080/review/create';
+    const url = `${APIURL}/review/create`;
     const body = {
       rating: this.state.rating,
       review: this.state.review,

@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import APIURL from '../../helpers/environment';
 
 type CreateProps = {
   sessionToken: string;
@@ -62,7 +63,7 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = 'http://localhost:8080/listing/create';
+    const url = `${APIURL}/listing/create`;
     const body = {
       itemName: this.state.itemName,
       color: this.state.color,

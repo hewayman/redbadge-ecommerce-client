@@ -10,6 +10,7 @@ import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import APIURL from '../../helpers/environment';
 
 type LoginProps = {
   updateToken: any;
@@ -45,7 +46,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = 'http://localhost:8080/user/login/';
+    const url = `${APIURL}/user/login`
     const body = {
       email: this.state.email,
       password: this.state.password

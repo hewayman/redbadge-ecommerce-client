@@ -11,6 +11,7 @@ import Rating from '@material-ui/lab/Rating';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography'
+import APIURL from '../../helpers/environment';
 
 type ReviewsProps = {
   classes: any;
@@ -70,7 +71,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
   }
 
   fetchUsers = () => {
-    fetch(`http://localhost:8080/user/${this.props.revObj.userId}`, {
+    fetch(`${APIURL}/user/${this.props.revObj.userId}`, {
       method: 'GET'
     })
       .then(r => r.json())
@@ -78,7 +79,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
   }
 
   deleteReview = () => {
-    fetch(`http://localhost:8080/review/${this.props.revObj.id}`, {
+    fetch(`${APIURL}/review/${this.props.revObj.id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
   // edit review
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = `http://localhost:8080/review/${this.props.revObj.id}`;
+    const url = `${APIURL}/review/${this.props.revObj.id}`;
     const body = {
       rating: this.state.rating || this.props.revObj.rating,
       review: this.state.review || this.props.revObj.review,

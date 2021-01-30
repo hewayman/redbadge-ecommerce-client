@@ -1,11 +1,12 @@
 import React from 'react';
 import NotFound from '../Site/NotFound';
+import APIURL from '../../helpers/environment';
 
 class AdminCreate extends React.Component {
 
   // automatically creates a super admin account based on the email/password in the .env file
   createAdmin = () => {
-    const url = 'http://localhost:8080/user/admin';
+    const url = `${APIURL}/user/admin`;
     fetch(url, {
       method: 'POST',
       headers: {

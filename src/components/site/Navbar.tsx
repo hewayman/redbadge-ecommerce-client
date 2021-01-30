@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LockIcon from '@material-ui/icons/Lock';
+import APIURL from '../../helpers/environment';
 
 type NavbarProps = {
   clickLogout: any;
@@ -37,7 +38,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
 
   // automatically creates admin account when the '/user/admin' endpoint is reached
   createAdmin = () => {
-    const url = 'http://localhost:8080/user/admin';
+    const url = `${APIURL}/user/admin`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -52,7 +53,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
   }
 
   handleSearch = () => {
-    fetch(`http://localhost:8080/listing/name/${this.state.searchTerm}`, {
+    fetch(`${APIURL}/listing/name/${this.state.searchTerm}`, {
       method: 'GET'
     })
     .then(r => r.json())

@@ -34,33 +34,6 @@ const styles = (theme: any) => createStyles({
 
 class Admin extends React.Component <AdminProps> {
 
-  // createAdmin = () => {
-  //   const url = 'http://localhost:8080/user/admin';
-  //   // const body = {
-  //     // email: this.state.email,
-  //     // password: this.state.password,
-  //     // isAdmin: this.state.isAdmin
-  //   // }
-  
-  //   fetch(url, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       // 'Authorization': this.props.sessionToken
-  //     },
-  //     // body: JSON.stringify(body)
-  //   })
-  //     .then(r => r.json())
-  //     .then(rObj => {
-  //       // this.props.sessionToken(rObj.sessionToken)
-  //       console.log(rObj)
-  //     })
-  // }
-
-  // componentDidMount() {
-  //   this.createAdmin()
-  // }
-
   render() {
     const { classes } = this.props;
     return (

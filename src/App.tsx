@@ -14,6 +14,7 @@ import UserList from './components/Users/UserList';
 import Cart from './components/Site/Cart';
 import AdminCreate from './components/Users/AdminCreate';
 import NotFound from './components/Site/NotFound';
+import APIURL from './helpers/environment';
  
 type AppState = {
   token: string;
@@ -62,7 +63,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   fetchStoreItems = () => {
-    fetch('http://localhost:8080/listing/', {
+    fetch(`${APIURL}/listing/`, {
       method: 'GET'
     })
       .then(r => r.json())
@@ -73,7 +74,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   fetchUsers = () => {
-    fetch('http://localhost:8080/user/all/', {
+    fetch(`${APIURL}/user/all/`, {
       method: 'GET'
     })
       .then(r => r.json())

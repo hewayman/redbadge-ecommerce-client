@@ -11,6 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import APIURL from '../../helpers/environment';
 
 type ItemProps = {
   item: any;
@@ -107,7 +108,7 @@ class Item extends React.Component<ItemProps, ItemState> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = `http://localhost:8080/listing/${this.props.item.id}`;
+    const url = `${APIURL}/listing/${this.props.item.id}`;
     const body = {
       itemName: this.state.itemName || this.props.item.itemName,
       color: this.state.color || this.props.item.color,
@@ -148,7 +149,7 @@ class Item extends React.Component<ItemProps, ItemState> {
   }
 
   deleteListing = () => {
-    fetch(`http://localhost:8080/listing/${this.props.item.id}`, {
+    fetch(`${APIURL}/listing/${this.props.item.id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
