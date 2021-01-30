@@ -96,7 +96,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             </div>
           {/* if the user is logged in, display a welcome message with the user's name */}
             {this.props.userFirstName ?
-              <Typography className="welcomeText" style={{ fontFamily:'Montserrat', fontWeight:'bold' }}>
+              <Typography className="welcomeText" style={{ fontFamily:'Montserrat', fontWeight:'bold', paddingRight:'8px' }}>
                 Welcome, {this.props.userFirstName}!
               </Typography> :
               null

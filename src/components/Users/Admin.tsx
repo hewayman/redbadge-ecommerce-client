@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
 
 type AdminProps = {
   sessionToken: string;
@@ -78,7 +79,13 @@ class Admin extends React.Component <AdminProps> {
                   <Link to={`/listing/create`} style={{textDecoration:"none"}} >
                     <CardActionArea> 
                       <CardContent>
-                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                      <CardMedia
+                        className="media"
+                        image={require(`./../../assets/listing.svg`).default}
+                        title="listingImg"
+                        style={{height: 200, paddingTop: '70.25%'}}
+                      />
+                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px'  }}>
                         {"Create Listing"}
                       </Typography>
                       </CardContent>
@@ -91,7 +98,13 @@ class Admin extends React.Component <AdminProps> {
                   <Link to={`/user/all`} style={{textDecoration:"none"}} >
                     <CardActionArea> 
                       <CardContent>
-                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                      <CardMedia
+                        className="media"
+                        image={require(`./../../assets/peopleSearch.svg`).default}
+                        title="furniture"
+                        style={{height: 200, paddingTop: '70.25%'}}
+                      />
+                      <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px' }}>
                         {"View All Customers"}
                       </Typography>
                       </CardContent>
