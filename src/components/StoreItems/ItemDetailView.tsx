@@ -183,7 +183,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
             {this.state.imgURL ? 
               <CardMedia
                 className="listingImg"
-                image={require(`../../assets/${this.state.imgURL}.jpg`).default}
+                image={`/assets/${this.state.imgURL}.jpg`}
                 title="Listing img"
                 // style={{height: 200, width: '60%', paddingTop: '35%'}}
               />
