@@ -5,7 +5,7 @@ switch (window.location.hostname) {
         APIURL = 'http://localhost:8080';
         break;
     case 'hw-ecommerce-store.herokuapp.com':
-        APIURL = 'https://hw-ecommerce-store.herokuapp.com'
+        APIURL = 'https://hw-ecommerce-server.herokuapp.com'
 }
 
 export default APIURL;
