@@ -200,13 +200,14 @@ class Item extends React.Component<ItemProps, ItemState> {
             <>
               <Link to={`/listing/${this.props.item.id}`} style={{textDecoration:'none', color:'black'}}>
               <CardActionArea>            
-                <CardMedia
+                {/* <CardMedia
                   className="media"
-                  image={require(`../../assets/${this.props.item.imgURL}.jpg`).default}
+                  image={require(`${this.props.item.imgURL}`).default}
                   title="furniture"
                   style={{height: 200, paddingTop: '56.25%'}}
                   onClick={this.handleClick}
-                />
+                /> */}
+                <img src={require(`${this.props.item.imgURL}`).default}></img>
                 </CardActionArea>
               </Link>
               {this.state.showBtn ? 
