@@ -52,12 +52,12 @@ class Admin extends React.Component <AdminProps> {
                   <Link to={`/listing/create`} style={{textDecoration:"none"}} >
                     <CardActionArea> 
                       <CardContent>
-                      {/* <CardMedia
+                      <CardMedia
                         className="media"
-                        image={require(`./../../assets/listing.svg`).default}
+                        image={`/assets/listing.svg`}
                         title="listingImg"
                         style={{height: 200, paddingTop: '70.25%'}}
-                      /> */}
+                      />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px'  }}>
                         {"Create Listing"}
                       </Typography>
@@ -71,12 +71,12 @@ class Admin extends React.Component <AdminProps> {
                   <Link to={`/user/all`} style={{textDecoration:"none"}} >
                     <CardActionArea> 
                       <CardContent>
-                      {/* <CardMedia
+                      <CardMedia
                         className="media"
-                        image={require(`./../../assets/peopleSearch.svg`).default}
+                        image={`/assets/peopleSearch.svg`}
                         title="furniture"
                         style={{height: 200, paddingTop: '70.25%'}}
-                      /> */}
+                      />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px' }}>
                         {"View All Customers"}
                       </Typography>
