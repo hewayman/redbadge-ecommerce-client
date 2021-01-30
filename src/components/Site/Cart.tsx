@@ -55,7 +55,7 @@ class Cart extends React.Component<CartProps, CartState> {
                 <Grid item xs={12} md={3} style={{ marginTop:'40px', paddingBottom:'0' }}>
                   {item.imgURL ? 
                     <CardMedia
-                      image={require(`../../assets/${item.imgURL}.jpg`).default}
+                      image={`/assets/${item.imgURL}.jpg`}
                       title="Listing img"
                       style={{height: 5, width: '60%', paddingTop: '35%'}}
                     />
