@@ -207,7 +207,7 @@ class Item extends React.Component<ItemProps, ItemState> {
                   style={{height: 200, paddingTop: '56.25%'}}
                   onClick={this.handleClick}
                 /> */}
-                <img src={require(`${this.props.item.imgURL}`).default}></img>
+                <img src={require(`../../assets/${this.props.item.imgURL}.jpg`).default}></img>
                 </CardActionArea>
               </Link>
               {this.state.showBtn ? 
