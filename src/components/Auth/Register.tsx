@@ -53,7 +53,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
   
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const url = `${APIURL}user/register`;
+    const url = `${APIURL}/user/register`;
     const body = {
       email: this.state.email,
       password: this.state.password,
