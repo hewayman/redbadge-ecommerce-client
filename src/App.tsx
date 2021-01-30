@@ -64,7 +64,8 @@ class App extends React.Component <{}, AppState> {
 
   fetchStoreItems = () => {
     fetch(`${APIURL}/listing/`, {
-      method: 'GET'
+      method: 'GET',
+      
     })
       .then(r => r.json())
       .then(obj => this.setState({ 
@@ -209,7 +210,7 @@ class App extends React.Component <{}, AppState> {
             {this.state.errorStatus ? (<Redirect to="/" />) : null}
             <Switch>
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
-              <Route path='/user/register'><Register updateToken={this.updateToken} token={this.state.token}/></Route>
+              <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
               <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
