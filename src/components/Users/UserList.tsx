@@ -32,7 +32,7 @@ export default class UserList extends React.Component<UserProps> {
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <div className="paper" style={{marginTop:'30px'}}>
-            <Avatar className="avatar" style={{backgroundColor:'#f50057', display:'inline'}}>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <CreateIcon />
             </Avatar>
             <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
