@@ -32,7 +32,7 @@ export default class UserList extends React.Component<UserProps> {
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <div className="paper" style={{marginTop:'30px'}}>
-            <div style={{display:'inline-block'}}>
+            <div style={{display:'inline'}}>
               <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
                 <CreateIcon />
               </Avatar>
