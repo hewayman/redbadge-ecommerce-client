@@ -47,7 +47,7 @@ class Admin extends React.Component <AdminProps> {
             {console.log("Admin loaded")}
             <h2 style={{ fontFamily:'Open Sans', fontWeight:500 }}>Admin Portal</h2>
             <Grid container spacing={2} alignItems="center">
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Card className={classes.root} >   
                   <Link to={`/listing/create`} style={{textDecoration:"none"}} >
                     <CardActionArea> 

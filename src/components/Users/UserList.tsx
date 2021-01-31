@@ -38,8 +38,8 @@ export default class UserList extends React.Component<UserProps> {
             <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900 }}>
               View/Edit Customers
             </Typography>
-            <Grid container spacing={2} xs={12} sm={6} md={4} alignItems="center" style={{ paddingTop:'2em' }}>
-                {this.props.users.map((userObj: any, i: any) => <Grid item xs={4}>
+            <Grid container spacing={2} alignItems="center" style={{ paddingTop:'2em' }}>
+                {this.props.users.map((userObj: any, i: any) => <Grid container item xs={12} sm={6} md={4}>
                   <User user={userObj} key={i}users={this.props.users} fetchUsers={this.props.fetchUsers} sessionToken={this.props.token}/>
                   </Grid> )}
             </Grid>   
