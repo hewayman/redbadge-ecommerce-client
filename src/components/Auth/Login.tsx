@@ -90,7 +90,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
             </Avatar> */}
-            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900, fontSize:'1.2em' }}>
               Sign in
             </Typography>
             <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Montserrat' }} noValidate>

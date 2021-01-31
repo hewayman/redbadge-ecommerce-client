@@ -176,9 +176,9 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
-                className="submitRegister"
+                className="createListingButton"
               >
                 Create Listing
               </Button>

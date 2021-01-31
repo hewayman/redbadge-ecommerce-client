@@ -94,7 +94,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
             {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
             </Avatar> */}
-            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900, fontSize:'1.2em' }}>
               Register
             </Typography>
             <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Montserrat' }} noValidate>
