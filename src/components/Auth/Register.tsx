@@ -91,13 +91,13 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
         <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
-            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+            {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
-            </Avatar>
+            </Avatar> */}
             <Typography component="h1" variant="h5">
               Register
             </Typography>
-            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Open Sans' }} noValidate>
+            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Montserrat' }} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -109,7 +109,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     id="firstName"
                     label="First Name"
                     autoFocus
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     onChange = {this.setFirstName.bind(this)}
                   />
                 </Grid>
@@ -122,7 +122,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     label="Last Name"
                     name="lastName"
                     autoComplete="lname"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     onChange = {this.setLastName.bind(this)}
                   />
                 </Grid>
@@ -135,7 +135,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     onChange = {this.setEmail.bind(this)}
                   />
                 </Grid>
@@ -149,7 +149,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     onChange = {this.setPassword.bind(this)}
                   />
                 </Grid>
@@ -158,7 +158,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 style={{marginTop:"1.1em", marginBottom:'0.8em', fontFamily:'Open Sans' }}
                 className="submitRegister"
               >
@@ -166,7 +166,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/user/login" variant="body2" style={{ fontFamily:'Open Sans' }}>
+                  <Link href="/user/login" variant="body2" style={{ fontFamily:'Montserrat' }}>
                     Already have an account? Sign in
                   </Link>
                 </Grid>

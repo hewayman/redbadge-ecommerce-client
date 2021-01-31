@@ -87,13 +87,13 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
-            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+            {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5" style={{ fontFamily:'Open Sans' }}>
+            </Avatar> */}
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat' }}>
               Sign in
             </Typography>
-            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Open Sans' }} noValidate>
+            <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Montserrat' }} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -104,6 +104,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                style={{ fontFamily:'Montserrat' }}
                 onChange = {this.setEmail.bind(this)}
               />
               <TextField
@@ -115,6 +116,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 label="Password"
                 type="password"
                 id="password"
+                style={{ fontFamily:'Montserrat' }}
                 autoComplete="current-password"
                 onChange = {this.setPassword.bind(this)}
               />
@@ -122,7 +124,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 style={{marginTop:"1em", marginBottom:'0.8em', fontFamily:'Open Sans' }}
                 className="submitRegister"
               >
@@ -130,7 +132,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/user/register" variant="body2" style={{ fontFamily:'Open Sans' }}>
+                  <Link href="/user/register" variant="body2" style={{ fontFamily:'Montserrat' }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
