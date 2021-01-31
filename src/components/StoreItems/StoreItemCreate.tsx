@@ -99,14 +99,12 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
-            <div style={{display:'inline'}}>
-              <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
-                <CreateIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
-                Create Item Listing
-              </Typography>
-            </div>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+              <CreateIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
+              Create Item Listing
+            </Typography>
             <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
               <TextField
                 variant="outlined"
