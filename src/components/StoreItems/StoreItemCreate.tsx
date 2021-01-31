@@ -93,15 +93,15 @@ export default class StoreItemCreate extends React.Component<CreateProps, Create
 
       <Container component="main" maxWidth="lg">
           <Link to="/admin" style={{textDecoration:'none', color:'black'}}>
-            <ArrowBackIosIcon style={{marginTop:'130px', marginRight:'-7px' }}/> 
+            <ArrowBackIosIcon className="backArrow" /> 
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
-            {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <CreateIcon />
-            </Avatar> */}
+            </Avatar>
             <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
               Create Item Listing
             </Typography>
