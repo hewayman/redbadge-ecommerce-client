@@ -47,7 +47,7 @@ class Admin extends React.Component <AdminProps> {
             {console.log("Admin loaded")}
             <h2 style={{ fontFamily:'Open Sans', fontWeight:500 }}>Admin Portal</h2>
             <Grid container spacing={2} alignItems="center">
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={6}>
                 <Card className={classes.root} >   
                   <Link to={`/listing/create`} style={{textDecoration:"none"}} >
                     <CardActionArea> 
@@ -56,7 +56,7 @@ class Admin extends React.Component <AdminProps> {
                         className="media"
                         image={`/assets/listing.svg`}
                         title="listingImg"
-                        style={{height: 200, paddingTop: '70.25%'}}
+                        style={{height: 200, paddingTop: '56.25%'}}
                       />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px'  }}>
                         {"Create Listing"}
@@ -75,7 +75,7 @@ class Admin extends React.Component <AdminProps> {
                         className="media"
                         image={`/assets/peopleSearch.svg`}
                         title="furniture"
-                        style={{height: 200, paddingTop: '70.25%'}}
+                        style={{height: 200, paddingTop: '56.25%'}}
                       />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px' }}>
                         {"View All Customers"}

@@ -90,7 +90,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <LockOutlinedIcon />
             </Avatar> */}
-            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat' }}>
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900 }}>
               Sign in
             </Typography>
             <form onSubmit={this.handleSubmit} className="formRegister" style={{ fontFamily:'Montserrat' }} noValidate>
@@ -132,7 +132,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/user/register" variant="body2" style={{ fontFamily:'Montserrat' }}>
+                  <Link href="/user/register" variant="body2" style={{ fontFamily:'Montserrat', fontWeight: 900, textDecoration:'none' }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

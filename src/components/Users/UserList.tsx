@@ -32,13 +32,13 @@ export default class UserList extends React.Component<UserProps> {
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <div className="paper" style={{marginTop:'30px'}}>
-            <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+            {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
               <CreateIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5" style={{ fontFamily:'Open Sans' }}>
+            </Avatar> */}
+            <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900 }}>
               View/Edit Customers
             </Typography>
-            <Grid container spacing={2} alignItems="center" style={{ paddingTop:'2em' }}>
+            <Grid container spacing={2} xs={12} sm={6} md={4} alignItems="center" style={{ paddingTop:'2em' }}>
                 {this.props.users.map((userObj: any, i: any) => <Grid item xs={4}>
                   <User user={userObj} key={i}users={this.props.users} fetchUsers={this.props.fetchUsers} sessionToken={this.props.token}/>
                   </Grid> )}
