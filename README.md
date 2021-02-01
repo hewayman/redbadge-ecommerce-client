@@ -14,7 +14,7 @@ MollieBirch is a full-stack ecommerce app that enables customers to browse store
 * React
 * TypeScript
 * Material UI
-* [View Server Side Code](https://github.com/hewayman/redbadge-ecommerce-server/ "View Server Side Code")
+* [View Server-Side Code](https://github.com/hewayman/redbadge-ecommerce-server/ "View Server-Side Code")
 
 ## Details
 #### Admin Account Creation:
