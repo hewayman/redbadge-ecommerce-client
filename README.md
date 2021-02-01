@@ -18,13 +18,13 @@ MollieBirch is a full-stack ecommerce app that enables customers to browse store
 
 ## Details
 #### Admin Account Creation:
-This app was designed to have one super admin account who can grant admin privileges to additional user accounts via the admin portal. As long as a super admin account does not already exist, a super admin account is automatically created when any user hits the '/create/admin' endpoint. The login information for the super admin acccount is protected in the .env file.
+This app was designed to have one super admin account who can grant admin privileges to additional user accounts via the admin portal. As long as a super admin account does not already exist, a super admin account is automatically created when any user hits the '/create/admin' endpoint. The login information for the super admin account is protected in the .env file.
 
 #### Protected Routes:
 React-router-guards are used to keep the admin portal, customer list, and store item creation components protected against unauthorized access.
 
 #### 404 Page:
-A 404 page alerts users that the URL does not exist and provides a link back to the home page.
+A 404 page alerts users that the URL does not exist.
 
 <img src="https://i.ibb.co/cLggkvM/404.jpg" alt="404 page" height="200">
 
