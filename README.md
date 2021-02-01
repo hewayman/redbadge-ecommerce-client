@@ -25,16 +25,24 @@ React-router-guards are used to keep the admin portal, customer list, and store 
 
 #### 404 Page:
 A 404 page alerts users that the URL does not exist and provides a link back to the home page.
-![404 Page](https://i.ibb.co/cLggkvM/404.jpg/100x100 "404 Page")
+
+<img src="https://i.ibb.co/cLggkvM/404.jpg" alt="404 page" height="200">
 
 ## Admin Portal
 The admin portal allows admins to post, edit, and delete store item listings, customer information, and customer reviews. The admins can also grant and remove admin privileges to any of the user accounts.
 
+<img src="https://i.ibb.co/60Bj4HX/item-Creation.jpg" alt="listing" height="300">           <img src="https://i.ibb.co/yN8smD0/admin-Portal.jpg" alt="admin portal" height="300">     
+
 ## Customer View
 The customer view gives customers access to post, edit and delete reviews. 
 
+<img src="https://i.ibb.co/sCHvp2f/reviews.jpg" alt="reviews" height="300">
+
 ## Shopping Cart
 Customers can add items to the shopping cart either from the home page or by clicking directly on the item to see the details page. The shopping cart calculates the subtotal, sales tax (currently set to 7%), and the total.
+
+
+<img src="https://i.ibb.co/gZQQrMV/shopping-Cart.jpg" alt="shopping cart" height="300">
 
 ## Future Developments
 In the future, customers will be able to pay via the app. Additionally, there will be a page that customers can access through the shopping cart to update their home addresses and phone numbers.
