@@ -26,7 +26,7 @@ React-router-guards are used to keep the admin portal, customer list, and store 
 #### 404 Page:
 A 404 page alerts users that the URL does not exist.
 
-<img src="https://i.ibb.co/NnRv2j8/404.jpg" alt="404 page" height="200">
+<img src="https://i.ibb.co/NnRv2j8/404.jpg" alt="404 page" height="150">
 
 ## Admin Portal
 The admin portal allows admins to post, edit, and delete store item listings, customer information, and customer reviews. The admins can also grant and remove admin privileges to any of the user accounts.
