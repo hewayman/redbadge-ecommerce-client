@@ -23,7 +23,6 @@ class Cart extends React.Component<CartProps, CartState> {
     super(props);
       this.state = {
         tax: 0.07,
-        // taxAmount: 0,
         total: 0
     }
   }

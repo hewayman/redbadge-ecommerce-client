@@ -1,13 +1,11 @@
 import React from 'react';
 import { Redirect, Link as LinkTo } from 'react-router-dom';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import APIURL from '../../helpers/environment';
@@ -88,9 +86,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         <Container component="main" maxWidth="xs" style={{minHeight:'65vh', marginBottom:'80px'}}>
           <CssBaseline />
           <div className="paper" style={{marginTop:'30px'}}>
-            {/* <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
-              <LockOutlinedIcon />
-            </Avatar> */}
             <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight: 900}}>
               Sign in
             </Typography>

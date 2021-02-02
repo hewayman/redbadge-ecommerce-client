@@ -41,7 +41,6 @@ const styles = (theme: any) => createStyles({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     fontFamily: 'Open Sans'
-    // overflow:'scroll',
   },
 })
 
@@ -99,7 +98,6 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
       review: this.state.review || this.props.revObj.review,
       date: this.state.date || this.props.revObj.date
     }
-  
     fetch(url, {
       method: 'PUT',
       headers: {

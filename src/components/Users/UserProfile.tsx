@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import APIURL from '../../helpers/environment';
-import IconButton from '@material-ui/core/IconButton';
 
 type UserProfileProps = {
   sessionToken: string;
@@ -138,154 +137,139 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
         <div className="paper" style={{marginTop:'30px'}}>
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
+          <Avatar className="avatar" style={{backgroundColor:'#f50057'}} onClick={this.toggle}>
             <CreateIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
+          <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }} onClick={this.toggle}>
             Edit User Profile
           </Typography>
-
-          <IconButton className="createButton" color="inherit" aria-label="menu" style={{backgroundColor:'#f50057', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
-            <CreateIcon style={{height:'25px', width:'25px'}}/>
-          </IconButton>  
 
           {/* display user edit form when create icon has been clicked, otherwise display user info */}
           {this.state.active === false ? 
             null 
             : 
-            (<form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                name={"firstName"}
-                autoFocus
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.firstName}
-                onChange = {this.setFirstName.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="lastName"
-                label="Last Name"
-                id="lastName"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.lastName}
-                onChange = {this.setLastName.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="email"
-                label="Email"
-                id="email"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.email}
-                onChange = {this.setEmail.bind(this)}
-              />
-               <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                id="password"
-                type="password"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.password}
-                onChange = {this.setPassword.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="addressLn1"
-                label="Address Line 1"
-                id="addressLn1"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.addressLn1}
-                onChange = {this.setAddressLn1.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="addressLn2"
-                label="Address Line 2"
-                id="addressLn2"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.addressLn2}
-                onChange = {this.setAddressLn2.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="city"
-                label="City"
-                id="city"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.city}
-                onChange = {this.setCity.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="state"
-                label="State"
-                id="state"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.state}
-                onChange = {this.setStateName.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="zipcode"
-                label="Zip Code"
-                id="zipcode"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.zipcode}
-                onChange = {this.setZipcode.bind(this)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="phone"
-                label="Phone"
-                id="phone"
-                style={{ fontFamily:'Montserrat' }}
-                defaultValue={this.props.user.phone}
-                onChange = {this.setPhone.bind(this)}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
-                className="createListingButton">
-                Submit
-              </Button>
-            </form>
+            (<Container component="main" maxWidth="sm">
+              <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  name={"firstName"}
+                  autoFocus
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.firstName}
+                  onChange = {this.setFirstName.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="lastName"
+                  label="Last Name"
+                  id="lastName"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.lastName}
+                  onChange = {this.setLastName.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="email"
+                  label="Email"
+                  id="email"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.email}
+                  onChange = {this.setEmail.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="addressLn1"
+                  label="Address Line 1"
+                  id="addressLn1"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.addressLn1}
+                  onChange = {this.setAddressLn1.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="addressLn2"
+                  label="Address Line 2"
+                  id="addressLn2"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.addressLn2}
+                  onChange = {this.setAddressLn2.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="city"
+                  label="City"
+                  id="city"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.city}
+                  onChange = {this.setCity.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="state"
+                  label="State"
+                  id="state"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.state}
+                  onChange = {this.setStateName.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="zipcode"
+                  label="Zip Code"
+                  id="zipcode"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.zipcode}
+                  onChange = {this.setZipcode.bind(this)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="phone"
+                  label="Phone"
+                  id="phone"
+                  style={{ fontFamily:'Montserrat' }}
+                  defaultValue={this.props.user.phone}
+                  onChange = {this.setPhone.bind(this)}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  style={{marginTop:"1em", marginBottom:'5em', fontFamily:'Open Sans' }}
+                  className="createListingButton">
+                  Submit
+                </Button>
+              </form>
+            </Container>
           )}
         </div>
       </Container>

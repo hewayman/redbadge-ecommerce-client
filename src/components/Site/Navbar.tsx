@@ -77,12 +77,10 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
         <AppBar className="navbar" style={{ background: 'white', color: "rgba(0, 0, 0, 0.87)", borderBottom: "1.2px solid #cccccc", display: "flex", padding:'0.5em 0 0.5em 0'}} elevation={0} >
         <Container className="navbarContainer" maxWidth="lg">
           <Toolbar className="navbarToolbar" disableGutters={true}>
-            {/* <Typography > */}
               <Link to="/" className="storeName" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)', fontFamily:'Open Sans', fontSize:'24px'}} onClick={this.props.fetchStoreItems}>
                 <h1 className="storeNameMollie" style={{ fontFamily:'Playfair Display'}}>Mollie</h1>
                 <h1 className="storeNameBirch" style={{ fontFamily:'Montserrat'}}>Birch</h1>
               </Link>
-            {/* </Typography> */}
             <div className="search" >
               <InputBase
                 placeholder="Search"

@@ -14,7 +14,7 @@ class NotFound extends React.Component {
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
         <Container component="main" maxWidth="sm" style={{minHeight: '65vh'}}>
-          <h1 style={{fontWeight:200, fontSize:'3em', fontFamily:'Open Sans', marginBottom:0}}>Oops! Page not found.</h1>
+          <h1 style={{fontWeight:200, fontSize:'2em', fontFamily:'Open Sans', marginBottom:0}}>Oops! Page not found.</h1>
           <p>Looks like you've followed a broken link or entered a URL that doesn't exist on this site.</p>
         </Container>
       </Container>

@@ -44,7 +44,6 @@ class Admin extends React.Component <AdminProps> {
             <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
           </Link>
           <Container maxWidth="md" style={{minHeight:'65vh', marginBottom:'80px', alignItems:'center'}} >
-            {console.log("Admin loaded")}
             <Grid container spacing={2} alignItems="center" justify='center'>
               <Grid item xs={12} sm={6} md={4}>
                 <Card className={classes.root} >   

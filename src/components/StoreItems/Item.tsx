@@ -207,7 +207,6 @@ class Item extends React.Component<ItemProps, ItemState> {
                   style={{height: 200, paddingTop: '56.25%'}}
                   onClick={this.handleClick}
                 />
-                {/* <img src={`/assets/${this.props.item.imgURL}.jpg`}></img> */}
                 </CardActionArea>
               </Link>
               {this.state.showBtn ? 
@@ -216,8 +215,7 @@ class Item extends React.Component<ItemProps, ItemState> {
                   variant="contained" 
                   color="secondary" 
                   onClick={() => this.props.addToCart(this.props.item)}
-                  style={{position:'absolute', fontFamily:'Open Sans'}}
-                  >
+                  style={{position:'absolute', fontFamily:'Open Sans'}}>
                   Add to Cart
                 </Button>
                 :
@@ -234,7 +232,6 @@ class Item extends React.Component<ItemProps, ItemState> {
                 </CardContent>
               </Link>
             </>
-            
           :
             <div className="paper" style={{marginTop:'0em'}}>
               <form onSubmit={this.handleSubmit} className="formEditListing" style={{ width: '70%', fontFamily:'Open Sans' }} noValidate>

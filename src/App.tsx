@@ -112,11 +112,6 @@ class App extends React.Component <{}, AppState> {
     this.setState({isAdmin: updateAdmin})
     this.setState({firstName: updateFirstName})
     this.setState({user: updateUser})
-    console.log('Token: ', newToken)
-    console.log("User id: ", updateId)
-    console.log("Admin? :", updateAdmin)
-    console.log("User first name:", updateFirstName)
-    console.log("User Obj:", updateUser)
   }
 
   updateSearch = (storeItem: any[]) => {
@@ -143,8 +138,13 @@ class App extends React.Component <{}, AppState> {
 
   // checks to make sure user has admin privileges before rendering guarded routes
   requireLogin = (to: any, from: any, next: any)  => {
-    if (to.meta.auth) {
+    if (to.meta.admin) {
       if (this.state.isAdmin === true) {
+        next();
+      }
+      next.redirect('/user/login');
+    } else if (to.meta.auth) {
+      if (this.state.token) {
         next();
       }
       next.redirect('/user/login');
@@ -215,7 +215,6 @@ class App extends React.Component <{}, AppState> {
     
     return (
       <div className="wrapper"> 
-        {/* {console.log("App token " + this.state.rating)} */}
         <Router>
           <GuardProvider guards={[this.requireLogin]} error={ NotFound }>
             <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
@@ -227,11 +226,11 @@ class App extends React.Component <{}, AppState> {
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-              <Route path='/user/profile'exact ><UserProfile sessionToken={this.state.token} userId={this.state.userId} user={this.state.user}/></Route>
-              <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
+              <GuardedRoute path='/user/profile'exact meta={{ auth: true }}><UserProfile sessionToken={this.state.token} userId={this.state.userId} user={this.state.user}/></GuardedRoute>
+              <GuardedRoute path='/admin' meta={{ admin: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
-              <GuardedRoute path='/user/all' meta={{ auth: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>
-              <GuardedRoute path='/listing/create' meta={{ auth: true }}><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></GuardedRoute>
+              <GuardedRoute path='/user/all' meta={{ admin: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>
+              <GuardedRoute path='/listing/create' meta={{ admin: true }}><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></GuardedRoute>
               <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
               <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>

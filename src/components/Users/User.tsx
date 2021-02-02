@@ -272,19 +272,6 @@ class User extends React.Component<UserProps, UserState> {
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    id="password"
-                    type="password"
-                    style={{ fontFamily:'Montserrat' }}
-                    defaultValue={this.props.user.password}
-                    onChange = {this.setPassword.bind(this)}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
                     name="addressLn1"
                     label="Address Line 1"
                     id="addressLn1"
