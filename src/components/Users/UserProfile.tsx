@@ -143,37 +143,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
             Edit User Profile
           </Typography>
-
-          <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
-            <CreateIcon style={{height:'25px', width:'25px'}}/>
-          </IconButton>  
-
-          {/* display user edit form when create icon has been clicked, otherwise display user info */}
-            {this.state.active === false ? (
-              // <CardContent> 
-              <div>
-                {/* <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                  {this.props.user.firstName  + ' ' + this.props.user.lastName}
-                </Typography> */}
-                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                  {/* <b>Name: </b> {this.props.user.firstName} {this.props.user.lastName}
-                  <b>Email: </b> {this.props.user.email}
-                  <br/>
-                  <b>Phone: </b>{this.props.user.phone}
-                  <br/>
-                  <b>Address Line 1: </b>{this.props.user.addressLn1}
-                  <br/>
-                  <b>Address Line 2: </b>{this.props.user.addressLn2}
-                  <br/>
-                  <b>City: </b>{this.props.user.city}
-                  <br/>
-                  <b>State: </b>{this.props.user.state}
-                  <br/>
-                  <b>Zip Code: </b>{this.props.user.zipcode} */}
-                </Typography>
-              {/* </CardContent> */}
-              </div>
-              ) : (
             <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
               <TextField
                 variant="outlined"
@@ -211,6 +180,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 style={{ fontFamily:'Montserrat' }}
                 defaultValue={this.props.user.email}
                 onChange = {this.setEmail.bind(this)}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                id="password"
+                type="password"
+                style={{ fontFamily:'Montserrat' }}
+                defaultValue={this.props.user.password}
+                onChange = {this.setPassword.bind(this)}
               />
               <TextField
                 variant="outlined"
@@ -294,7 +276,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 Submit
               </Button>
             </form>
-          )}
         </div>
       </Container>
     );
