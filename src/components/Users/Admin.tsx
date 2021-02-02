@@ -54,7 +54,7 @@ class Admin extends React.Component <AdminProps> {
                         className="media"
                         image={`/assets/listing.svg`}
                         title="listingImg"
-                        style={{height: 200, paddingTop: '56.25%'}}
+                        style={{height: 100, paddingTop: '56.25%'}}
                       />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px'  }}>
                         {"Create Listing"}
@@ -73,7 +73,7 @@ class Admin extends React.Component <AdminProps> {
                         className="media"
                         image={`/assets/person.svg`}
                         title="furniture"
-                        style={{height: 200, paddingTop: '56.25%'}}
+                        style={{height: 100, paddingTop: '56.25%'}}
                       />
                       <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.2em', fontWeight: 900, paddingTop:'20px' }}>
                         {"View All Customers"}

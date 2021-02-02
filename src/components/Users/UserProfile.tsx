@@ -179,7 +179,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
               </Container>
             )
             : 
-            (<Container component="main" maxWidth="sm">
+            (<Container component="main" maxWidth="xs">
               <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
                 <CreateIcon style={{height:'25px', width:'25px'}}/>
               </IconButton> 
