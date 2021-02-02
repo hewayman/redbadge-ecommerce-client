@@ -73,7 +73,7 @@ class Admin extends React.Component <AdminProps> {
                       <CardContent>
                       <CardMedia
                         className="media"
-                        image={`/assets/peopleSearch.svg`}
+                        image={`/assets/people.svg`}
                         title="furniture"
                         style={{height: 200, paddingTop: '56.25%'}}
                       />
