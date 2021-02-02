@@ -124,14 +124,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     })
   }
 
-  fetchUsers = () => {
-    fetch(`${APIURL}/user/${this.props.user.id}`, {
-      method: 'GET'
-    })
-    .then(r => r.json())
-    .then(obj => this.setState({ user: obj.user }))
-  }
-
   toggle = () => {
     const showEdit = this.state.active
     this.setState({active: !showEdit})
@@ -165,22 +157,22 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   </IconButton> 
                   <CardContent style={{paddingLeft: '5px', paddingTop:'5px'}}>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                      {this.state.firstName} {this.state.lastName}
+                      {this.state.firstName ? this.state.firstName : this.props.user.firstName} {this.state.lastName ? this.state.lastName : this.props.user.lastName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                      <b>Email: </b> {this.state.email}
+                      <b>Email: </b> {this.state.email ? this.state.email : this.props.user.email}
                       <br/>
-                      <b>Phone: </b> {this.state.phone}
+                      <b>Phone: </b> {this.state.phone !== 0 ? this.state.phone : this.props.user.phone}
                       <br/>
-                      <b>Address Line 1: </b> {this.state.addressLn1}
+                      <b>Address Line 1: </b> {this.state.addressLn1 ? this.state.addressLn1 : this.props.user.addressLn1}
                       <br/>
-                      <b>Address Line 2: </b> {this.state.addressLn2}
+                      <b>Address Line 2: </b> {this.state.addressLn2 ? this.state.addressLn2 : this.props.user.addressLn2}
                       <br/>
-                      <b>City: </b> {this.state.city}
+                      <b>City: </b> {this.state.city ? this.state.city : this.props.user.city}
                       <br/>
-                      <b>State: </b> {this.state.state}
+                      <b>State: </b> {this.state.state ? this.state.state : this.props.user.state}
                       <br/>
-                      <b>Zip Code: </b> {this.state.zipcode}
+                      <b>Zip Code: </b> {this.state.zipcode !== 0 ? this.state.zipcode : this.props.user.zipcode}
                     </Typography>
                   </CardContent>
                 </Card>
