@@ -214,7 +214,7 @@ class App extends React.Component <{}, AppState> {
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-              <Route path='user/profile'exact ><UserProfile sessionToken={this.state.token} userId={this.state.userId}/></Route>
+              <Route path='/user/profile'exact ><UserProfile sessionToken={this.state.token} userId={this.state.userId}/></Route>
               <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
               <GuardedRoute path='/user/all' meta={{ auth: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>
