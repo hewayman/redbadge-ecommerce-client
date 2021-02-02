@@ -89,12 +89,12 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({phone: e.target.value});
   }
 
-  fetchUsers = () => {
+  fetchUser = () => {
     fetch(`${APIURL}/user/${this.props.userId}`, {
       method: 'GET'
     })
     .then(r => r.json())
-    .then(obj => {this.setState({ user: obj.user }); console.log(this.state.user)})
+    .then(obj => {this.setState({ user: obj.user }); console.log(obj)})
   }
 
   handleSubmit = (e: any) => {
@@ -132,8 +132,8 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({active: !showEdit})
   }
 
-  componentDidMount() {
-    this.fetchUsers()
+  componentWillMount() {
+    this.fetchUser()
   }
 
   render() {
