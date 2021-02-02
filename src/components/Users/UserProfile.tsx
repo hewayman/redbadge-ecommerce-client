@@ -120,9 +120,16 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
       .then(r => r.json())
       .then(rObj => {
         // console.log(rObj)
-        window.location.reload();
         this.setState({ active: false }) // turn toggle off after editing user info
     })
+  }
+
+  fetchUsers = () => {
+    fetch(`${APIURL}/user/${this.props.user.id}`, {
+      method: 'GET'
+    })
+    .then(r => r.json())
+    .then(obj => this.setState({ user: obj.user }))
   }
 
   toggle = () => {
@@ -165,9 +172,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                       <br/>
                       <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
                       <br/>
-                      <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
+                      <b>Address Line 1: </b> {this.state.addressLn1 ? this.state.addressLn1 : this.props.user.addressLn1}
                       <br/>
-                      <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
+                      <b>Address Line 2: </b> {this.state.addressLn2 ? this.state.addressLn2 : this.props.user.addressLn2}
                       <br/>
                       <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
                       <br/>
