@@ -148,24 +148,24 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           {this.state.active === false ? 
             (<Container component="main" maxWidth="sm">
               <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                {this.props.user.firstName ? this.props.user.firstName : null}  + ' ' + {this.props.user.lastName ? this.props.user.lastName : null}
+                {this.props.user.firstName ? this.props.user.firstName : ''}  + ' ' + {this.props.user.lastName ? this.props.user.lastName : ''}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                <b>Admin Status: </b> {this.props.user.isAdmin ? String(this.props.user.isAdmin) : null }
+                <b>Admin Status: </b> {this.props.user.isAdmin ? String(this.props.user.isAdmin) : '' }
                 <br/>
-                <b>Email: </b> {this.props.user.email ? this.props.user.email : null}
+                <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
                 <br/>
-                <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : null}
+                <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
                 <br/>
-                <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : null}
+                <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
                 <br/>
-                <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : null}
+                <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
                 <br/>
-                <b>City: </b> {this.props.user.city ? this.props.user.city : null}
+                <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
                 <br/>
-                <b>State: </b> {this.props.user.state ? this.props.user.state : null}
+                <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
                 <br/>
-                <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : null}
+                <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
               </Typography>
             </Container>
             )

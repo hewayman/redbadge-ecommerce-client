@@ -72,7 +72,6 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
   }
 
   render() {
-    console.log(this.props.updateToken)
     // if user logs in, redirect to home page
     if (this.props.token) {
       return (<Redirect to="/" />)
