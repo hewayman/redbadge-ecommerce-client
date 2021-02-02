@@ -156,7 +156,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
               <div>
                 <CardContent style={{ paddingTop:'1em'}}>
                   <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
-                    <PersonIcon /> {this.state.user.firstName}
+                    <PersonIcon /> {this.state.user.firstName ? this.state.user.firstName : 'unknown'}
                     <br/>
                     {this.props.revObj.date}
                   </Typography>
