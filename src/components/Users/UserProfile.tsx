@@ -94,7 +94,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
       method: 'GET'
     })
     .then(r => r.json())
-    .then(obj => this.setState({ user: obj.user }))
+    .then(obj => {this.setState({ user: obj.user }); console.log(obj.user)})
   }
 
   handleSubmit = (e: any) => {

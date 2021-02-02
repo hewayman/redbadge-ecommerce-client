@@ -65,9 +65,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   }
 
   render() {
-    // if user logs in, redirect to home page
+    // if user logs in, redirect to user profile page
     if (this.props.token) {
-      return (<Redirect to="/" />)
+      return (<Redirect to="/user/profile" />)
     } 
     // if there was an error logging in, reset the errorStatus to false
     if (this.state.errorStatus) {
