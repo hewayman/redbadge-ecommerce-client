@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import APIURL from '../../helpers/environment';
-import IconButton from '@material-ui/core/IconButton';
 
 type UserProfileProps = {
   sessionToken: string;
@@ -144,7 +143,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
             Edit User Profile
           </Typography>
           {this.props.sessionToken ?
-            <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
+            (<form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -276,7 +275,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 className="createListingButton">
                 Submit
               </Button>
-            </form>
+            </form>)
             :
             null  
           }
