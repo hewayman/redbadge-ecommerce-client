@@ -156,7 +156,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   {this.props.user.firstName  + ' ' + this.props.user.lastName}
                 </Typography> */}
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                  <b>Name: </b> {this.props.user.firstName} {this.props.user.lastName}
+                  {/* <b>Name: </b> {this.props.user.firstName} {this.props.user.lastName}
                   <b>Email: </b> {this.props.user.email}
                   <br/>
                   <b>Phone: </b>{this.props.user.phone}
@@ -169,7 +169,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   <br/>
                   <b>State: </b>{this.props.user.state}
                   <br/>
-                  <b>Zip Code: </b>{this.props.user.zipcode}
+                  <b>Zip Code: </b>{this.props.user.zipcode} */}
                 </Typography>
               {/* </CardContent> */}
               </div>

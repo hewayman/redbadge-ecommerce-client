@@ -25,7 +25,7 @@ type AppState = {
   storeItems: any[];
   itemId: number;
   users: any[];
-  user: any;
+  user: any[];
   filteredItems: any[];
   sort: any;
   isAdmin: boolean;
@@ -50,7 +50,7 @@ class App extends React.Component <{}, AppState> {
       storeItems: [],
       itemId: 0,
       users: [],
-      user: '',
+      user: [],
       filteredItems: [],
       sort: '',
       isAdmin: false,
@@ -104,7 +104,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   // updates the state for the token, userId, admin status, and first name when a user logs in or registers
-  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: any) => {
+  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: any[]) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
     this.setState({token: newToken});
