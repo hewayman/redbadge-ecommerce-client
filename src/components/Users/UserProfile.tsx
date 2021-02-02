@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import APIURL from '../../helpers/environment';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import CreateIcon from '@material-ui/icons/Create';
 import Container from '@material-ui/core/Container';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import APIURL from '../../helpers/environment';
 
 type UserProfileProps = {
   sessionToken: string;
@@ -137,36 +139,39 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
         <div className="paper" style={{marginTop:'30px'}}>
-          <Avatar className="avatar" style={{backgroundColor:'#f50057'}} onClick={this.toggle}>
+          <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
             <CreateIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }} onClick={this.toggle}>
+          <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
             Edit User Profile
           </Typography>
 
           {/* display user edit form when create icon has been clicked, otherwise display user info */}
           {this.state.active === false ? 
             (<Container component="main" maxWidth="sm">
-              <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                {this.props.user.firstName ? this.props.user.firstName : ''}  + ' ' + {this.props.user.lastName ? this.props.user.lastName : ''}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                <b>Admin Status: </b> {this.props.user.isAdmin ? String(this.props.user.isAdmin) : '' }
-                <br/>
-                <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
-                <br/>
-                <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
-                <br/>
-                <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
-                <br/>
-                <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
-                <br/>
-                <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
-                <br/>
-                <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
-                <br/>
-                <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
-              </Typography>
+              <Card>
+                <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
+                  <CreateIcon style={{height:'25px', width:'25px'}}/>
+                </IconButton> 
+                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
+                  {this.props.user.firstName ? this.props.user.firstName : ''} {this.props.user.lastName ? this.props.user.lastName : ''}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
+                  <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
+                  <br/>
+                  <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
+                  <br/>
+                  <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
+                  <br/>
+                  <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
+                  <br/>
+                  <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
+                  <br/>
+                  <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
+                  <br/>
+                  <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
+                </Typography>
+              </Card>
             </Container>
             )
             : 
