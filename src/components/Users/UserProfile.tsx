@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 type UserProfileProps = {
   sessionToken: string;
   userId: number;
-  users: any;
   fetchOneUser: any;
 }
 
