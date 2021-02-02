@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Avatar from '@material-ui/core/Avatar';
 import CreateIcon from '@material-ui/icons/Create';
@@ -94,7 +94,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
       method: 'GET'
     })
     .then(r => r.json())
-    .then(obj => {this.setState({ user: obj.user }); console.log(obj.user)})
+    .then(obj => {this.setState({ user: obj.user }); console.log(this.state.user)})
   }
 
   handleSubmit = (e: any) => {
@@ -132,11 +132,15 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({active: !showEdit})
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchUsers()
   }
 
   render() {
+    // if user logs out, redirect to login page
+    if (!this.props.sessionToken) {
+      return (<Redirect to="/user/login" />)
+    } 
     return (
       <Container component="main" maxWidth="lg">
         <Link to="/" style={{textDecoration:'none', color:'black'}}>
