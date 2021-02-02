@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import APIURL from '../../helpers/environment';
+import IconButton from '@material-ui/core/IconButton';
 
 type UserProfileProps = {
   sessionToken: string;
@@ -124,6 +125,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({active: !showEdit})
   }
 
+
   render() {
     // if user logs out, redirect to login page
     if (!this.props.sessionToken) {
@@ -135,14 +137,22 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           <ArrowBackIosIcon className="backArrow" /> 
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
-        <Container className="paper" style={{marginTop:'30px'}} maxWidth="sm">
+        <div className="paper" style={{marginTop:'30px'}}>
           <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
             <CreateIcon />
           </Avatar>
           <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
             Edit User Profile
           </Typography>
-          {this.props.sessionToken ?
+
+          <IconButton className="createButton" color="inherit" aria-label="menu" style={{backgroundColor:'#f50057', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
+            <CreateIcon style={{height:'25px', width:'25px'}}/>
+          </IconButton>  
+
+          {/* display user edit form when create icon has been clicked, otherwise display user info */}
+          {this.state.active === false ? 
+            null 
+            : 
             (<form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
               <TextField
                 variant="outlined"
@@ -181,7 +191,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 defaultValue={this.props.user.email}
                 onChange = {this.setEmail.bind(this)}
               />
-              <TextField
+               <TextField
                 variant="outlined"
                 margin="normal"
                 required
@@ -275,11 +285,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 className="createListingButton">
                 Submit
               </Button>
-            </form>)
-            :
-            null  
-          }
-        </Container>
+            </form>
+          )}
+        </div>
       </Container>
     );
   }
