@@ -86,14 +86,6 @@ class App extends React.Component <{}, AppState> {
       .catch(err => {console.log(err); this.setState({errorStatus: true})})
   }
 
-  fetchOneUser = () => {
-    fetch(`${APIURL}/user/${this.state.userId}`, {
-      method: 'GET'
-    })
-    .then(r => r.json())
-    .then(obj => this.setState({ user: obj.user }))
-  }
-
   setToken = (token: string) => {
     if (token) {
       this.setState({token: token})
@@ -116,17 +108,14 @@ class App extends React.Component <{}, AppState> {
 
   updateSearch = (storeItem: any[]) => {
     this.setState({ storeItems: storeItem })
-    console.log("search", storeItem)
   }
 
   updateItemId = (itemId: any) => {
     this.setState({ itemId: itemId })
-    console.log('itemid', itemId)
   }
 
   updateItem = (item: any) => {
     this.setState({ itemObj: item })
-    console.log('itemid', item)
   }
 
   // when user logs out, it redirects to '/' and resets the first name
@@ -175,9 +164,6 @@ class App extends React.Component <{}, AppState> {
     try {
       this.setState({cart: this.state.cart.slice()});
       this.setState({ cart: this.state.cart.filter(item => item.id !== product)})
-      // this.setState({ redirect: true })
-      console.log('Item removed from cart.')
-      console.log('cart: ', this.state.cart)
     } catch {
       console.log('Item not removed from cart.')
     }
@@ -208,7 +194,6 @@ class App extends React.Component <{}, AppState> {
     this.setToken('')
     this.fetchStoreItems()
     this.fetchUsers()
-    this.fetchOneUser()
   }
 
   render() {  
