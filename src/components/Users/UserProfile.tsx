@@ -120,26 +120,14 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
       .then(r => r.json())
       .then(rObj => {
         // console.log(rObj)
-        this.fetchUser()
+        window.location.reload();
         this.setState({ active: false }) // turn toggle off after editing user info
     })
-  }
-
-  fetchUser = () => {
-    fetch(`${APIURL}/user/${this.props.userId}`, {
-      method: 'GET'
-    })
-    .then(r => r.json())
-    .then(obj => this.setState({ user: obj.user }))
   }
 
   toggle = () => {
     const showEdit = this.state.active
     this.setState({active: !showEdit})
-  }
-
-  componentDidMount = () => {
-    this.fetchUser();
   }
 
   render() {
