@@ -226,7 +226,7 @@ class App extends React.Component <{}, AppState> {
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-              <GuardedRoute path='/user/profile'exact meta={{ auth: true }}><UserProfile sessionToken={this.state.token} userId={this.state.userId} user={this.state.user}/></GuardedRoute>
+              <GuardedRoute path='/user/profile'exact meta={{ auth: true }}><UserProfile sessionToken={this.state.token} userId={this.state.userId} user={this.state.user} fetchUsers={this.fetchUsers}/></GuardedRoute>
               <GuardedRoute path='/admin' meta={{ admin: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
               <GuardedRoute path='/user/all' meta={{ admin: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>

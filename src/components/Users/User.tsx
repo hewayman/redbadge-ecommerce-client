@@ -144,7 +144,7 @@ class User extends React.Component<UserProps, UserState> {
     })
       .then(r => r.json())
       .then(rObj => {
-        console.log(rObj)
+        // console.log(rObj)
         this.props.fetchUsers()
         this.setState({ active: false }) // turn toggle off after editing user info
       })

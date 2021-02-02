@@ -16,6 +16,7 @@ type UserProfileProps = {
   sessionToken: string;
   userId: number;
   user: any;
+  fetchUsers: any;
 }
 
 type UserProfileState = {
@@ -118,7 +119,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     })
       .then(r => r.json())
       .then(rObj => {
-        console.log(rObj)
+        // console.log(rObj)
+        this.props.fetchUsers()
+        this.setState({ active: false }) // turn toggle off after editing user info
     })
   }
 
@@ -148,37 +151,40 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           </Typography>
 
           {/* display user edit form when create icon has been clicked, otherwise display user info */}
-            <Container component="main" maxWidth="xs">
-              <Card>
-                <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
-                  <CreateIcon style={{height:'25px', width:'25px'}}/>
-                </IconButton> 
-                {this.state.active === false ? 
-                (<CardContent style={{paddingLeft: '5px', paddingTop:'5px'}}>
-                  <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                    {this.props.user.firstName ? this.props.user.firstName : ''} {this.props.user.lastName ? this.props.user.lastName : ''}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                    <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
-                    <br/>
-                    <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
-                    <br/>
-                    <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
-                    <br/>
-                    <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
-                    <br/>
-                    <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
-                    <br/>
-                    <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
-                    <br/>
-                    <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Container>
+            {this.state.active === false ? 
+              (<Container component="main" maxWidth="xs" style={{marginTop:'10px'}}>
+                <Card>
+                  <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
+                    <CreateIcon style={{height:'25px', width:'25px'}}/>
+                  </IconButton> 
+                  <CardContent style={{paddingLeft: '5px', paddingTop:'5px'}}>
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
+                      {this.props.user.firstName ? this.props.user.firstName : ''} {this.props.user.lastName ? this.props.user.lastName : ''}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
+                      <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
+                      <br/>
+                      <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
+                      <br/>
+                      <b>Address Line 1: </b> {this.props.user.addressLn1 ? this.props.user.addressLn1 : ''}
+                      <br/>
+                      <b>Address Line 2: </b> {this.props.user.addressLn2 ? this.props.user.addressLn2 : ''}
+                      <br/>
+                      <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
+                      <br/>
+                      <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
+                      <br/>
+                      <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Container>
             )
             : 
             (<Container component="main" maxWidth="sm">
+              <IconButton className="createButton" color="inherit" aria-label="menu" style={{color: 'rgba(0, 0, 0, 0.87)', float:'right', height:'30px', width:'30px'}} onClick={this.toggle}>
+                <CreateIcon style={{height:'25px', width:'25px'}}/>
+              </IconButton> 
               <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
                 <TextField
                   variant="outlined"
