@@ -114,9 +114,16 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
               }
             {/* display the login, shopping cart, and logout buttons for all users*/}
               <IconButton edge="start" className="accountIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'4px'}}>
-                <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
-                  <AccountCircleIcon />
-                </Link>
+                {/* if the user is logged in, direct the user to the profile page, otherwise redirect to the login page */}
+                {this.props.sessionToken ? 
+                  <Link to='/user/profile' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
+                    <AccountCircleIcon />
+                  </Link> 
+                  :
+                  <Link to='/user/login' style={{color: 'rgba(0, 0, 0, 0.87)'}} >
+                    <AccountCircleIcon />
+                  </Link> 
+                }  
               </IconButton>
               <IconButton edge="start" className="cartIconButton" color="inherit" aria-label="menu" style={{padding: '9px 12px 9px 12px', marginTop:'5px'}}>
                 <Link to='/cart' style={{color: 'rgba(0, 0, 0, 0.9)'}} >

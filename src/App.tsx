@@ -15,6 +15,7 @@ import Cart from './components/Site/Cart';
 import AdminCreate from './components/Users/AdminCreate';
 import NotFound from './components/Site/NotFound';
 import APIURL from './helpers/environment';
+import UserProfile from './components/Users/UserProfile';
  
 type AppState = {
   token: string;
@@ -212,6 +213,7 @@ class App extends React.Component <{}, AppState> {
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
+              <GuardedRoute path='user/profile'exact meta={{ auth: true }}><UserProfile sessionToken={this.state.token} userId={this.state.userId}/></GuardedRoute>
               <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
               <GuardedRoute path='/user/all' meta={{ auth: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>

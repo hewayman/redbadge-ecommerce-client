@@ -195,25 +195,25 @@ class User extends React.Component<UserProps, UserState> {
           {/* display user edit form when create icon has been clicked, otherwise display user info */}
             {this.state.active === false ? (
               <CardContent> 
-                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans', fontSize:'1.3em', color:'black' }}>
+                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
                   {this.props.user.firstName  + ' ' + this.props.user.lastName}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
                   <b>Admin Status: </b>{String(this.props.user.isAdmin)}
                   <br/>
                   <b>Email: </b> {this.props.user.email}
                   <br/>
-                  <b>Phone:</b> {this.props.user.phone}
+                  <b>Phone: </b>{this.props.user.phone}
                   <br/>
-                  <b>Address Line 1:</b> {this.props.user.addressLn1}
+                  <b>Address Line 1: </b>{this.props.user.addressLn1}
                   <br/>
-                  <b>Address Line 2: </b> {this.props.user.addressLn2}
+                  <b>Address Line 2: </b>{this.props.user.addressLn2}
                   <br/>
-                  <b>City:</b> {this.props.user.city}
+                  <b>City: </b>{this.props.user.city}
                   <br/>
-                  <b>State:</b> {this.props.user.state}
+                  <b>State: </b>{this.props.user.state}
                   <br/>
-                  <b>Zip Code:</b>{this.props.user.zipcode}
+                  <b>Zip Code: </b>{this.props.user.zipcode}
                 </Typography>
               </CardContent>) : (
               <div className="paper" style={{marginTop:'0em'}}>
@@ -227,7 +227,7 @@ class User extends React.Component<UserProps, UserState> {
                     label="First Name"
                     name={"firstName"}
                     autoFocus
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.firstName}
                     onChange = {this.setFirstName.bind(this)}
                   />
@@ -239,7 +239,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="lastName"
                     label="Last Name"
                     id="lastName"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.lastName}
                     onChange = {this.setLastName.bind(this)}
                   />
@@ -251,7 +251,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="isAdmin"
                     label="Admin Access (true or false)"
                     id="isAdmin"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.isAdmin}
                     onChange = {this.setIsAdmin.bind(this)}
                   />
@@ -263,7 +263,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="email"
                     label="Email"
                     id="email"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.email}
                     onChange = {this.setEmail.bind(this)}
                   />
@@ -275,7 +275,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="addressLn1"
                     label="Address Line 1"
                     id="addressLn1"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.addressLn1}
                     onChange = {this.setAddressLn1.bind(this)}
                   />
@@ -287,7 +287,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="addressLn2"
                     label="Address Line 2"
                     id="addressLn2"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.addressLn2}
                     onChange = {this.setAddressLn2.bind(this)}
                   />
@@ -299,7 +299,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="city"
                     label="City"
                     id="city"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.city}
                     onChange = {this.setCity.bind(this)}
                   />
@@ -311,7 +311,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="state"
                     label="State"
                     id="state"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.state}
                     onChange = {this.setStateName.bind(this)}
                   />
@@ -323,7 +323,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="zipcode"
                     label="Zip Code"
                     id="zipcode"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.zipcode}
                     onChange = {this.setZipcode.bind(this)}
                   />
@@ -335,7 +335,7 @@ class User extends React.Component<UserProps, UserState> {
                     name="phone"
                     label="Phone"
                     id="phone"
-                    style={{ fontFamily:'Open Sans' }}
+                    style={{ fontFamily:'Montserrat' }}
                     defaultValue={this.props.user.phone}
                     onChange = {this.setPhone.bind(this)}
                   />
