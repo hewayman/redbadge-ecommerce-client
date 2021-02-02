@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 type UserProfileProps = {
   sessionToken: string;
   userId: number;
+  users: any;
 }
 
 type UserProfileState = {
@@ -89,20 +90,20 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({phone: e.target.value});
   }
 
-  fetchUser = () => {
-    fetch(`${APIURL}/user/${this.props.userId}`, {
-      method: 'GET'
-    })
-    .then(r => r.json())
-    .then(obj => {this.setState({ user: obj.user }); console.log(obj)})
-  }
+  // fetchUser = () => {
+  //   fetch(`${APIURL}/user/${this.props.userId}`, {
+  //     method: 'GET'
+  //   })
+  //   .then(r => r.json())
+  //   .then(obj => {this.setState({ user: obj }); console.log(obj)})
+  // }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = `${APIURL}/user/details`;
     const body = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      firstName: this.state.firstName || this.props.users.firstName,
+      lastName: this.state.lastName || this.props.users.lastName,
       email: this.state.email,
       password: this.state.password,
       addressLn1: this.state.addressLn1,
@@ -132,9 +133,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({active: !showEdit})
   }
 
-  componentWillMount() {
-    this.fetchUser()
-  }
+  // componentWillMount() {
+  //   this.fetchUser()
+  // }
 
   render() {
     // if user logs out, redirect to login page
@@ -164,7 +165,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
               // <CardContent> 
               <div>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                  {/* {this.props.user.firstName  + ' ' + this.props.user.lastName} */}
+                  {this.props.users.firstName  + ' ' + this.props.users.lastName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
                   {/* <b>Email: </b> {this.props.user.email}
