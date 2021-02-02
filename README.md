@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# MollieBirch Ecommerce App #
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+MollieBirch is a full-stack ecommerce app that enables customers to browse store item listings, view/leave reviews, and add items to a shopping cart.
 
-In the project directory, you can run:
+[View MollieBirch](https://hw-ecommerce-store.herokuapp.com/ "View MollieBirch")
 
-### `npm start`
+### Built With:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Express
+* Node.js
+* PostgreSQL
+* React
+* TypeScript
+* Material UI
+* [View Server-Side Code](https://github.com/hewayman/redbadge-ecommerce-server/ "View Server-Side Code")
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Details
+#### Admin Account Creation:
+This app was designed to have one super admin account who can grant admin privileges to additional user accounts via the admin portal. As long as a super admin account does not already exist, a super admin account is automatically created when any user hits the '/create/admin' endpoint. The login information for the super admin account is protected in the .env file.
 
-### `npm test`
+#### Protected Routes:
+React-router-guards are used to keep the admin portal, customer list, and store item creation components protected against unauthorized access.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 404 Page:
+A 404 page alerts users that the URL does not exist.
 
-### `npm run build`
+<img src="https://i.ibb.co/NnRv2j8/404.jpg" alt="404 page" height="150">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Admin Portal
+The admin portal allows admins to post, edit, and delete store item listings, customer information, and customer reviews. The admins can also grant and remove admin privileges to any of the user accounts.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="https://i.ibb.co/60Bj4HX/item-Creation.jpg" alt="listing" height="300">           <img src="https://i.ibb.co/yN8smD0/admin-Portal.jpg" alt="admin portal" height="300">     
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Customer View
+The customer view gives customers access to post, edit and delete reviews. 
 
-### `npm run eject`
+<img src="https://i.ibb.co/sCHvp2f/reviews.jpg" alt="reviews" height="300">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Shopping Cart
+Customers can add items to the shopping cart either from the home page or by clicking directly on the item to see the details page. The shopping cart calculates the subtotal, sales tax (currently set to 7%), and the total.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<img src="https://i.ibb.co/gZQQrMV/shopping-Cart.jpg" alt="shopping cart" height="300">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Future Developments
+In the future, customers will be able to pay via the app. Additionally, there will be a page that customers can access through the shopping cart to update their home addresses and phone numbers.
