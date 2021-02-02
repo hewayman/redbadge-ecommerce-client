@@ -165,22 +165,22 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   </IconButton> 
                   <CardContent style={{paddingLeft: '5px', paddingTop:'5px'}}>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                      {this.props.user.firstName ? this.props.user.firstName : ''} {this.props.user.lastName ? this.props.user.lastName : ''}
+                      {this.state.firstName} {this.state.lastName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                      <b>Email: </b> {this.props.user.email ? this.props.user.email : ''}
+                      <b>Email: </b> {this.state.email}
                       <br/>
-                      <b>Phone: </b> {this.props.user.phone ? this.props.user.phone : ''}
+                      <b>Phone: </b> {this.state.phone}
                       <br/>
-                      <b>Address Line 1: </b> {this.state.addressLn1 ? this.state.addressLn1 : this.props.user.addressLn1}
+                      <b>Address Line 1: </b> {this.state.addressLn1}
                       <br/>
-                      <b>Address Line 2: </b> {this.state.addressLn2 ? this.state.addressLn2 : this.props.user.addressLn2}
+                      <b>Address Line 2: </b> {this.state.addressLn2}
                       <br/>
-                      <b>City: </b> {this.props.user.city ? this.props.user.city : ''}
+                      <b>City: </b> {this.state.city}
                       <br/>
-                      <b>State: </b> {this.props.user.state ? this.props.user.state : ''}
+                      <b>State: </b> {this.state.state}
                       <br/>
-                      <b>Zip Code: </b> {this.props.user.zipcode ? this.props.user.zipcode : ''}
+                      <b>Zip Code: </b> {this.state.zipcode}
                     </Typography>
                   </CardContent>
                 </Card>
