@@ -136,13 +136,14 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
           <ArrowBackIosIcon className="backArrow" /> 
           <Typography style={{ display:'inline', fontFamily:'Open Sans', fontSize:16, verticalAlign:'7px' }}>Back</Typography>
         </Link>
-        <div className="paper" style={{marginTop:'30px'}}>
+        <Container className="paper" style={{marginTop:'30px'}} maxWidth="sm">
           <Avatar className="avatar" style={{backgroundColor:'#f50057'}}>
             <CreateIcon />
           </Avatar>
           <Typography component="h1" variant="h5" style={{ fontFamily:'Montserrat', fontWeight:900, display:'inline' }}>
             Edit User Profile
           </Typography>
+          {this.props.sessionToken ?
             <form onSubmit={this.handleSubmit} className="formCreateListing" noValidate>
               <TextField
                 variant="outlined"
@@ -276,7 +277,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                 Submit
               </Button>
             </form>
-        </div>
+            :
+            null  
+          }
+        </Container>
       </Container>
     );
   }
