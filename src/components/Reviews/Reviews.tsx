@@ -155,13 +155,13 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
             {this.state.active === false ? 
               <div>
                 <CardContent style={{ paddingTop:'1em'}}>
-                  {/* <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
+                  <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                     <PersonIcon /> {this.state.user.firstName ? this.state.user.firstName : 'unknown'}
                     <br/>
                     {this.props.revObj.date}
-                  </Typography> */}
+                  </Typography>
                 </CardContent>
-                {/* <Rating
+                <Rating
                   name="customized-empty"
                   defaultValue={this.props.revObj.rating}
                   precision={0.5}
@@ -174,7 +174,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
                   <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
                     {this.props.revObj.review}
                   </Typography>
-                </CardContent> */}
+                </CardContent>
               </div>
               :
               <div className="paper" style={{marginTop:'0em'}}>
