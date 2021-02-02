@@ -60,7 +60,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       body: JSON.stringify(body)
     })
       .then(r => r.json())
-      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName))
+      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName, rObj.user))
       .catch(err => {this.setState({errorStatus: true}); window.alert('Unable to login. Please check email and password and try again.')})
   }
 

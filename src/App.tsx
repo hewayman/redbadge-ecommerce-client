@@ -103,18 +103,20 @@ class App extends React.Component <{}, AppState> {
     }
   }
 
-  // updates the state for the token, userId,admin status, and first name when a user logs in or registers
-  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string) => {
+  // updates the state for the token, userId, admin status, and first name when a user logs in or registers
+  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: any) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
     this.setState({token: newToken});
     this.setState({userId: updateId});
     this.setState({isAdmin: updateAdmin})
     this.setState({firstName: updateFirstName})
+    this.setState({user: updateUser})
     console.log('Token: ', newToken)
     console.log("User id: ", updateId)
     console.log("Admin? :", updateAdmin)
     console.log("User first name:", updateFirstName)
+    console.log("User Obj:", updateUser)
   }
 
   updateSearch = (storeItem: any[]) => {
