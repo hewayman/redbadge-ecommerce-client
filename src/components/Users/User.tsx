@@ -199,21 +199,21 @@ class User extends React.Component<UserProps, UserState> {
                   {this.props.user.firstName  + ' ' + this.props.user.lastName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
-                  Admin Status: {String(this.props.user.isAdmin)}
+                  <b>Admin Status: </b>{String(this.props.user.isAdmin)}
                   <br/>
-                  {this.props.user.email}
+                  <b>Email: </b> {this.props.user.email}
                   <br/>
-                  {this.props.user.phone}
+                  <b>Phone:</b> {this.props.user.phone}
                   <br/>
-                  {this.props.user.addressLn1}
+                  <b>Address Line 1:</b> {this.props.user.addressLn1}
                   <br/>
-                  {this.props.user.addressLn2}
+                  <b>Address Line 2: </b> {this.props.user.addressLn2}
                   <br/>
-                  {this.props.user.city}
+                  <b>City:</b> {this.props.user.city}
                   <br/>
-                  {this.props.user.state}
+                  <b>State:</b> {this.props.user.state}
                   <br/>
-                  {this.props.user.zipcode}
+                  <b>Zip Code:</b>{this.props.user.zipcode}
                 </Typography>
               </CardContent>) : (
               <div className="paper" style={{marginTop:'0em'}}>
