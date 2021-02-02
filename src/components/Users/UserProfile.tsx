@@ -90,20 +90,20 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({phone: e.target.value});
   }
 
-  // fetchUser = () => {
-  //   fetch(`${APIURL}/user/${this.props.userId}`, {
-  //     method: 'GET'
-  //   })
-  //   .then(r => r.json())
-  //   .then(obj => {this.setState({ user: obj }); console.log(obj)})
-  // }
+   fetchUser = async () => {
+    await fetch(`${APIURL}/user/${this.props.userId}`, {
+      method: 'GET'
+    })
+    .then(r => r.json())
+    .then(obj => {this.setState({ user: obj.user }); console.log(obj.user)})
+  }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = `${APIURL}/user/details`;
     const body = {
-      firstName: this.state.firstName || this.props.users.firstName,
-      lastName: this.state.lastName || this.props.users.lastName,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
       addressLn1: this.state.addressLn1,
@@ -165,7 +165,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
               // <CardContent> 
               <div>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                  {this.props.users.firstName  + ' ' + this.props.users.lastName}
+                  {/* {this.state.user.firstName  + ' ' + this.props.users.lastName} */}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
                   {/* <b>Email: </b> {this.props.user.email}
