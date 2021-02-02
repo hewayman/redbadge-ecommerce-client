@@ -25,6 +25,7 @@ type AppState = {
   storeItems: any[];
   itemId: number;
   users: any[];
+  user: any[];
   filteredItems: any[];
   sort: any;
   isAdmin: boolean;
@@ -49,6 +50,7 @@ class App extends React.Component <{}, AppState> {
       storeItems: [],
       itemId: 0,
       users: [],
+      user: [],
       filteredItems: [],
       sort: '',
       isAdmin: false,
@@ -82,6 +84,14 @@ class App extends React.Component <{}, AppState> {
       .then(r => r.json())
       .then(obj => this.setState({ users: obj.user }))
       .catch(err => {console.log(err); this.setState({errorStatus: true})})
+  }
+
+  fetchOneUser = () => {
+    fetch(`${APIURL}/user/${this.state.userId}`, {
+      method: 'GET'
+    })
+    .then(r => r.json())
+    .then(obj => this.setState({ user: obj.user }))
   }
 
   setToken = (token: string) => {
@@ -196,6 +206,7 @@ class App extends React.Component <{}, AppState> {
     this.setToken('')
     this.fetchStoreItems()
     this.fetchUsers()
+    this.fetchOneUser()
   }
 
   render() {  
@@ -214,7 +225,7 @@ class App extends React.Component <{}, AppState> {
               <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
               <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
               <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-              <Route path='/user/profile'exact ><UserProfile sessionToken={this.state.token} userId={this.state.userId} users={this.state.users}/></Route>
+              <Route path='/user/profile'exact ><UserProfile sessionToken={this.state.token} userId={this.state.userId} fetchOneUser={this.fetchOneUser}/></Route>
               <GuardedRoute path='/admin' meta={{ auth: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
               <Route path='/create/admin'><AdminCreate /></Route>
               <GuardedRoute path='/user/all' meta={{ auth: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>

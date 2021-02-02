@@ -14,6 +14,7 @@ type UserProfileProps = {
   sessionToken: string;
   userId: number;
   users: any;
+  fetchOneUser: any;
 }
 
 type UserProfileState = {
@@ -90,19 +91,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     this.setState({phone: e.target.value});
   }
 
-   fetchUser = async () => {
-    await fetch(`${APIURL}/user/${this.props.userId}`, {
-      method: 'GET'
-    })
-    .then(r => r.json())
-    .then(obj => {this.setState({ user: obj.user }); console.log(obj.user)})
-  }
+  //  fetchUser = async () => {
+  //   await fetch(`${APIURL}/user/${this.props.userId}`, {
+  //     method: 'GET'
+  //   })
+  //   .then(r => r.json())
+  //   .then(obj => {this.setState({ user: obj.user }); console.log(obj.user)})
+  // }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     const url = `${APIURL}/user/details`;
     const body = {
-      firstName: this.state.firstName,
+      firstName: this.state.firstName || this.props.fetchOneUser.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
@@ -165,7 +166,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
               // <CardContent> 
               <div>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                  {/* {this.state.user.firstName  + ' ' + this.props.users.lastName} */}
+                  {this.props.fetchOneUser.firstName  + ' ' + this.props.fetchOneUser.lastName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
                   {/* <b>Email: </b> {this.props.user.email}
