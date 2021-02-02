@@ -25,7 +25,7 @@ type AppState = {
   storeItems: any[];
   itemId: number;
   users: any[];
-  user: any[];
+  user: any;
   filteredItems: any[];
   sort: any;
   isAdmin: boolean;
@@ -50,7 +50,7 @@ class App extends React.Component <{}, AppState> {
       storeItems: [],
       itemId: 0,
       users: [],
-      user: [],
+      user: '',
       filteredItems: [],
       sort: '',
       isAdmin: false,
