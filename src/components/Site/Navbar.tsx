@@ -20,7 +20,7 @@ type NavbarProps = {
   adminStatus: boolean;
   userFirstName: string;
   fetchStoreItems: any;
-  searchItems: any[];
+  // searchItems: any[];
   updateSearch: any;
 }
 

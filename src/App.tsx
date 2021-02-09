@@ -16,22 +16,24 @@ import AdminCreate from './components/Users/AdminCreate';
 import NotFound from './components/Site/NotFound';
 import APIURL from './helpers/environment';
 import UserProfile from './components/Users/UserProfile';
+
+import { User, Users, Product, StoreItem } from './types';
  
 type AppState = {
   token: string;
   newToken: string;
-  userId: number;
-  setStoreItems: any;
-  storeItems: any[];
+  userId: string;
+  // setStoreItems: any;
+  storeItems: StoreItem[];
   itemId: number;
-  users: any[];
-  user: any[];
-  filteredItems: any[];
-  sort: any;
+  users: Users;
+  user: User | null;
+  filteredItems: StoreItem[];
+  sort: string;
   isAdmin: boolean;
   firstName: string;
   searchTerm: string;
-  searchItems: any[];
+  // searchItems: any[];
   rating: number;
   redirect: boolean;
   errorStatus: boolean;
@@ -45,18 +47,18 @@ class App extends React.Component <{}, AppState> {
     this.state = {
       token: '',
       newToken: '',
-      userId: -1,
-      setStoreItems: '',
+      userId: '',
+      // setStoreItems: '',
       storeItems: [],
       itemId: 0,
       users: [],
-      user: [],
+      user: null,
       filteredItems: [],
       sort: '',
       isAdmin: false,
       firstName: '',
       searchTerm: '',
-      searchItems: [],
+      // searchItems: [],
       rating: 0,
       redirect: false,
       errorStatus: false,
@@ -96,7 +98,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   // updates the state for the token, userId, admin status, and first name when a user logs in or registers
-  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: any[]) => {
+  updateToken = (newToken: string, updateId: string, updateAdmin: boolean, updateFirstName: string, updateUser: User) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
     this.setState({token: newToken});
@@ -106,15 +108,15 @@ class App extends React.Component <{}, AppState> {
     this.setState({user: updateUser})
   }
 
-  updateSearch = (storeItem: any[]) => {
+  updateSearch = (storeItem: StoreItem[]) => {
     this.setState({ storeItems: storeItem })
   }
 
-  updateItemId = (itemId: any) => {
+  updateItemId = (itemId: number) => {
     this.setState({ itemId: itemId })
   }
 
-  updateItem = (item: any) => {
+  updateItem = (item: StoreItem) => {
     this.setState({ itemObj: item })
   }
 
@@ -155,12 +157,12 @@ class App extends React.Component <{}, AppState> {
     })
   }
 
-  handleChangeSort = (e: any) => {
+  handleChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({sort: e.target.value})
     this.listItems();
   }
 
-  removeFromCart = (product: any) => {
+  removeFromCart = (product: StoreItem) => {
     try {
       this.setState({cart: this.state.cart.slice()});
       this.setState({ cart: this.state.cart.filter(item => item.id !== product)})
@@ -169,16 +171,18 @@ class App extends React.Component <{}, AppState> {
     }
   }
 
-  addToCart = (product: any) => {
+  addToCart = (product: StoreItem) => {
     try {
       this.setState({cart: this.state.cart.slice()});
       let alreadyInCart = false;
+      // if item is already in cart, increase the count for the item
       this.state.cart.forEach((item: any) => {
         if (item.id === product.id) {
           item.count++;
           alreadyInCart = true;
         }
       });
+      // if item is not in cart, add it to the cart
       if (!alreadyInCart) {
         this.state.cart.push({...product, count: 1});
       }
@@ -202,23 +206,88 @@ class App extends React.Component <{}, AppState> {
       <div className="wrapper"> 
         <Router>
           <GuardProvider guards={[this.requireLogin]} error={ NotFound }>
-            <Navbar clickLogout={this.clearToken} sessionToken={this.state.token} adminStatus={this.state.isAdmin} userFirstName={this.state.firstName} searchItems={this.state.searchItems} updateSearch={this.updateSearch} fetchStoreItems={this.fetchStoreItems} />
+            <Navbar 
+              clickLogout={this.clearToken} 
+              sessionToken={this.state.token} 
+              adminStatus={this.state.isAdmin} 
+              userFirstName={this.state.firstName} 
+              // searchItems={this.state.searchItems} 
+              updateSearch={this.updateSearch} 
+              fetchStoreItems={this.fetchStoreItems} />
             {/* redirect to '/' when user logs out */}
             {this.state.redirect ? (<Redirect to='/'/> && window.location.reload()) : null}
             {/* if there is an issue fetching data, redirect to home page */}
             {this.state.errorStatus ? (<Redirect to="/" />) : null}
             <Switch>
-              <Route path='/' exact ><StoreItemsList sessionToken={this.state.token} adminStatus={this.state.isAdmin} storeItems={this.state.storeItems} fetchStoreItems={this.fetchStoreItems} sort={this.state.sort} handleChangeSort={this.handleChangeSort} updateItemId={this.updateItemId} updateItem={this.updateItem} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
-              <Route path='/user/register' exact><Register updateToken={this.updateToken} token={this.state.token}/></Route>
-              <Route path='/user/login' exact ><Login updateToken={this.updateToken} token={this.state.token} adminStatus={this.state.isAdmin}/></Route>
-              <GuardedRoute path='/user/profile'exact meta={{ auth: true }}><UserProfile sessionToken={this.state.token} userId={this.state.userId} user={this.state.user} fetchUsers={this.fetchUsers}/></GuardedRoute>
-              <GuardedRoute path='/admin' meta={{ admin: true }}><Admin sessionToken={this.state.token}/></GuardedRoute>
-              <Route path='/create/admin'><AdminCreate /></Route>
-              <GuardedRoute path='/user/all' meta={{ admin: true }}><UserList users={this.state.users} fetchUsers={this.fetchUsers} sessionToken={this.state.token} token={this.state.token}/></GuardedRoute>
-              <GuardedRoute path='/listing/create' meta={{ admin: true }}><StoreItemsCreate sessionToken={this.state.token} fetchStoreItems={this.fetchStoreItems}/></GuardedRoute>
-              <Route path='/listing/:id'><ItemDetailView storeItemId={this.state.itemId} sessionToken={this.state.token} userId={this.state.userId} adminStatus={this.state.isAdmin} addToCart={this.addToCart} storeItemObj={this.state.itemObj}/></Route>
-              <Route path='sort'><FilterItems sort={this.state.sort} handleChangeSort={this.handleChangeSort} /></Route>
-              <Route path='/cart'><Cart cartItems={this.state.cart} removeFromCart={this.removeFromCart}/></Route>
+              <Route path='/' exact >
+                <StoreItemsList 
+                  sessionToken={this.state.token} 
+                  adminStatus={this.state.isAdmin} 
+                  storeItems={this.state.storeItems} 
+                  fetchStoreItems={this.fetchStoreItems} 
+                  sort={this.state.sort} 
+                  handleChangeSort={this.handleChangeSort} 
+                  updateItemId={this.updateItemId} 
+                  updateItem={this.updateItem} 
+                  addToCart={this.addToCart} 
+                  storeItemObj={this.state.itemObj}/>
+              </Route>
+              <Route path='/user/register' exact>
+                <Register 
+                  updateToken={this.updateToken} 
+                  token={this.state.token}/>
+                </Route>
+              <Route path='/user/login' exact >
+                <Login 
+                  updateToken={this.updateToken} 
+                  token={this.state.token} 
+                  adminStatus={this.state.isAdmin}/>
+              </Route>
+              <GuardedRoute path='/user/profile'exact meta={{ auth: true }}>
+                <UserProfile 
+                  sessionToken={this.state.token} 
+                  userId={this.state.userId} 
+                  user={this.state.user} 
+                  fetchUsers={this.fetchUsers}/>
+              </GuardedRoute>
+              <GuardedRoute path='/admin' meta={{ admin: true }}>
+                <Admin 
+                  sessionToken={this.state.token}/>
+              </GuardedRoute>
+              <Route path='/create/admin'>
+                <AdminCreate />
+              </Route>
+              <GuardedRoute path='/user/all' meta={{ admin: true }}>
+                <UserList 
+                  users={this.state.users} 
+                  fetchUsers={this.fetchUsers} 
+                  sessionToken={this.state.token} 
+                  token={this.state.token}/>
+              </GuardedRoute>
+              <GuardedRoute path='/listing/create' meta={{ admin: true }}>
+                <StoreItemsCreate 
+                  sessionToken={this.state.token} 
+                  fetchStoreItems={this.fetchStoreItems}/>
+              </GuardedRoute>
+              <Route path='/listing/:id'>
+                <ItemDetailView 
+                  storeItemId={this.state.itemId} 
+                  sessionToken={this.state.token} 
+                  userId={this.state.userId} 
+                  adminStatus={this.state.isAdmin} 
+                  addToCart={this.addToCart} 
+                  storeItemObj={this.state.itemObj}/>
+              </Route>
+              <Route path='sort'>
+                <FilterItems 
+                  sort={this.state.sort} 
+                  handleChangeSort={this.handleChangeSort} />
+              </Route>
+              <Route path='/cart'>
+                <Cart 
+                  cartItems={this.state.cart} 
+                  removeFromCart={this.removeFromCart}/>
+              </Route>
               <Route component={ NotFound } />
             </Switch>
             <Footer />

@@ -10,8 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import APIURL from '../../helpers/environment';
 
-type RegisterProps = {
-  updateToken: any;
+import { User } from '../../types';
+
+interface RegisterProps {
+  updateToken: (newToken: string, updateId: string, updateAdmin: boolean, updateFirstName: string, updateUser: User) => void;
   token: string;
 }
 
@@ -33,23 +35,23 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
     }
   }
 
-  setFirstName = (e: any) => {
+  setFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({firstName: e.target.value});
   }
 
-  setLastName = (e: any) => {
+  setLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({lastName: e.target.value});
   }
 
-  setEmail = (e: any) => {
+  setEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({email: e.target.value});
   }
 
-  setPassword = (e: any) => {
+  setPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({password: e.target.value});
   }
   
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${APIURL}/user/register`;
     const body = {
@@ -68,7 +70,7 @@ export default class Register extends React.Component<RegisterProps, RegisterSta
       body: JSON.stringify(body)
     })
       .then(r => r.json())
-      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName))
+      .then(rObj => this.props.updateToken(rObj.sessionToken, rObj.user.id, rObj.user.isAdmin, rObj.user.firstName, rObj.user))
   }
 
   render() {

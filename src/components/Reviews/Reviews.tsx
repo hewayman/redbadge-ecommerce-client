@@ -17,7 +17,7 @@ type ReviewsProps = {
   classes: any;
   revObj: any;
   calculateTotalRating: any;
-  userId: number;
+  userId: string;
   adminStatus: boolean;
   sessionToken: string;
   fetchReviews: any;

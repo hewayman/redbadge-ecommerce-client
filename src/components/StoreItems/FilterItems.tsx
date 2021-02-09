@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 type FilterProps = {
-  sort: any;
+  sort: string;
   handleChangeSort: any;
 }
 

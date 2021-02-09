@@ -13,8 +13,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import APIURL from '../../helpers/environment';
 
+import { StoreItem } from '../../types';
+
 type ItemProps = {
-  item: any;
+  item: StoreItem;
   classes: any;
   adminStatus: boolean;
   sessionToken: string;
@@ -22,18 +24,18 @@ type ItemProps = {
   updateItemId: any;
   updateItem: any;
   addToCart: any;
-  storeItemObj: any;
+  // storeItemObj: any;
 }
 
-type ItemState = {
+interface ItemState extends StoreItem {
   storeItem: any;
   show: boolean;
-  itemName: string;
-  color: string;
-  description: string;
-  price: number;
-  itemNum: number;
-  imgURL: string;
+  // itemName: string;
+  // color: string;
+  // description: string;
+  // price: number;
+  // itemNum: number;
+  // imgURL: string;
   active: boolean;
   id: number;
   errorStatus: boolean;

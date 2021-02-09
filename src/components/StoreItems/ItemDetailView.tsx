@@ -19,7 +19,7 @@ type ItemProps = {
   sessionToken: any;
   storeItemId: number;
   classes: any;
-  userId: number;
+  userId: string;
   adminStatus: boolean;
   addToCart: any;
   storeItemObj: any;

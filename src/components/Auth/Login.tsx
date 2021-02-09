@@ -10,8 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import APIURL from '../../helpers/environment';
 
-type LoginProps = {
-  updateToken: any;
+import { User } from '../../types';
+
+interface LoginProps {
+  updateToken: (newToken: string, updateId: string, updateAdmin: boolean, updateFirstName: string, updateUser: User) => void;
   token: string;
   adminStatus: boolean;
 }
@@ -34,15 +36,15 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     }
   }
 
-  setEmail = (e: any) => {
+  setEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({email: e.target.value});
   }
 
-  setPassword = (e: any) => {
+  setPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({password: e.target.value});
   }
 
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${APIURL}/user/login`
     const body = {
