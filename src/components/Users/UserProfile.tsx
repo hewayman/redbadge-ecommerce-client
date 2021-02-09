@@ -17,7 +17,7 @@ import { User } from '../../types'
 type UserProfileProps = {
   sessionToken: string;
   userId: number;
-  user: User | null;
+  user: User;
   fetchUsers: any;
 }
 
