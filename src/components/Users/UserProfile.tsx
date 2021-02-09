@@ -12,26 +12,23 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
+import { User } from '../../types'
+
 type UserProfileProps = {
   sessionToken: string;
   userId: number;
-  user: any;
+  user: User;
   fetchUsers: any;
 }
 
-type UserProfileState = {
+// type UserProfileState = User & {
+//   user: any[];
+//   active: boolean;
+// }
+
+interface UserProfileState extends User {
   user: any[];
   active: boolean;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  addressLn1: string;
-  addressLn2: string;
-  city: string;
-  state: string;
-  zipcode: number;
-  phone: number;
 }
 
 class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
@@ -49,7 +46,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
       city: '',
       state: '',
       zipcode: 0,
-      phone: 0,
+      phone: null,
     }
   }
 
@@ -97,16 +94,16 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
     e.preventDefault();
     const url = `${APIURL}/user/details`;
     const body = {
-      firstName: this.state.firstName || this.props.user.firstName,
-      lastName: this.state.lastName || this.props.user.lastName,
-      email: this.state.email || this.props.user.email,
-      password: this.state.password || this.props.user.password,
-      addressLn1: this.state.addressLn1 || this.props.user.addressLn1,
-      addressLn2: this.state.addressLn2 || this.props.user.addressLn2,
-      city: this.state.city || this.props.user.city,
-      state: this.state.state || this.props.user.state,
-      zipcode: this.state.zipcode || this.props.user.zipcode,
-      phone: this.state.phone || this.props.user.phone
+      firstName: this.state.firstName || this.props.user!.firstName,
+      lastName: this.state.lastName || this.props.user!.lastName,
+      email: this.state.email || this.props.user!.email,
+      password: this.state.password || this.props.user!.password,
+      addressLn1: this.state.addressLn1 ?? this.props.user!.addressLn1,
+      addressLn2: this.state.addressLn2 || this.props.user!.addressLn2,
+      city: this.state.city || this.props.user!.city,
+      state: this.state.state || this.props.user!.state,
+      zipcode: this.state.zipcode || this.props.user!.zipcode,
+      phone: this.state.phone || this.props.user!.phone
     }
   
     fetch(url, {
@@ -157,22 +154,22 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   </IconButton> 
                   <CardContent style={{paddingLeft: '5px', paddingTop:'5px'}}>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat', fontSize:'1.3em', color:'black' }}>
-                      {this.state.firstName ? this.state.firstName : this.props.user.firstName} {this.state.lastName ? this.state.lastName : this.props.user.lastName}
+                      {this.state.firstName ? this.state.firstName : this.props.user!.firstName} {this.state.lastName ? this.state.lastName : this.props.user!.lastName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Montserrat' }}>
-                      <b>Email: </b> {this.state.email ? this.state.email : this.props.user.email}
+                      <b>Email: </b> {this.state.email || this.props.user!.email}
                       <br/>
-                      <b>Phone: </b> {this.state.phone !== 0 ? this.state.phone : this.props.user.phone}
+                      <b>Phone: </b> {this.state.phone || this.props.user!.phone}
                       <br/>
-                      <b>Address Line 1: </b> {this.state.addressLn1 ? this.state.addressLn1 : this.props.user.addressLn1}
+                      <b>Address Line 1: </b> {this.state.addressLn1 ? this.state.addressLn1 : this.props.user!.addressLn1}
                       <br/>
-                      <b>Address Line 2: </b> {this.state.addressLn2 ? this.state.addressLn2 : this.props.user.addressLn2}
+                      <b>Address Line 2: </b> {this.state.addressLn2 ? this.state.addressLn2 : this.props.user!.addressLn2}
                       <br/>
-                      <b>City: </b> {this.state.city ? this.state.city : this.props.user.city}
+                      <b>City: </b> {this.state.city ? this.state.city : this.props.user!.city}
                       <br/>
-                      <b>State: </b> {this.state.state ? this.state.state : this.props.user.state}
+                      <b>State: </b> {this.state.state ? this.state.state : this.props.user!.state}
                       <br/>
-                      <b>Zip Code: </b> {this.state.zipcode !== 0 ? this.state.zipcode : this.props.user.zipcode}
+                      <b>Zip Code: </b> {this.state.zipcode !== 0 ? this.state.zipcode : this.props.user!.zipcode}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -194,7 +191,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   name={"firstName"}
                   autoFocus
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.firstName}
+                  defaultValue={this.props.user!.firstName}
                   onChange = {this.setFirstName.bind(this)}
                 />
                 <TextField
@@ -206,7 +203,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Last Name"
                   id="lastName"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.lastName}
+                  defaultValue={this.props.user!.lastName}
                   onChange = {this.setLastName.bind(this)}
                 />
                 <TextField
@@ -218,7 +215,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Email"
                   id="email"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.email}
+                  defaultValue={this.props.user!.email}
                   onChange = {this.setEmail.bind(this)}
                 />
                 <TextField
@@ -230,7 +227,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Address Line 1"
                   id="addressLn1"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.addressLn1}
+                  defaultValue={this.props.user!.addressLn1}
                   onChange = {this.setAddressLn1.bind(this)}
                 />
                 <TextField
@@ -242,7 +239,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Address Line 2"
                   id="addressLn2"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.addressLn2}
+                  defaultValue={this.props.user!.addressLn2}
                   onChange = {this.setAddressLn2.bind(this)}
                 />
                 <TextField
@@ -254,7 +251,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="City"
                   id="city"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.city}
+                  defaultValue={this.props.user!.city}
                   onChange = {this.setCity.bind(this)}
                 />
                 <TextField
@@ -266,7 +263,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="State"
                   id="state"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.state}
+                  defaultValue={this.props.user!.state}
                   onChange = {this.setStateName.bind(this)}
                 />
                 <TextField
@@ -278,7 +275,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Zip Code"
                   id="zipcode"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.zipcode}
+                  defaultValue={this.props.user!.zipcode}
                   onChange = {this.setZipcode.bind(this)}
                 />
                 <TextField
@@ -290,7 +287,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
                   label="Phone"
                   id="phone"
                   style={{ fontFamily:'Montserrat' }}
-                  defaultValue={this.props.user.phone}
+                  defaultValue={this.props.user!.phone}
                   onChange = {this.setPhone.bind(this)}
                 />
                 <Button

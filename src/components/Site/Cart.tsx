@@ -8,6 +8,11 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import CartItem from './CartItem'
+import { Item } from '../../types'
+
+const TAX = 0.07
+
 type CartProps = {
   cartItems: any;
   removeFromCart: any;
@@ -22,7 +27,7 @@ class Cart extends React.Component<CartProps, CartState> {
   constructor (props: CartProps) {
     super(props);
       this.state = {
-        tax: 0.07,
+        tax: TAX,
         total: 0
     }
   }
@@ -49,40 +54,8 @@ class Cart extends React.Component<CartProps, CartState> {
           {this.props.cartItems.length === 0 ? <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>Your cart is empty.</div> : <div style={{fontFamily:'Montserrat', fontWeight:'bold'}}>You have {this.props.cartItems.length} item(s) in your cart.</div>}
 
           <Paper style={{ borderRadius:'0px', border:'none', borderTop:'1px solid #cccccc', marginTop:'20px'}} variant="outlined">
-            {this.props.cartItems.map((item: any, i: any) => (
-              <Grid key={i} container direction="row" spacing={3} alignItems="center">
-                <Grid item xs={12} md={3} style={{ marginTop:'40px', paddingBottom:'0' }}>
-                  {item.imgURL ? 
-                    <CardMedia
-                      image={`/assets/${item.imgURL}.jpg`}
-                      title="Listing img"
-                      style={{height: 5, width: '60%', paddingTop: '35%'}}
-                    />
-                  : null}
-                </Grid>
-                <Grid item xs={12} sm={3} style={{ paddingTop:'0', paddingBottom:'0' }}>
-                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1em', textTransform:"capitalize", color:'black'}}>
-                    {item.itemName}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={3} style={{ paddingTop:'0', paddingBottom:'0' }}>
-                  <Typography variant="body2" component="h2" style={{padding:'0.4em 0 0 0', fontFamily:'Montserrat', fontWeight:900, fontSize:'1em', color:'black'}}>
-                    ${item.price.toLocaleString()} x {item.count}
-                  </Typography> 
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    style={{ fontFamily:'Open Sans' }}
-                    className="submitRemoveFromCart" 
-                    onClick={() => this.props.removeFromCart(item.id)}>
-                    Remove
-                  </Button>
-                </Grid>
-              </Grid>
+            {this.props.cartItems.map((item: Item, i: number) => (
+              <CartItem {...item} key={i} />
             ))}
               {/* if the cart is empty, do not show the total and checkout button */}
               { this.props.cartItems.length !== 0 ?

@@ -17,6 +17,8 @@ import NotFound from './components/Site/NotFound';
 import APIURL from './helpers/environment';
 import UserProfile from './components/Users/UserProfile';
  
+import { User, Users, Product } from './types'
+
 type AppState = {
   token: string;
   newToken: string;
@@ -24,8 +26,8 @@ type AppState = {
   setStoreItems: any;
   storeItems: any[];
   itemId: number;
-  users: any[];
-  user: any[];
+  users: Users;
+  user: User | null;
   filteredItems: any[];
   sort: any;
   isAdmin: boolean;
@@ -50,7 +52,7 @@ class App extends React.Component <{}, AppState> {
       storeItems: [],
       itemId: 0,
       users: [],
-      user: [],
+      user: null,
       filteredItems: [],
       sort: '',
       isAdmin: false,
@@ -64,6 +66,8 @@ class App extends React.Component <{}, AppState> {
       itemObj: ''
     }
   }
+
+  
 
   fetchStoreItems = () => {
     fetch(`${APIURL}/listing/`, {
@@ -96,7 +100,7 @@ class App extends React.Component <{}, AppState> {
   }
 
   // updates the state for the token, userId, admin status, and first name when a user logs in or registers
-  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: any[]) => {
+  updateToken = (newToken: any, updateId: any, updateAdmin: boolean, updateFirstName: string, updateUser: User) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('id', updateId)
     this.setState({token: newToken});
@@ -169,7 +173,7 @@ class App extends React.Component <{}, AppState> {
     }
   }
 
-  addToCart = (product: any) => {
+  addToCart = (product: Product) => {
     try {
       this.setState({cart: this.state.cart.slice()});
       let alreadyInCart = false;
