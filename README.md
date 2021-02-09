@@ -31,7 +31,7 @@ A 404 page alerts users that the URL does not exist.
 ## Admin Portal
 The admin portal allows admins to post, edit, and delete store item listings, customer information, and customer reviews. The admins can also grant and remove admin privileges to any of the user accounts.
 
-<img src="https://i.ibb.co/60Bj4HX/item-Creation.jpg" alt="listing" height="300">           <img src="https://i.ibb.co/yN8smD0/admin-Portal.jpg" alt="admin portal" height="300">     
+<img src="https://i.ibb.co/60Bj4HX/item-Creation.jpg" alt="listing" height="300">           <img src="https://i.ibb.co/8rNwF9R/admin-Portal.jpg" alt="admin portal" height="300">     
 
 ## Customer View
 The customer view gives customers access to post, edit and delete reviews. 
