@@ -15,12 +15,11 @@ import LockIcon from '@material-ui/icons/Lock';
 import APIURL from '../../helpers/environment';
 
 type NavbarProps = {
-  clickLogout: any;
+  clickLogout: () => void;
   sessionToken: string;
   adminStatus: boolean;
   userFirstName: string;
   fetchStoreItems: any;
-  // searchItems: any[];
   updateSearch: any;
 }
 
@@ -63,7 +62,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
     .catch(err => console.log(err))
   }
 
-  setSearch = (e: any) => {
+  setSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       this.setState({ searchTerm: e.target.value });
     } else {
