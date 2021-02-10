@@ -13,18 +13,20 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography'
 import APIURL from '../../helpers/environment';
 
+import { User } from '../../types';
+
 type ReviewsProps = {
   classes: any;
   revObj: any;
-  calculateTotalRating: any;
+  calculateTotalRating: (rating: number) => void;
   userId: string;
   adminStatus: boolean;
   sessionToken: string;
   fetchReviews: any;
 }
 
-type ReviewsState = {
-  user: any;
+interface ReviewsState {
+  userFirstName: User["firstName"];
   active: boolean;
   rating: number;
   review: string;
@@ -48,7 +50,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
   constructor (props: ReviewsProps) {
     super(props);
       this.state = {
-        user: '',
+        userFirstName: 'Unknown',
         active: false,
         rating: 0,
         review: '',
@@ -61,11 +63,11 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
     this.setState({rating: e.target.value});
   }
 
-  setReview = (e: any) => {
+  setReview = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({review: e.target.value});
   }
 
-  setDate = (e: any) => {
+  setDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({date: e.target.value});
   }
 
@@ -74,7 +76,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
       method: 'GET'
     })
       .then(r => r.json())
-      .then(obj => this.setState({ user: obj.user }))
+      .then(obj => this.setState({ userFirstName: obj.user.firstName }))
   }
 
   deleteReview = () => {
@@ -90,7 +92,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
   }
 
   // edit review
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${APIURL}/review/${this.props.revObj.id}`;
     const body = {
@@ -156,7 +158,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewsState> {
               <div>
                 <CardContent style={{ paddingTop:'1em'}}>
                   <Typography variant="body2" color="textSecondary" component="p" style={{ fontFamily:'Open Sans' }}>
-                    <PersonIcon /> {this.state.user.firstName ? this.state.user.firstName : 'unknown'}
+                    <PersonIcon /> {this.state.userFirstName || 'unknown'}
                     <br/>
                     {this.props.revObj.date}
                   </Typography>

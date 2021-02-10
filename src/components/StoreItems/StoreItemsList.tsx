@@ -3,18 +3,19 @@ import Item from './Item';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import FilterItems from './FilterItems';
+import { StoreItem } from '../../types';
 
-type ListProps = {
+interface ListProps {
   sessionToken: string;
-  fetchStoreItems: any;
-  storeItems: any;
+  fetchStoreItems: () => void;
+  storeItems: StoreItem[];
   adminStatus: boolean;
-  updateItemId: any;
+  updateItemId: (itemId: number) => void;
   sort: string;
-  handleChangeSort: any;
-  updateItem: any;
-  addToCart: any;
-  storeItemObj: any;
+  handleChangeSort: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateItem: (item: StoreItem) => void;
+  addToCart: (storeItem: StoreItem) => void;
+  // storeItemObj: any;
 }
 
 export default class StoreItemsList extends React.Component<ListProps> {

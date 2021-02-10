@@ -15,14 +15,16 @@ import Reviews from './../Reviews/Reviews';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import APIURL from '../../helpers/environment';
 
+import { StoreItem } from '../../types';
+
 type ItemProps = {
-  sessionToken: any;
+  sessionToken: string;
   storeItemId: number;
   classes: any;
   userId: string;
   adminStatus: boolean;
-  addToCart: any;
-  storeItemObj: any;
+  addToCart: (storeItem: StoreItem) => void;
+  storeItemObj: StoreItem;
 }
 
 type ItemState = {
@@ -77,11 +79,11 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     this.setState({rating: e.target.value});
   }
 
-  setReview = (e: any) => {
+  setReview = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({review: e.target.value});
   }
 
-  setDate = (e: any) => {
+  setDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({date: e.target.value});
   }
 
@@ -116,7 +118,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
   }
   
 
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${APIURL}/review/create`;
     const body = {
@@ -149,7 +151,7 @@ class ItemDetailView extends React.Component<ItemProps, ItemState> {
     this.setState({active: !showEdit})
   }
 
-  calculateTotalRating = (rating: any) => {
+  calculateTotalRating = (rating: number) => {
     this.setState(prevState => {
       return {
         totalRating: (prevState.totalRating + rating),

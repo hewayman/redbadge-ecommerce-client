@@ -171,23 +171,23 @@ class App extends React.Component <{}, AppState> {
     }
   }
 
-  addToCart = (product: StoreItem) => {
+  addToCart = (storeItem: StoreItem) => {
     try {
       this.setState({cart: this.state.cart.slice()});
       let alreadyInCart = false;
       // if item is already in cart, increase the count for the item
-      this.state.cart.forEach((item: any) => {
-        if (item.id === product.id) {
+      this.state.cart.forEach((item: StoreItem) => {
+        if (item.id === storeItem.id) {
           item.count++;
           alreadyInCart = true;
         }
       });
       // if item is not in cart, add it to the cart
       if (!alreadyInCart) {
-        this.state.cart.push({...product, count: 1});
+        this.state.cart.push({...storeItem, count: 1});
       }
       this.setState({ cart: this.state.cart})
-        console.log('add to cart: ', product)
+        console.log('add to cart: ', storeItem)
         console.log('cart: ', this.state.cart)
     } catch {
       console.log('did not add to cart')
@@ -230,7 +230,8 @@ class App extends React.Component <{}, AppState> {
                   updateItemId={this.updateItemId} 
                   updateItem={this.updateItem} 
                   addToCart={this.addToCart} 
-                  storeItemObj={this.state.itemObj}/>
+                  // storeItemObj={this.state.itemObj}
+                  />
               </Route>
               <Route path='/user/register' exact>
                 <Register 

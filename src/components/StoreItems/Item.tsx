@@ -20,22 +20,16 @@ type ItemProps = {
   classes: any;
   adminStatus: boolean;
   sessionToken: string;
-  fetchStoreItems: any;
-  updateItemId: any;
-  updateItem: any;
-  addToCart: any;
+  fetchStoreItems: () => void;
+  updateItemId: (itemId: number) => void;
+  updateItem: (item: StoreItem) => void;
+  addToCart: (storeItem: StoreItem) => void;
   // storeItemObj: any;
 }
 
 interface ItemState extends StoreItem {
-  storeItem: any;
+  storeItem: StoreItem[];
   show: boolean;
-  // itemName: string;
-  // color: string;
-  // description: string;
-  // price: number;
-  // itemNum: number;
-  // imgURL: string;
   active: boolean;
   id: number;
   errorStatus: boolean;
@@ -76,6 +70,7 @@ class Item extends React.Component<ItemProps, ItemState> {
         price: 0,
         itemNum: 0,
         imgURL: '',
+        count: 0,
         active: false,
         id: 0,
         errorStatus: false,
@@ -84,31 +79,31 @@ class Item extends React.Component<ItemProps, ItemState> {
       this.handleClick = this.handleClick.bind(this);
   }
 
-  setItemName = (e: any) => {
+  setItemName = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({itemName: e.target.value});
   }
 
-  setColor = (e: any) => {
+  setColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({color: e.target.value});
   }
 
-  setDescription = (e: any) => {
+  setDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({description: e.target.value});
   }
 
-  setPrice = (e: any) => {
-    this.setState({price: e.target.value});
+  setPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({price: Number(e.target.value)});
   }
 
-  setItemNum = (e: any) => {
-    this.setState({itemNum: e.target.value});
+  setItemNum = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({itemNum: Number(e.target.value)});
   }
 
-  setImgURL = (e: any) => {
+  setImgURL = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({imgURL: e.target.value});
   }
 
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${APIURL}/listing/${this.props.item.id}`;
     const body = {
@@ -170,8 +165,9 @@ class Item extends React.Component<ItemProps, ItemState> {
 
   render() {
     const { classes } = this.props;
-     // if there is an issue fetching data, redirect to home page
-     if (this.state.errorStatus) {
+
+    // if there is an issue fetching data, redirect to home page
+    if (this.state.errorStatus) {
       return (<Redirect to="/" />)
     } 
     return (

@@ -29,8 +29,12 @@ export interface StoreItem extends Thing {
   price: number;
   itemNum: number;
   imgURL: string;
-  // count: number;
+  count: number;
 }
+
+// export interface Cart {
+
+// }
 
 // export interface UpdateToken {
 //   newToken: string;
